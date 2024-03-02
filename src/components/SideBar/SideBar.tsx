@@ -14,13 +14,16 @@ import { useNavigate } from "react-router-dom";
 const SideBar = () => {
   const [activeDiv, setActiveDiv] = useState<number>(1);
   const { user } = useContext(UserContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleDivClick = (divId: number) => {
     setActiveDiv(divId);
-    if(divId == 2)
-    {
-        navigate('/initiatetransfer')
+    if (divId === 1) {
+      navigate("/dashboard");
+    } else if (divId === 2) {
+      navigate("/initiatetransfer");
+    } else if (divId === 5) {
+      navigate("/transferhistory");
     }
   };
 

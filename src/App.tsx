@@ -1,22 +1,24 @@
-import React from 'react';
-import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './pages/Login/Login';
-import Dashboard  from './pages/Dashboard/Dashboard';
-import './variables.css'
-import InitiateTransfer from './pages/InitiateTransfer/InitiateTransfer';
-import Navbar from './components/Navbar/Navbar';
-import SideBar from './components/SideBar/SideBar';
+import React from "react";
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login/Login";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import "./variables.css";
+import InitiateTransfer from "./pages/InitiateTransfer/InitiateTransfer";
+import Navbar from "./components/Navbar/Navbar";
+import SideBar from "./components/SideBar/SideBar";
+import TransferHistory from "./pages/TransferHistory/TransferHistory";
 
 function App() {
   return (
     <BrowserRouter>
-    <Navbar></Navbar>
-        <SideBar></SideBar>
+      <Navbar></Navbar>
+      <SideBar></SideBar>
       <Routes>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/dashboard" element={<Dashboard/>}/>
-        <Route path='/initiatetransfer' element={<InitiateTransfer/>}/>
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/initiatetransfer" element={<InitiateTransfer />} />
+        <Route path="/transferhistory" element={<TransferHistory />} />
       </Routes>
     </BrowserRouter>
   );
