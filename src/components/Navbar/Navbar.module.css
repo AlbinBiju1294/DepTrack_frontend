@@ -1,0 +1,28 @@
+.nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 0px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    min-height: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 255, 0.2);
+  }
+
+.navbar_right{
+    display: flex;
+}
+
+.navbar_title
+{
+    color: #012970;
+    font-size: large;   
+}
+
+.navbar_name{
+    margin-left: 30px;
+    color: #012970;
+}

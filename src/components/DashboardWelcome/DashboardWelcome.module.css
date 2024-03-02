@@ -1,0 +1,12 @@
+.welcome
+{
+    color: var(--secondary-color);
+    font-size: 30px;
+    font-weight: 500;
+    padding-left: 30px;
+}
+
+.new
+{
+    padding-top: 10px;
+}

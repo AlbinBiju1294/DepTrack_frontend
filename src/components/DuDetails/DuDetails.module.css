@@ -1,0 +1,27 @@
+.card{
+    background-color:#F9FBFF;
+    box-shadow: 0px 0px 3px 0px rgba(132,139,186,1);
+    width: 300px;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 10px;
+    
+}
+ 
+.header{
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 17px;
+    color: #012970;
+    margin-bottom: 15px;
+}
+
+.dudetails
+{
+    margin-top: -62px;
+    display: flex;
+    flex-direction: column;
+}
