@@ -1,0 +1,10 @@
+.inner_container {
+  background-color: white;
+  margin-top: 10px;
+  height: 490px;
+}
+
+.du_transfer_details
+{
+  display: flex;
+}

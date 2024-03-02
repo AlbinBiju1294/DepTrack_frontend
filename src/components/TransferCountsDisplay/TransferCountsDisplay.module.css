@@ -1,0 +1,7 @@
+.transferContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 63%;
+    padding: 20px;
+}
+
