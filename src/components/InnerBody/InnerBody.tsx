@@ -5,7 +5,7 @@ import InnerContainer from '../InnerContainer/InnerContainer'
 const InnerBody = () => {
   return (
     <>
-        <InnerBodyHeader></InnerBodyHeader>
+        <InnerBodyHeader heading='Dashboard'></InnerBodyHeader>
         <InnerContainer></InnerContainer>
     </>
   )

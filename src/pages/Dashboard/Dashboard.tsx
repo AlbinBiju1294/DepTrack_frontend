@@ -10,8 +10,7 @@ const Dashboard = () => {
   console.log(storedUser)
   return (
     <>
-        <Navbar></Navbar>
-        <SideBar></SideBar>
+        
     <div className={styles.main}>
         <InnerBody></InnerBody>
     </div>

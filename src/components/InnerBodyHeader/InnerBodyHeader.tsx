@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from './InnerBodyHeader.module.css'
 
-const InnerBodyHeader = () => {
+const InnerBodyHeader = ({heading}:{heading:string}) => {
   return (
     <>
-        <h4 className={styles.heading}>Dashboard</h4>
+        <h4 className={styles.heading}>{heading}</h4>
     </>
   )
 }
