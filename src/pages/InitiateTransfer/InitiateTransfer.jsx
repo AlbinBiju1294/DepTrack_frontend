@@ -1,22 +1,21 @@
-import React from 'react'
-import Navbar from '../../components/Navbar/Navbar'
-import SideBar from '../../components/SideBar/SideBar'
-import InnerBody from '../../components/InnerBody/InnerBody'
-import styles from './InitiateTransfer.module.css'
+import React from "react";
+import Navbar from "../../components/Navbar/Navbar";
+import SideBar from "../../components/SideBar/SideBar";
+import InnerBody from "../../components/InnerBody/InnerBody";
+import styles from "./InitiateTransfer.module.css";
+import InnerBodyHeader from "../../components/InnerBodyHeader/InnerBodyHeader";
+import InitiateTransferContainer from "../../components/InitiateTransferContainer/InitiateTransferContainer";
 
 const InitiateTransfer = () => {
-
-  const storedUser = localStorage.getItem('user')
+  const storedUser = localStorage.getItem("user");
   return (
     <>
-        <Navbar></Navbar>
-        <SideBar></SideBar>
-    {/* <div className={styles.main}>
-        <InnerBody></InnerBody>
-    </div> */}
-    
+      <div className={styles.main}>
+        <InnerBodyHeader heading="Initiate Transfer" />
+        <InitiateTransferContainer />
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default InitiateTransfer
+export default InitiateTransfer;

@@ -5,10 +5,14 @@ import Login from './pages/Login/Login';
 import Dashboard  from './pages/Dashboard/Dashboard';
 import './variables.css'
 import InitiateTransfer from './pages/InitiateTransfer/InitiateTransfer';
+import Navbar from './components/Navbar/Navbar';
+import SideBar from './components/SideBar/SideBar';
 
 function App() {
   return (
     <BrowserRouter>
+    <Navbar></Navbar>
+        <SideBar></SideBar>
       <Routes>
         <Route path="/login" element={<Login/>}/>
         <Route path="/dashboard" element={<Dashboard/>}/>
