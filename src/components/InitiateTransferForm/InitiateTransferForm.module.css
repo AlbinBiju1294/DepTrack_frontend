@@ -2,3 +2,115 @@
 {
     width: 300px;
 }
+
+.employee_droplist{
+    height: 20px !important;
+}
+
+.employee_name
+{
+    margin-right: 10px;
+    font-family: 'Poppins';
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--secondary-color);
+}
+
+.employee_number
+{
+    font-size: 12px;
+    color: #7D7D7D;
+}
+
+.emp_name
+{
+    display: flex;
+    align-items: center;
+}
+
+.select_box{
+    width: 300px;
+    font-size: 10px;
+    height: 20px;
+}
+
+.MuiInputBase-input {
+    height: 10px !important;
+  }
+
+.form_label
+{
+    color: var(--secondary-color);
+    font-size: 13px;
+    font-weight: 500;
+    margin-right: 15px;
+}
+
+.form_wrapper
+{
+    padding: 20px 0px;
+    padding-right: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form_row
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.input_box
+{
+    height: 28px;
+    width: 250px;
+    border: 1px solid #7D7D7D;
+    border-radius: 3px;
+    align-items: center;
+    padding-left: 10px;
+    color: #7D7D7D;
+}
+
+textarea{
+    padding-top: 5px;
+}
+
+.input_drop_control
+{
+    height: 28px;
+    width: 250px;
+    border: 1px solid #7D7D7D !important;
+    border-radius: 3px !important;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+.input_box:focus
+{
+    border: 1px solid blue;
+    outline: 1px solid blue;
+}
+
+.single_transfer_detail{
+    width: 750px;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 40px;
+    align-items: center;
+}
+
+.submit_area{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 66px;
+}
+
+.submit_area label{
+    font-size: 13px;
+    color: #7D7D7D;
+}
+

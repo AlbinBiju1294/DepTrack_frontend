@@ -4,7 +4,8 @@ type User = {
   id:number,
   username:string,
   role:number,
-  email?:string
+  email?:string,
+  du_id:number
 };
 
 type UserContextType = {
