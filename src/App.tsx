@@ -8,6 +8,7 @@ import InitiateTransfer from "./pages/InitiateTransfer/InitiateTransfer";
 import Navbar from "./components/Navbar/Navbar";
 import SideBar from "./components/SideBar/SideBar";
 import TransferHistory from "./pages/TransferHistory/TransferHistory";
+import Test from "./components/test";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Navbar></Navbar>
       <SideBar></SideBar>
       <Routes>
+      <Route path="/" element={<Test />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/initiatetransfer" element={<InitiateTransfer />} />

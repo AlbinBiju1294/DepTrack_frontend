@@ -11,13 +11,13 @@ import UserContext from "../Contexts/UserContextProvider";
 import { Button, Checkbox } from "@mui/material";
 import { Employee, Du } from "./types";
 import { fetchEmployeeData } from "./api/fetchEmployeeData";
+import { fetchDuData } from "./api/fetchDuData";
+import { fetchBandData } from "./api/fetchBandData";
 import axiosInstance from "../../config/AxiosConfig";
-
-const { Search } = Input;
+import { useNavigate } from "react-router-dom";
+import { message } from "antd";
 
 const InitiateTransferForm = () => {
-  // const defaultOption = options[0];
-
   const [employeeData, setEmployeeData] = useState<Employee[]>([]);
   const [searchKeyword, setSearchKeyword] = useState<string>("");
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
@@ -25,57 +25,33 @@ const InitiateTransferForm = () => {
   );
   const [duData, setDuData] = useState<Du[]>([]);
   const [bands, setBands] = useState<string[]>([]);
-  // const [formData, setFormData] = useState({});
-
   const { user } = useContext(UserContext);
 
   const [formData, setFormData] = useState({});
   const [isChecked, setIsChecked] = useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const navigate = useNavigate()
 
   const options = duData.map((du) => {
     return du.du_name;
   });
 
-  const defaultOption = "Select Delivery Unit";
-
-  const token = localStorage.getItem("access_token");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
+  // const token = localStorage.getItem("access_token");
+  // const config = {
+  //   headers: { Authorization: `Bearer ${token}` },
+  // };
 
   useEffect(() => {
-    fetchEmployeeData(searchKeyword,setEmployeeData);
+    fetchEmployeeData(searchKeyword, setEmployeeData);
   }, [searchKeyword]);
 
   useEffect(() => {
-    const fetchDuData = async () => {
-      try {
-        const res = await axiosInstance.get(
-          "http://127.0.0.1:8000/api/v1/delivery-unit/list-delivery-units/",
-        );
-        console.log("Response from API - du's got:", res.data.data);
-        setDuData(res.data.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchDuData();
+    fetchDuData(setDuData);
   }, []);
 
   useEffect(() => {
-    const fetchBandData = async () => {
-      try {
-        const res = await axios.get(
-          `http://127.0.0.1:8000/api/v1/employee/bands/`,
-          config
-        );
-        console.log("Response from API - bands:", res.data.band_levels);
-        setBands(res.data.band_levels);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchBandData();
+    fetchBandData(setBands);
   }, []);
 
   const changeKeyword = (
@@ -87,16 +63,20 @@ const InitiateTransferForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
+      const res = await axiosInstance.post(
         "http://127.0.0.1:8000/api/v1/transfer/create-transfer/",
-        formData,
-        config
+        formData
       );
-      console.log("Response from API - submission:", res.data);
+      console.log("Response from API - submission:", res);
+      if(res.status === 201)
+      {
+          await messageApi.success('Transfer initiated successfully');
+        
+        navigate('/dashboard')
+      }
       // Optionally, handle success response here
     } catch (error) {
-      console.error("Error submitting data:", error);
-      // Optionally, handle error here
+      await messageApi.error('Transfer initiation failed');
     }
     console.log(formData);
   };
@@ -132,19 +112,19 @@ const InitiateTransferForm = () => {
 
   const handleAutocompleteChange = (selectedValue: Employee | null) => {
     if (selectedValue === null) {
-        setSelectedEmployee(null);
-        setFormData({
-            ...formData,
-            employee_id: null // Assuming employee_id is a string, clear it
-        });
+      setSelectedEmployee(null);
+      setFormData({
+        ...formData,
+        employee_id: null, // Assuming employee_id is a string, clear it
+      });
     } else {
-        setSelectedEmployee(selectedValue);
-        setFormData({
-            ...formData,
-            employee_id: selectedValue.id,
-        });
+      setSelectedEmployee(selectedValue);
+      setFormData({
+        ...formData,
+        employee_id: selectedValue.id,
+      });
     }
-};
+  };
 
   const handleBandDropdownChange = (selectedOption: Option) => {
     setFormData({
@@ -170,6 +150,8 @@ const InitiateTransferForm = () => {
   };
 
   return (
+    <>
+    {contextHolder}
     <form onSubmit={handleSubmit}>
       <div className={styles.form_wrapper}>
         <div className={styles.form_row}>
@@ -233,7 +215,7 @@ const InitiateTransferForm = () => {
             <label className={styles.form_label}>Target DU:</label>
             <Dropdown
               options={options}
-              value={defaultOption}
+              value='Select Delivery Unit'
               onChange={(selectedOption) =>
                 handleDuDropdownChange(selectedOption)
               }
@@ -325,7 +307,9 @@ const InitiateTransferForm = () => {
           </div>
           <div className={styles.single_transfer_detail}>
             <label className={styles.form_label}>Remarks:</label>
-            <textarea className={`${styles.input_box} ${styles.non_resizable_textarea}`} />
+            <textarea
+              className={`${styles.input_box} ${styles.non_resizable_textarea}`}
+            />
           </div>
         </div>
       </div>
@@ -350,6 +334,7 @@ const InitiateTransferForm = () => {
         </Button>
       </div>
     </form>
+    </>
   );
 };
 
