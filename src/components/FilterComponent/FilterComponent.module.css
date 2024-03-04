@@ -1,9 +1,42 @@
-.filter whole {
+.first_row {
   position: relative;
   top: 10px;
   display: flex;
 }
+.second_row {
+  margin-top: 15px;
+}
 
-.first_line {
+.input_drop_control {
+  height: 28px;
+  width: 110px;
+  border: 1px solid #7d7d7d !important;
+  border-radius: 3px !important;
   display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.dropdown {
+  padding-right: 5px;
+}
+
+.input_box {
+  height: 28px;
+  width: 150px;
+  border: 1px solid #7d7d7d;
+  border-radius: 3px;
+  align-items: center;
+  padding-left: 10px;
+  margin-right: 5px;
+  color: #7d7d7d;
+}
+
+.input_box:focus {
+  border: 1px solid blue;
+  outline: 1px solid blue;
+}
+
+.button {
+  padding-right: 5px;
 }
