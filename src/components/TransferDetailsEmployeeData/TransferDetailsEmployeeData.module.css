@@ -1,0 +1,58 @@
+.Main_wrapping_Container{
+    display: flex;
+    margin-left: 40px;
+
+}
+.Right_Container{
+    display: flex;
+    flex:1px;
+    margin-left: 0px;
+    margin-top: 10px;
+}
+
+.Left_Container{
+    display:flex;
+    margin-left: 40px;
+    margin-top: 10px;
+    flex:5px
+    
+}
+.Employee_icon_container{
+    flex: 10;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+.Employee_details_container{
+    flex: 90;
+    width: 10px;
+    font-family: "Poppins";
+    /* line-height:3px; */
+    color:#012970;
+    /* margin-top: 13px; */
+    font-size: 9px;
+}
+
+.Employee_name{
+    font-size: 20px;
+}
+
+
+.Card{
+
+    width: 100px;
+    height:32px;
+    text-align: center;
+    justify-content: center;
+    padding-bottom:6px ;
+    padding-top: 6px;
+    padding-right: 8px; 
+    border-radius: 10px!important;
+    background-color: #E6EFF5!important;   
+}
+
+.ArrowIcon{
+    color: #012970!important;
+}
+.Du{
+    color:#595353
+}

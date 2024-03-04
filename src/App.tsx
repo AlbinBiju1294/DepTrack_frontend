@@ -8,6 +8,7 @@ import InitiateTransfer from "./pages/InitiateTransfer/InitiateTransfer";
 import Navbar from "./components/Navbar/Navbar";
 import SideBar from "./components/SideBar/SideBar";
 import TransferHistory from "./pages/TransferHistory/TransferHistory";
+import PendingApprovals from "./pages/PendingApprovals/PendingApprovals";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/initiatetransfer" element={<InitiateTransfer />} />
         <Route path="/transferhistory" element={<TransferHistory />} />
+        <Route path="/pendingapprovals" element={<PendingApprovals />} />
+
+
       </Routes>
     </BrowserRouter>
   );

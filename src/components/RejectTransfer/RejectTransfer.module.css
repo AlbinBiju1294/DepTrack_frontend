@@ -1,0 +1,15 @@
+.FormButton{
+  margin-left: 550px;
+  margin-top: 20;
+}
+
+
+
+.FormButton .Approve {
+    background-color: rgb(114, 235, 114)!important;
+  }
+  .FormButton .Reject {
+    background-color: rgb(232, 96, 96)!important;
+    margin-left: 40px;
+  }
+ 
