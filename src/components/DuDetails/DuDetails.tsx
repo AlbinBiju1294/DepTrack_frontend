@@ -39,9 +39,9 @@ return (
     <div className={`${styles.header}`}>Du Details</div>
     <div className={`${styles.card}`}>
      
-      <DuDetailsCard name="Du name :" value={duData?duData.du_name: ""}/>
+      <DuDetailsCard name="Delivery Unit Name :" value={duData?duData.du_name: ""}/>
       <DuDetailsCard name="Number Of PMs :" value={duData?duData.no_of_pms:""}/>
-      <DuDetailsCard name="Number of employees :" value={duData?duData.no_of_employees:""}/>
+      <DuDetailsCard name="Number of Employees :" value={duData?duData.no_of_employees:""}/>
  
     </div>
     </div>

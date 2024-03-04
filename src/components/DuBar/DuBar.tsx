@@ -74,7 +74,7 @@ const DuBar = () => {
 
   return (
     <div>
-      <p className={styles.bar_graph_heading}>Transfers completed</p>
+      <p className={styles.bar_graph_heading}>Transfers Completed</p>
       <div className={styles.bar_chart}>
       {isLoaded?<BarChart 
         xAxis={[
@@ -82,6 +82,10 @@ const DuBar = () => {
             id: 'barCategories',
             data: xdata,
             scaleType: 'band',
+            label: 'DU Name',
+            labelStyle: {
+              fontSize: 11,
+            },
             categoryGapRatio: 0.6,
             fontSize:1
           } as AxisConfig,
@@ -98,7 +102,6 @@ const DuBar = () => {
             label: 'No of Transfers',
             labelStyle: {
               fontSize: 11,
-
             },
           } as YaxisConfig,
         ]}
