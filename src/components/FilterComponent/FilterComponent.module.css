@@ -1,4 +1,9 @@
 .filter whole {
   position: relative;
   top: 10px;
+  display: flex;
+}
+
+.first_line {
+  display: flex;
 }
