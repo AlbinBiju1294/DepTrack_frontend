@@ -59,7 +59,7 @@ const FilterComponent = () => {
       }));
     }
   };
-  console.log(formData);
+  console.log(formData, fromRef.current);
 
   const handleChange = (name: string, value: string | number) => {
     setFormData({
@@ -70,6 +70,16 @@ const FilterComponent = () => {
 
   const handleClear = () => {
     setFormData({});
+
+    if (fromRef.current) {
+      fromRef.current.setState({ selected: "From", isOpen: false });
+    }
+    if (toRef.current) {
+      toRef.current.setState({ selected: "To", isOpen: false });
+    }
+    if (toRef.current) {
+      toRef.current.setState({ selected: "Status", isOpen: false });
+    }
 
     if (transferDateFromRef.current) transferDateFromRef.current.value = "";
     if (transferDateToRef.current) transferDateToRef.current.value = "";
@@ -126,6 +136,7 @@ const FilterComponent = () => {
           <Dropdown
             options={options}
             value="To"
+            ref={toRef}
             onChange={(selectedOption) =>
               handleDuDropdownChange(selectedOption, "targetdu_id")
             }
@@ -135,6 +146,7 @@ const FilterComponent = () => {
           <Dropdown
             options={status}
             value="status"
+            ref={statusRef}
             onChange={(selectedOption) =>
               handleDuDropdownChange(selectedOption, "status")
             }
