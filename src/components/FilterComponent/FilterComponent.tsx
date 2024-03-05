@@ -5,13 +5,17 @@ import { Button } from "@mui/material";
 import Dropdown, { Option } from "react-dropdown";
 import "react-dropdown/style.css";
 import { useRef, useState, useEffect } from "react";
-import { FormData, Du } from "./types/index";
+import { Du } from "./types/index";
 import ReactDropdown from "react-dropdown";
 
 const FilterComponent = () => {
   const status = ["Completed", "Cancelled", "Rejected"];
   const [duData, setDuData] = useState<Du[]>([]);
+  const [formData, setFormData] = useState({});
+
   const statusRef = useRef<ReactDropdown>(null);
+  const fromRef = useRef<ReactDropdown>(null);
+  const toRef = useRef<ReactDropdown>(null);
   const transferDateFromRef = useRef<HTMLInputElement>(null);
   const transferDateToRef = useRef<HTMLInputElement>(null);
   const employeeNameRef = useRef<HTMLInputElement>(null);
@@ -26,31 +30,38 @@ const FilterComponent = () => {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const fromRef = useRef<ReactDropdown>(null);
-  const toRef = useRef<ReactDropdown>(null);
-
-  const [formData, setFormData] = useState<FormData>({
-    from: "",
-    to: "",
-    status: "",
-    transferDateFrom: "",
-    transferDateTo: "",
-    employeeName: "",
-    employeeNumber: "",
-  });
-
   const handleDuDropdownChange = (
     selectedOption: Option,
     fieldToUpdate: string
   ) => {
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [fieldToUpdate]: selectedOption.value,
-    }));
+    if (selectedOption.value === "Completed") {
+      setFormData((FormData) => ({
+        ...FormData,
+        [fieldToUpdate]: 3,
+      }));
+    } else if (selectedOption.value === "Rejected") {
+      setFormData((FormData) => ({
+        ...FormData,
+        [fieldToUpdate]: 4,
+      }));
+    } else if (selectedOption.value === "Cancelled") {
+      setFormData((FormData) => ({
+        ...FormData,
+        [fieldToUpdate]: 5,
+      }));
+    } else {
+      const fieldValue =
+        duData.find((du) => du.du_name === selectedOption.value)?.id || -1;
+
+      setFormData((FormData) => ({
+        ...FormData,
+        [fieldToUpdate]: fieldValue,
+      }));
+    }
   };
   console.log(formData);
 
-  const handleChange = (name: keyof FormData, value: string) => {
+  const handleChange = (name: string, value: string | number) => {
     setFormData({
       ...formData,
       [name]: value,
@@ -58,15 +69,7 @@ const FilterComponent = () => {
   };
 
   const handleClear = () => {
-    setFormData({
-      from: "",
-      to: "",
-      status: "",
-      transferDateFrom: "",
-      transferDateTo: "",
-      employeeName: "",
-      employeeNumber: "",
-    });
+    setFormData({});
 
     if (transferDateFromRef.current) transferDateFromRef.current.value = "";
     if (transferDateToRef.current) transferDateToRef.current.value = "";
@@ -90,6 +93,21 @@ const FilterComponent = () => {
     fetchDuData();
   }, []);
 
+  const fetchFilteredData = async () => {
+    try {
+      const res = await axios.get(
+        "http://127.0.0.1:8000/api/v1/transfer/filter-transfers/",
+        {
+          params: formData,
+          ...config,
+        }
+      );
+      console.log("Response from API - du's got:", res.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   return (
     <>
       <div>
@@ -99,7 +117,7 @@ const FilterComponent = () => {
             value="From"
             ref={fromRef}
             onChange={(selectedOption) =>
-              handleDuDropdownChange(selectedOption, "from")
+              handleDuDropdownChange(selectedOption, "currentdu_id")
             }
             className={styles.dropdown}
             controlClassName={styles.input_drop_control}
@@ -109,7 +127,7 @@ const FilterComponent = () => {
             options={options}
             value="To"
             onChange={(selectedOption) =>
-              handleDuDropdownChange(selectedOption, "to")
+              handleDuDropdownChange(selectedOption, "targetdu_id")
             }
             className={styles.dropdown}
             controlClassName={styles.input_drop_control}
@@ -126,7 +144,7 @@ const FilterComponent = () => {
           <input
             type="date"
             name="transfer_date"
-            onChange={(e) => handleChange("transferDateFrom", e.target.value)}
+            onChange={(e) => handleChange("start_date", e.target.value)}
             ref={transferDateFromRef}
             className={styles.input_box}
           />
@@ -134,7 +152,8 @@ const FilterComponent = () => {
           <input
             type="date"
             name="transfer_date"
-            onChange={(e) => handleChange("transferDateTo", e.target.value)}
+            ref={transferDateToRef}
+            onChange={(e) => handleChange("end_date", e.target.value)}
             className={styles.input_box}
           />
         </div>
@@ -142,14 +161,16 @@ const FilterComponent = () => {
           <input
             type="text"
             name="employee_name"
+            ref={employeeNameRef}
             placeholder="Employee Name"
-            onChange={(e) => handleChange("employeeName", e.target.value)}
+            onChange={(e) => handleChange("employee_name", e.target.value)}
             className={styles.input_box}
           />
           <input
             type="text"
             name="employee_number"
-            onChange={(e) => handleChange("employeeNumber", e.target.value)}
+            ref={employeeNumberRef}
+            onChange={(e) => handleChange("employee_id", e.target.value)}
             placeholder="Employee Number"
             className={styles.input_box}
           />
@@ -157,6 +178,7 @@ const FilterComponent = () => {
             disableRipple={true}
             variant="outlined"
             color="primary"
+            onClick={fetchFilteredData}
             type="submit"
             size="small"
             sx={{
