@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import {PersonCircle} from 'react-bootstrap-icons'
 import styles from './Navbar.module.css' 
 import UserContext from '../Contexts/UserContextProvider'
+import { capitalizeFirstLetter } from '../DashboardWelcome/DashboardWelcome'
 
 const Navbar = () => {
   const {user} = useContext(UserContext)
@@ -10,7 +11,7 @@ const Navbar = () => {
     <h5 className={styles.navbar_title}>DepTrack</h5>
     <div className={styles.navbar_right}>
         <PersonCircle/>
-        <h5 className={styles.navbar_name}>{user?.username}</h5>
+        <h5 className={styles.navbar_name}>{user ? capitalizeFirstLetter(user.username) : null}</h5>
     </div>
     </nav>
   )

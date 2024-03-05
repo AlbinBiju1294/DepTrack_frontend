@@ -5,7 +5,7 @@ import TransferHistoryTable from './TransferHistoryTable'
 
 const TransferHistoryTableHandler = () => {
     const [dataSource, setDataSource] = useState([])
-    const [pagination, setPagination] = useState({ current: 1, total: 0, pageSize: 1 }); // Initial pagination state
+    const [pagination, setPagination] = useState({ current: 1, total: 0, pageSize: 5 }); // Initial pagination state
 
     const token = localStorage.getItem('access_token')
     const config = {
