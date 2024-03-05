@@ -1,12 +1,17 @@
-import { Button } from '@mui/material'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from "../PendingApprovals/TabSwitchTables.module.css"
+import { fetchData } from './api/fetchData';
 import UserContext from '../Contexts/UserContextProvider';
 
-const TabSwitchTables = () => {
+const TabSwitchTables = ({}) => {
 
     const [activeButton, setActiveButton] = useState<number>(1);
     const { user } = useContext(UserContext);
+    const du_id = user?.du_id;
+  
+    useEffect(() => {
+        fetchData(du_id, activeButton)
+      }, [activeButton]);
 
   return (
     <div>
