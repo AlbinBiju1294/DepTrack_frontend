@@ -13,3 +13,7 @@ export interface Du {
 }
 
 export type SetEmployeeDataFunction = (data: Employee[]) => void;
+
+export type SetDuDataFunction = (data: Du[]) => void;
+
+export type SetBandDataFunction = (data: string[]) => void;

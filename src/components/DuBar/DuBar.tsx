@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import styles from './DuBar.module.css'
+import { Padding } from '@mui/icons-material';
 
 interface AxisConfig {
     id: string;
