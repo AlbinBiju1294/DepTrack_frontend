@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar/Navbar";
 import SideBar from "./components/SideBar/SideBar";
 import TransferHistory from "./pages/TransferHistory/TransferHistory";
 import PendingApprovals from "./pages/PendingApprovals/PendingApprovals";
+import PendingApprovals1 from "./pages/PendingApprovals1/PendingApprovals1";
 
 function App() {
   return (
@@ -21,7 +22,9 @@ function App() {
         <Route path="/initiatetransfer" element={<InitiateTransfer />} />
         <Route path="/transferhistory" element={<TransferHistory />} />
         <Route path="/pendingapprovals" element={<PendingApprovals />} />
+        <Route path="/pendingapprovals1" element={<PendingApprovals1 />} />
 
+        PendingApprovals1
 
       </Routes>
     </BrowserRouter>

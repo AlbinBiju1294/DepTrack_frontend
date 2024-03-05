@@ -1,5 +1,5 @@
 .FormButton{
-  margin-left: 750px;
+  margin-left: 740px;
   margin-top: -25px;
   font-size: 10px!important;
 }
@@ -9,7 +9,7 @@
 .FormButton .Approve {
     background-color: #ffff!important;
     font-size: 10px!important;
-    color: black;
+    color: #012970;
     
 
   }
@@ -17,7 +17,7 @@
     background-color:#ffff!important;
     margin-left: 40px;
     font-size: 10px!important;
-    color: black;
+    color: #012970;
 
 
   }

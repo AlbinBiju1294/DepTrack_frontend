@@ -16,7 +16,7 @@ export default function TransferDetailsDisplay() {
 
   const [formData,seFormData] = useState<FormDataDisplayProps>();
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyOTA5MzU0ODU1LCJpYXQiOjE3MDkzNTQ4NTUsImp0aSI6IjlmYWRkNWIwNGNjZTQ4ZmNiNGYwZGY2ZWJlYjQxODQ1IiwidXNlcl9pZCI6MTB9.YZJ1F8TwtpfzXV76bU2x4EhnCgtdDNb1Ca5d-iTGoCo';
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyOTA5NjExNDQ2LCJpYXQiOjE3MDk2MTE0NDYsImp0aSI6ImFjZmM4MTc0OWRlNDQ4ODdhOTRlYTNhMjZmYjQ1ZDFjIiwidXNlcl9pZCI6MTB9.SXjoSYrF5LqaE1X5tr6VoAEK0Qr-hBbgNFTVnQIZaOM';
   const config = {
     headers: { Authorization: `Bearer ${token}` }
   };
@@ -24,7 +24,8 @@ export default function TransferDetailsDisplay() {
 useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/', config);
+        const transfer_id=3;
+        const res = await axios.get(`http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/?transfer_id=${transfer_id}`, config);
         console.log('Response from API:', res.data);
         seFormData(res.data.data);
       } catch (error) {
@@ -43,7 +44,7 @@ useEffect(() => {
           <Typography className={`${styles.Form_left_side}`}color="text.secondary" gutterBottom>
       
               
-            <TransferDetailsDisplayBody name="1.  Employee Id :" /> 
+            <TransferDetailsDisplayBody name="1.  Employee Name :" /> 
             <TransferDetailsDisplayBody name="2.  Current Department :" />
             <TransferDetailsDisplayBody name="3.  Current Department Head:"/>
             <TransferDetailsDisplayBody name="4.  Band:"/>
@@ -63,19 +64,36 @@ useEffect(() => {
               {/* value={duData?duData.du_name: ""} */}
           <Typography className={`${styles.Form_right_side}`}color="text.secondary" gutterBottom>
             
-            <TransferDetailsDisplayBody value={formData?formData.du_name: ""}/> 
+            <TransferDetailsDisplayBody value={formData?formData.employee.name: ""}/> 
             <TransferDetailsDisplayBody  value={formData?formData.currentdu_id: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.currentdu_id: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.currentdu_id: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.currentdu_id: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.currentdu_id: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.currentdu_id: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.currentdu_id: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.currentdu_id: ""} />
-            <TransferDetailsDisplayBody value={formData?formData.currentdu_id: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.currentdu_id: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.currentdu_id: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.currentdu_id: ""}/>
+            <TransferDetailsDisplayBody value={ "Antony"}/>
+
+            {/* <TransferDetailsDisplayBody value={formData?formData.currentdu_id: ""}/> */}
+            <TransferDetailsDisplayBody value={ "A1"}/>
+            <TransferDetailsDisplayBody value={ "6 years"}/>
+            <TransferDetailsDisplayBody value={ "3 years"}/>
+
+
+
+
+            {/* <TransferDetailsDisplayBody value={formData?formData.details.employee_band: ""}/> */}
+            {/* <TransferDetailsDisplayBody value={formData?formData.details.total_experience: ""}/> */}
+            {/* <TransferDetailsDisplayBody value={formData?formData.details.experion_experience: ""}/> */}
+            <TransferDetailsDisplayBody value={formData?formData.rejection_reason: ""}/>
+            <TransferDetailsDisplayBody value={ "Python,C++"}/>
+            <TransferDetailsDisplayBody value={ "Machine Learning"}/>
+            <TransferDetailsDisplayBody value={ "6"}/>
+
+
+
+            {/* <TransferDetailsDisplayBody value={formData?formData.details.employee_skills: ""}/> */}
+            {/* <TransferDetailsDisplayBody value={formData?formData.details.upskilling_suggestions: ""} /> */}
+            {/* <TransferDetailsDisplayBody value={formData?formData.details.strengths: ""}/> */}
+            <TransferDetailsDisplayBody value={formData?formData.transfer_date: ""}/>
+            {/* <TransferDetailsDisplayBody value={formData?formData.initiated_by: ""}/> */}
+            <TransferDetailsDisplayBody value={ "PM"}/>
+
+            {/* <TransferDetailsDisplayBody value={formData?formData.currentdu_id: ""}/> */}
 
           </Typography>
         
