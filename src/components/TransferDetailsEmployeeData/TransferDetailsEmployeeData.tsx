@@ -8,6 +8,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import IconButton from '@mui/material/IconButton';
 import { EmployeeDataProps} from './types';
 import styles from './TransferDetailsEmployeeData.module.css'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 
@@ -41,9 +42,10 @@ const TransferDetailsEmployeeData = () => {
     <>
       <div  className= {`${styles.Main_wrapping_Container}`}  >
     <div className= {`${styles.Left_Container}`}>
-        <div className= {`${styles.Employee_icon_container}`}>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-    
+        <div>
+            {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
+            <AccountCircleIcon  className= {`${styles.Employee_icon_container}`} ></AccountCircleIcon>
+
         </div>
         <div className= {`${styles.Employee_details_container}`}>
             <h4  className= {`${styles.Employee_name}`}>John Paul</h4> 

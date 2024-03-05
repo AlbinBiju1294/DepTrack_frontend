@@ -1,27 +1,20 @@
-.Form_Outer_Card{
-
-    margin-top: 20px;
-    align-self: center;
-    width: 700px;
-    height: 330px;
-    margin-left: 70px;
-    border-width: 50px;
-    border-color: black;
-}
-
 .Form_left_side{
     text-align: left;
     background-color: #E5ECF8;
-    width: 250px;
-    flex: 1;
-    height: 300px;
+    width: 600px;
+    flex: 2;
+    height: 306px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .Form_right_side{
     text-align: left;
     background-color: #F6F9FF;
-    width: 300px;
+    width: 200px;
     flex: 2;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
     
 }
 

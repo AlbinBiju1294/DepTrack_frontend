@@ -1,4 +1,4 @@
-/* .inner_container {
+.inner_container {
     background-color: white;
     margin-top: 10px;
     height: 490px;
@@ -10,4 +10,4 @@
 {
     color: var(--secondary-color);
     font-weight: 500;
-} */
+}

@@ -10,9 +10,9 @@ const PendingApprovalsContainer = () => {
     <div className={styles.inner_container}>
         {/* <h4 className={styles.form_heading}>Please fill the form</h4> */}
         {/* <PendingApprovalsTransferDetails/> */}
-        <TransferDetailsEmployeeData/>
+         <TransferDetailsEmployeeData/>
         <TransferDetailsDisplay/>
-        <RejectTransfer/>
+        <RejectTransfer/> 
        
     </div>
   )

@@ -7,6 +7,7 @@ import {FormDataDisplayProps} from './types/index';
 import styles from './TransferDetailsDisplay.module.css';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
+import TransferDetailsEmployeeData from '../TransferDetailsEmployeeData/TransferDetailsEmployeeData';
 
 
 
@@ -36,24 +37,24 @@ useEffect(() => {
 
 
   return (
-    <Card className={`${styles.Form_Outer_Card}`}>
+    <div className={`${styles.Form_Outer_Card}`}>
       <CardContent>
         <Typography className={`${styles.Form_Inner_container}`}color="text.secondary" gutterBottom>
           <Typography className={`${styles.Form_left_side}`}color="text.secondary" gutterBottom>
       
               
-            <TransferDetailsDisplayBody name="Employee Id :" /> 
-            <TransferDetailsDisplayBody name="Current Department :" />
-            <TransferDetailsDisplayBody name="Current Department Head:"/>
-            <TransferDetailsDisplayBody name="Band:"/>
-            <TransferDetailsDisplayBody name="Total Experience:"/>
-            <TransferDetailsDisplayBody name="Experience in Experion:"/>
-            <TransferDetailsDisplayBody name="Reason for Release:"/>
-            <TransferDetailsDisplayBody name="Skills:"/>
-            <TransferDetailsDisplayBody name="Upskilling Suggestions:"/>
-            <TransferDetailsDisplayBody name="Strength:"/>
-            <TransferDetailsDisplayBody name="Transfer Date:"/>
-            <TransferDetailsDisplayBody name="Initiated by:"/>
+            <TransferDetailsDisplayBody name="1.  Employee Id :" /> 
+            <TransferDetailsDisplayBody name="2.  Current Department :" />
+            <TransferDetailsDisplayBody name="3.  Current Department Head:"/>
+            <TransferDetailsDisplayBody name="4.  Band:"/>
+            <TransferDetailsDisplayBody name="5.  Total Experience:"/>
+            <TransferDetailsDisplayBody name="6.  Experience in Experion:"/>
+            <TransferDetailsDisplayBody name="7.  Reason for Release:"/>
+            <TransferDetailsDisplayBody name="8.  Skills:"/>
+            <TransferDetailsDisplayBody name="9.  Upskilling Suggestions:"/>
+            <TransferDetailsDisplayBody name="10. Strength:"/>
+            <TransferDetailsDisplayBody name="11. Transfer Date:"/>
+            <TransferDetailsDisplayBody name="12. Initiated by:"/>
 
 
           </Typography >
@@ -80,6 +81,6 @@ useEffect(() => {
         
         </Typography>
       </CardContent>
-    </Card>
+    </div>
   );
 }

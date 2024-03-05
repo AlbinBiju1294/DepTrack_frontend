@@ -1,15 +1,24 @@
 .FormButton{
-  margin-left: 550px;
-  margin-top: 20;
+  margin-left: 750px;
+  margin-top: -25px;
+  font-size: 10px!important;
 }
 
 
 
 .FormButton .Approve {
-    background-color: rgb(114, 235, 114)!important;
+    background-color: #ffff!important;
+    font-size: 10px!important;
+    color: black;
+    
+
   }
   .FormButton .Reject {
-    background-color: rgb(232, 96, 96)!important;
+    background-color:#ffff!important;
     margin-left: 40px;
+    font-size: 10px!important;
+    color: black;
+
+
   }
  

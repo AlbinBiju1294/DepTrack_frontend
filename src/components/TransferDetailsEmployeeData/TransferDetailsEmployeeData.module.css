@@ -1,39 +1,41 @@
 .Main_wrapping_Container{
     display: flex;
-    margin-left: 40px;
+    margin-left: 97px;
+    margin-top: 20px;
+
 
 }
 .Right_Container{
     display: flex;
     flex:1px;
-    margin-left: 0px;
-    margin-top: 10px;
+    margin-top:30px;
+    margin-left: 40px;
 }
 
 .Left_Container{
     display:flex;
-    margin-left: 40px;
-    margin-top: 10px;
-    flex:5px
+    margin-left: -70px;
+    flex:5px;
+    
     
 }
 .Employee_icon_container{
-    flex: 10;
-    margin-top: 10px;
+    flex: 6;
+    margin-top: -4.7px;
     margin-right: 20px;
+    font-size: 4.9rem!important;
+
 }
 .Employee_details_container{
     flex: 90;
     width: 10px;
     font-family: "Poppins";
-    /* line-height:3px; */
     color:#012970;
-    /* margin-top: 13px; */
-    font-size: 9px;
+    font-size: 11px;
 }
 
 .Employee_name{
-    font-size: 20px;
+    font-size: 22px;
 }
 
 
@@ -56,3 +58,4 @@
 .Du{
     color:#595353
 }
+
