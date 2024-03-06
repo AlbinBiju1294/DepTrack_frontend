@@ -9,7 +9,7 @@ import Navbar from "./components/Navbar/Navbar";
 import SideBar from "./components/SideBar/SideBar";
 import TransferHistory from "./pages/TransferHistory/TransferHistory";
 import PendingApprovals from "./pages/PendingApprovals/PendingApprovals";
-import TrackInitiatedRequests from "./pages/TrackInitiatedRequests/TrackInitiatedRequests";import PendingApprovalsForm from "./pages/PendingApprovalsForm/PendingApprovalsForm";
+import TrackInitiatedRequests from "./pages/TrackInitiatedRequests/TrackInitiatedRequests";
 import PendingApprovalsForm from "./pages/PendingApprovalsForm/PendingApprovalsForm";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
         <Route path="/transferhistory" element={<TransferHistory />} />
         <Route path="/trackrequests" element={<TrackInitiatedRequests />} />
         <Route path="/pendingapprovals" element={<PendingApprovals/>} />
-        <Route path="/pendingapprovalsform" element={<PendingApprovalsForm/>} />
+        <Route path="/pendingapprovals/:id" element={<PendingApprovalsForm/>} />
         
 
       </Routes>
