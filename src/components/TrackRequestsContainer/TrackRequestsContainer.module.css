@@ -1,0 +1,21 @@
+.inner_container {
+    background-color: white;
+    margin-top: 10px;
+    height: 490px;
+    padding: 10px;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .inner_container::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .pagination
+  {
+    align-self: end;
+    margin-right: 5vw;
+    color: var(--secondary-color);
+  }
