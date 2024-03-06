@@ -65,8 +65,7 @@ const TransferDetailsEmployeeData = () => {
 
     <div className= {`${styles.Right_Container}`}>
             <Card className= {`${styles.Card}`}>
-             {/* <p>{userData?userData.:""}</p> */}
-             {/* <p>DU3</p> */}
+             <p>{userData?userData.currentdu.du_name:""}</p>
             </Card>
 
         <div className= {`${styles.Arrow_Container}`}>
@@ -77,8 +76,7 @@ const TransferDetailsEmployeeData = () => {
 
         <div className= {`${styles.CDU_container}`}>
             <Card className= {`${styles.Card}`}>
-                <p>{userData?userData.targetdu_id:""}</p>
-                {/* <p>DU4</p> */}
+                <p>{userData?userData.targetdu.du_name:""}</p>
             </Card>
         </div>
     </div>
