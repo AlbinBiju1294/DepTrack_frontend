@@ -8,8 +8,9 @@ import InitiateTransfer from "./pages/InitiateTransfer/InitiateTransfer";
 import Navbar from "./components/Navbar/Navbar";
 import SideBar from "./components/SideBar/SideBar";
 import TransferHistory from "./pages/TransferHistory/TransferHistory";
+// import TabSwitch from "./components/PendingApprovals/TabSwitch";
 import PendingApprovals from "./pages/PendingApprovals/PendingApprovals";
-import PendingApprovals1 from "./pages/PendingApprovals1/PendingApprovals1";
+import PendingApprovalsForm from "./pages/PendingApprovalsForm/PendingApprovalsForm";
 
 function App() {
   return (
@@ -21,10 +22,9 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/initiatetransfer" element={<InitiateTransfer />} />
         <Route path="/transferhistory" element={<TransferHistory />} />
-        <Route path="/pendingapprovals" element={<PendingApprovals />} />
-        <Route path="/pendingapprovals1" element={<PendingApprovals1 />} />
-
-        PendingApprovals1
+        <Route path="/pendingapprovals" element={<PendingApprovals/>} />
+        <Route path="/pendingapprovalsform" element={<PendingApprovalsForm/>} />
+        
 
       </Routes>
     </BrowserRouter>

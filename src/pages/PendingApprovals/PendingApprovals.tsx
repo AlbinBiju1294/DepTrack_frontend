@@ -1,23 +1,18 @@
-import React from "react";
-import Navbar from "../../components/Navbar/Navbar";
-import SideBar from "../../components/SideBar/SideBar";
-import InnerBody from "../../components/InnerBody/InnerBody";
-import styles from "./PendingApprovals.module.css";
-import InnerBodyHeader from "../../components/InnerBodyHeader/InnerBodyHeader";
-import PendingApprovalsContainer from '../../components/PendingApprovalsContainer/PendingApprovalsContainer'
-
+import React from 'react'
+import styles from './PendingApprovals.module.css'
+import TransferHistroyContainer from '../../components/TransferHistoryContainer/TransferHistroyContainer';
+import InnerBodyHeader from '../../components/InnerBodyHeader/InnerBodyHeader';
+import PendingApprovalsContainer from '../../components/PendingApprovalsContainer/PendingApprovalsContainer';
 
 const PendingApprovals = () => {
-  const storedUser = localStorage.getItem("user");
   return (
     <>
       <div className={styles.main}>
-        <InnerBodyHeader heading="PendingApprovals" />
-        <PendingApprovalsContainer />
-        
+        <InnerBodyHeader heading="Pending Approvals" />
+        <PendingApprovalsContainer></PendingApprovalsContainer>
       </div>
     </>
   );
-};
+}
 
-export default PendingApprovals;
+export default PendingApprovals

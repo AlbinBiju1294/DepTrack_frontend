@@ -1,0 +1,16 @@
+.tabs{
+    opacity: 50%;
+    border: none;
+    width: 10rem;
+    height: 1.9rem;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.activeBtn {
+    background-color: #4154F1;
+    color: white;
+}
+.inactiveBtn {
+    background-color: #E2E7E7;
+}

@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react';
 // import './index.css';
-import { Table } from 'antd';
-import type { PaginationProps, TableColumnsType, TableProps } from 'antd';
+import { Table ,Button} from 'antd';
+import type { TableColumnsType, TableProps } from 'antd';
 import axios from 'axios';
-import { HandlePaginationChangeType, dataSourceType, PendingApprovalsTablePropsType } from './types';
-import styles from './TransferHistoryTable.module.css'
+import {dataSourceType } from './types';
+import styles from './PendingApprovalsTable.module.css'
+import { useNavigate } from 'react-router-dom';
+
 
   
-const PendingApprovalsTable = ({dataSource, pagination, handlePaginationChange}: PendingApprovalsTablePropsType ) => {
+const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) => {
     
+    const navigate = useNavigate()
     const columns: TableColumnsType<dataSourceType> = [
         {
             title: 'Transfer Id',
             dataIndex: 'id',
         },
-        ...(dataSource.length > 0 ? Object.keys(dataSource[0].employee).filter(key => key !== 'id').map(key => ({
-            title: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize first letter of key
-            dataIndex: ['employee', key],
-        })) : []),
+        // ...(dataSource.length > 0 ? Object.keys(dataSource[0].employee).filter(key => key !== 'id').map(key => ({
+        //     title: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize first letter of key
+        //     dataIndex: ['employee', key],
+        // })) : []),
 
         {
             title: 'Employee Number',
@@ -26,7 +29,7 @@ const PendingApprovalsTable = ({dataSource, pagination, handlePaginationChange}:
 
         {
             title: 'Employee Name',
-            dataIndex: ['employee', 'name'],////
+            dataIndex: ['employee', 'name'],
         },
 
         {
@@ -36,19 +39,33 @@ const PendingApprovalsTable = ({dataSource, pagination, handlePaginationChange}:
 
         {
             title: 'Transfer Initiated By',
-            dataIndex: ['status'],///////
+            dataIndex: ['initiated_by','name'],
         },
         {
             title: 'Transfer Initiated To',
             dataIndex: ['targetdu', 'du_name'],
         },
+        {
+           
+            render: ( _,record) => (
+            
+            <button type='button' className={styles.button} onClick={() => handleButtonClick(record)}> <p style={{color:"#FFFF"}}>{'>'}</p>  </button>
+            ),
+          },
+        ];
+      
+        // Function to handle button click
+        const handleButtonClick = (record: dataSourceType) => {
+          // Handle button click logic here
+          console.log('Button clicked for record:', record);
+          navigate('/pendingapprovalsform')
+        };
        
-      ];
+        
     
   return (
     <div>
-      <Table columns={columns} dataSource={dataSource} pagination={pagination}
-                onChange={handlePaginationChange} />
+      <Table className={styles.table} columns={columns} dataSource={dataSource} />
     </div>
   )
 }

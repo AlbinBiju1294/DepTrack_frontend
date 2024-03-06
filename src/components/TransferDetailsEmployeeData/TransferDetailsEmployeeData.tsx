@@ -16,17 +16,24 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const TransferDetailsEmployeeData = () => {
 
-        const [userData,setUserData] = useState< EmployeeDataProps>();
+        const [userData,setUserData] = useState< EmployeeDataProps|undefined>();
 
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyOTA5MzU0ODU1LCJpYXQiOjE3MDkzNTQ4NTUsImp0aSI6IjlmYWRkNWIwNGNjZTQ4ZmNiNGYwZGY2ZWJlYjQxODQ1IiwidXNlcl9pZCI6MTB9.YZJ1F8TwtpfzXV76bU2x4EhnCgtdDNb1Ca5d-iTGoCo';
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyOTA5NjExNDQ2LCJpYXQiOjE3MDk2MTE0NDYsImp0aSI6ImFjZmM4MTc0OWRlNDQ4ODdhOTRlYTNhMjZmYjQ1ZDFjIiwidXNlcl9pZCI6MTB9.SXjoSYrF5LqaE1X5tr6VoAEK0Qr-hBbgNFTVnQIZaOM';
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
   
+
+  // const token = localStorage.getItem('access_token')
+  // const config = {
+  // headers: { Authorization: `Bearer ${token}` },
+  // };
+
   useEffect(() => {
       const fetchData = async () => {
         try {
-          const res = await axios.get('http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/', config);
+          const transfer_id=3;
+          const res = await axios.get(`http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/?transfer_id=${transfer_id}`, config);
           console.log('Response from API:', res.data);
           setUserData(res.data.data);
         } catch (error) {
@@ -43,17 +50,13 @@ const TransferDetailsEmployeeData = () => {
       <div  className= {`${styles.Main_wrapping_Container}`}  >
     <div className= {`${styles.Left_Container}`}>
         <div>
-            {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" /> */}
             <AccountCircleIcon  className= {`${styles.Employee_icon_container}`} ></AccountCircleIcon>
 
         </div>
         <div className= {`${styles.Employee_details_container}`}>
-            <h4  className= {`${styles.Employee_name}`}>John Paul</h4> 
-            <h4>Assosciate Software Engineer</h4>
-            <p>john@experionglobal.com</p>
-            {/* <h4>{userData.employee.name}</h4>
-                <p>{userData.designation}</p>
-                <p>{userData.mail_id}</p> */}
+            <h4  className= {`${styles.Employee_name}`}>{userData?userData.employee.name:""}</h4>
+                <h4>{userData?userData.employee.designation:""}</h4>
+                <p>{userData?userData.employee.mail_id:""}</p>
         
         </div>
     </div>
@@ -61,12 +64,10 @@ const TransferDetailsEmployeeData = () => {
 
 
     <div className= {`${styles.Right_Container}`}>
-        {/* <div className= {`${styles.CDU_Container}`}> */}
             <Card className= {`${styles.Card}`}>
-             {/* <p>{userData.currentdu_id}</p> */}
-             <p>DU3</p>
+             {/* <p>{userData?userData.:""}</p> */}
+             {/* <p>DU3</p> */}
             </Card>
-        {/* </div> */}
 
         <div className= {`${styles.Arrow_Container}`}>
             <IconButton className={`${styles.ArrowIcon}`}>
@@ -76,8 +77,8 @@ const TransferDetailsEmployeeData = () => {
 
         <div className= {`${styles.CDU_container}`}>
             <Card className= {`${styles.Card}`}>
-                {/* <p>{userData.targetdu_id}</p> */}
-                <p>DU4</p>
+                <p>{userData?userData.targetdu_id:""}</p>
+                {/* <p>DU4</p> */}
             </Card>
         </div>
     </div>

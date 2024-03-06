@@ -1,3 +1,19 @@
 .columnHeader > tr > th {
     background-color: aquamarine!important;
 }
+
+
+.button{
+    background-color:#4154F1;
+    opacity:50%;
+    width: 20px;
+    height: 21px;
+    border:none;
+    border-radius: 5px;
+    
+}
+
+.table{
+    align-items: center!important;
+    font-size: 10px!important;
+}
