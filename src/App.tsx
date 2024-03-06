@@ -25,7 +25,7 @@ function App() {
         <Route path="/transferhistory" element={<TransferHistory />} />
         <Route path="/trackrequests" element={<TrackInitiatedRequests />} />
         <Route path="/pendingapprovals" element={<PendingApprovals/>} />
-        <Route path="/pendingapprovalsform" element={<PendingApprovalsForm/>} />
+        <Route path="/pendingapprovals/:id" element={<PendingApprovalsForm/>} />
         
 
       </Routes>

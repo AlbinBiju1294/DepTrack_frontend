@@ -17,10 +17,6 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
             title: 'Transfer Id',
             dataIndex: 'id',
         },
-        // ...(dataSource.length > 0 ? Object.keys(dataSource[0].employee).filter(key => key !== 'id').map(key => ({
-        //     title: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize first letter of key
-        //     dataIndex: ['employee', key],
-        // })) : []),
 
         {
             title: 'Employee Number',
@@ -33,22 +29,20 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
         },
 
         {
-            title: 'Transfer Initiated From',
+            title: 'Initiated From',
             dataIndex: ['currentdu', 'du_name'],
         },
 
         {
-            title: 'Transfer Initiated By',
+            title: 'Initiated By',
             dataIndex: ['initiated_by','name'],
         },
         {
-            title: 'Transfer Initiated To',
+            title: 'Initiated To',
             dataIndex: ['targetdu', 'du_name'],
         },
         {
-           
             render: ( _,record) => (
-            
             <button type='button' className={styles.button} onClick={() => handleButtonClick(record)}> <p style={{color:"#FFFF"}}>{'>'}</p>  </button>
             ),
           },
@@ -56,9 +50,9 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
       
         // Function to handle button click
         const handleButtonClick = (record: dataSourceType) => {
-          // Handle button click logic here
           console.log('Button clicked for record:', record);
-          navigate('/pendingapprovalsform')
+          const id = record.id; 
+          navigate(`/pendingapprovals/${id}`)
         };
        
         
