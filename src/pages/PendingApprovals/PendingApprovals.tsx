@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './PendingApprovals.module.css'
 import TransferHistroyContainer from '../../components/TransferHistoryContainer/TransferHistroyContainer';
 import InnerBodyHeader from '../../components/InnerBodyHeader/InnerBodyHeader';
-import TabSwitch from '../../components/PendingApprovals/TabSwitch';
 import PendingApprovalsContainer from '../../components/PendingApprovalsContainer/PendingApprovalsContainer';
 
 const PendingApprovals = () => {

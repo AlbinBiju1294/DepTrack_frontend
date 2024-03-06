@@ -8,10 +8,10 @@ import InitiateTransfer from "./pages/InitiateTransfer/InitiateTransfer";
 import Navbar from "./components/Navbar/Navbar";
 import SideBar from "./components/SideBar/SideBar";
 import TransferHistory from "./pages/TransferHistory/TransferHistory";
-import TabSwitch from "./components/PendingApprovals/TabSwitch";
 import PendingApprovals from "./pages/PendingApprovals/PendingApprovals";
-
+import TrackInitiatedRequests from "./pages/TrackInitiatedRequests/TrackInitiatedRequests";
 function App() {
+  
   return (
     <BrowserRouter>
       <Navbar></Navbar>
@@ -21,6 +21,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/initiatetransfer" element={<InitiateTransfer />} />
         <Route path="/transferhistory" element={<TransferHistory />} />
+        <Route path="/trackrequests" element={<TrackInitiatedRequests />} />
         <Route path="/pendingapprovals" element={<PendingApprovals/>} />
       </Routes>
     </BrowserRouter>
