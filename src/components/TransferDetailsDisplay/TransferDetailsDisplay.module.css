@@ -1,0 +1,26 @@
+.Form_left_side{
+    text-align: left;
+    background-color: #E5ECF8;
+    width: 600px;
+    flex: 2;
+    height: 306px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.Form_right_side{
+    text-align: left;
+    background-color: #F6F9FF;
+    width: 200px;
+    flex: 2;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    
+}
+
+
+.Form_Inner_container{
+    display: flex;
+    
+}
+
