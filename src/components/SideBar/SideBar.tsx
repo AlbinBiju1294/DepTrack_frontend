@@ -20,8 +20,12 @@ const SideBar = () => {
     setActiveDiv(divId);
     if (divId === 1) {
       navigate("/dashboard");
-    } else if (divId === 2) {
+    } 
+    else if (divId === 2) {
       navigate("/initiatetransfer");
+    }
+      else if (divId === 3) {
+        navigate("/trackrequests");
     } else if (divId === 5) {
       navigate("/transferhistory");
     }
