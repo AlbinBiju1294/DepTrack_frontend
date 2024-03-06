@@ -37,11 +37,6 @@ const InitiateTransferForm = () => {
     return du.du_name;
   });
 
-  // const token = localStorage.getItem("access_token");
-  // const config = {
-  //   headers: { Authorization: `Bearer ${token}` },
-  // };
-
   useEffect(() => {
     fetchEmployeeData(searchKeyword, setEmployeeData);
   }, [searchKeyword]);
