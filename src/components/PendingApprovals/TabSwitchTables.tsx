@@ -16,6 +16,7 @@ const TabSwitchTables = ({}) => {
     const du_id = user?.du_id;
   
     useEffect(() => {
+        setDataSource([])
         fetchData(du_id, activeButton,setDataSource)
       }, [activeButton]);
 
