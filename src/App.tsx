@@ -8,7 +8,6 @@ import InitiateTransfer from "./pages/InitiateTransfer/InitiateTransfer";
 import Navbar from "./components/Navbar/Navbar";
 import SideBar from "./components/SideBar/SideBar";
 import TransferHistory from "./pages/TransferHistory/TransferHistory";
-import TabSwitch from "./components/PendingApprovals/TabSwitch";
 import PendingApprovals from "./pages/PendingApprovals/PendingApprovals";
 
 function App() {
