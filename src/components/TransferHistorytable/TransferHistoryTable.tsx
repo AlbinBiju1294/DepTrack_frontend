@@ -5,7 +5,6 @@ import type { PaginationProps, TableColumnsType, TableProps } from 'antd';
 import axios from 'axios';
 import TransferHistoryTableHandler from './TransferHistoryTableHandler'
 import { HandlePaginationChangeType, dataSourceType, TransferHistoryTablePropsType } from './types';
-import styles from './TransferHistoryTable.module.css'
 
   
 const TransferHistoryTable = ({dataSource, pagination, handlePaginationChange}: TransferHistoryTablePropsType ) => {
@@ -16,7 +15,7 @@ const TransferHistoryTable = ({dataSource, pagination, handlePaginationChange}: 
             dataIndex: 'id',
         },
         ...(dataSource.length > 0 ? Object.keys(dataSource[0].employee).filter(key => key !== 'id').map(key => ({
-            title: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize first letter of key
+            title: key === 'employee_number' ? 'Employee Number' : key === 'name' ? 'Employee Name' : key.charAt(0).toUpperCase() + key.slice(1), 
             dataIndex: ['employee', key],
         })) : []),
         {
@@ -39,8 +38,12 @@ const TransferHistoryTable = ({dataSource, pagination, handlePaginationChange}: 
     
   return (
     <div>
-      <Table columns={columns} dataSource={dataSource} pagination={pagination}
-                onChange={handlePaginationChange} />
+      <Table 
+      columns={columns}
+       dataSource={dataSource} 
+       pagination={pagination}
+       onChange={handlePaginationChange}
+    />
     </div>
   )
 }

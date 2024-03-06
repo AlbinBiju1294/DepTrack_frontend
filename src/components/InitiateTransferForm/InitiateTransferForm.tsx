@@ -59,19 +59,19 @@ const InitiateTransferForm = () => {
     e.preventDefault();
     try {
       const res = await axiosInstance.post(
-        "http://127.0.0.1:8000/api/v1/transfer/create-transfer/",
+        "/api/v1/transfer/create-transfer/",
         formData
       );
       console.log("Response from API - submission:", res);
       if(res.status === 201)
       {
           await messageApi.success('Transfer initiated successfully');
-        
-        navigate('/dashboard')
+          navigate('/dashboard')
       }
       // Optionally, handle success response here
     } catch (error) {
-      await messageApi.error('Transfer initiation failed');
+      console.log(error)
+      await messageApi.error('Transfer initiation failed',1);
     }
     console.log(formData);
   };
