@@ -60,11 +60,10 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
           },
         ];
       
-        // Function to handle button click
         const handleButtonClick = (record: dataSourceType) => {
           console.log('Button clicked for record:', record);
           const id = record.id; 
-          navigate(`/pendingapprovals/${id}`)
+          navigate(`/transferdetailsdisplay/${id}`)
         };
        
         

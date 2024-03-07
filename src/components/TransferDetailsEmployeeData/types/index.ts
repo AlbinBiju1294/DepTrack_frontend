@@ -28,6 +28,9 @@ export interface EmployeeDataProps {
   currentdu: {
     du_name: string;
 };
+targetdu:{
+  du_name:string
+}
 initiated_by: {
     id: number;
     employee_number: string;

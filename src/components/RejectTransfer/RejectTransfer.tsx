@@ -12,6 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
 import axiosInstance from "../../config/AxiosConfig";
+import {useParams } from 'react-router-dom';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -35,14 +36,9 @@ const ConfirmButton = styled(Button)(({ theme, disabled }) => ({
 export default function RejectTransfer() {
   const [open, setOpen] = useState(false);
   const [reason, setReason] = useState<string>('');
-  // const [transferId, setTransferId] = useState<number>(0); // Assuming you have a transfer ID state
+  const {id} = useParams()
 
 
-
-  // const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyOTA5NjgwNjU1LCJpYXQiOjE3MDk2ODA2NTUsImp0aSI6IjUzMzRjZjRlMGZiZjQ3OTRiNjk0MDM4NDRkNmQzZDg0IiwidXNlcl9pZCI6MTB9.dxPzR7Tp2y0LYKX7bPmiLEav5GwzOxwclqFVrCsvAbw';
-  // const config = {
-  //   headers: { Authorization: `Bearer ${token}` }
-  // };
   const token = localStorage.getItem('access_token')
   const config = {
   headers: { Authorization: `Bearer ${token}` },
@@ -51,7 +47,6 @@ export default function RejectTransfer() {
 
   const handleClickOpen = () => {
     setOpen(true);
-    // setTransferId(transferId);
   };
 
   const handleClose = () => {
@@ -64,30 +59,23 @@ export default function RejectTransfer() {
 
   const isReasonEntered = reason.trim() !== '';
 
-  const handleConfirm = () => {
-    const transferId=3
-    if (isReasonEntered && transferId) {
-      const fetchData = async (transfer_id: number | undefined, isReasonEntered:string) => {
-      try{
-      const res = await axiosInstance.post('http://127.0.0.1:8000/api/v1/transfer/request-rejected', {
-        transferId: transferId,
+
+
+  const handleConfirm = async () => {
+    try {
+      const res = await axiosInstance.patch(`http://127.0.0.1:8000/api/v1/transfer/request-rejected/${id}`, {
+        transfer_id:id,
         reason: isReasonEntered
-      })
-    
-        console.log('Rejection reason submitted successfully:', res.data);
-        handleClose();
-      }
+      });
 
-      catch(error) {
-        console.log('Error submitting rejection reason:', error);
-    
-      };
-    
-  
+      console.log('Rejection reason submitted successfully:', res.data);
+      handleClose();
+    } catch (error) {
+      console.log('Error submitting rejection reason:', error);
     }
-  };}
+  };
+      
 
-  
 
   return (
     <div className={styles.FormButton}>
