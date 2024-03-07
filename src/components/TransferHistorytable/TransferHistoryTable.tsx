@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import './index.css';
 import { Table } from 'antd';
 import type { PaginationProps, TableColumnsType, TableProps } from 'antd';
+import {Tag} from 'antd';
 import axios from 'axios';
 import TransferHistoryTableHandler from './TransferHistoryTableHandler'
 import { HandlePaginationChangeType, dataSourceType, TransferHistoryTablePropsType } from './types';
@@ -29,6 +30,20 @@ const TransferHistoryTable = ({dataSource, pagination, handlePaginationChange}: 
         {
             title: 'Status',
             dataIndex: 'status',
+            render: (status) => {
+                let color = 'green'; // Default color
+                if (status === "REJECTED") 
+                    color = 'red';
+                else if (status === "COMPLETED") 
+                    color = 'green';
+                else if( status === "CANCELLED")
+                    color = "#808080"
+                return (
+                    <Tag color={color}>
+                    {status}
+                    </Tag>
+                );
+            },
         },
         {
             title: 'Transfer Date',

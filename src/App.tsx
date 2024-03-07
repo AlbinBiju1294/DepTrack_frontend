@@ -26,8 +26,6 @@ function App() {
         <Route path="/trackrequests" element={<TrackInitiatedRequests />} />
         <Route path="/pendingapprovals" element={<PendingApprovals/>} />
         <Route path="/transferdetailsdisplay/:id" element={<TransferDetailsDisplayForm/>} />
-        
-
       </Routes>
     </BrowserRouter>
   );

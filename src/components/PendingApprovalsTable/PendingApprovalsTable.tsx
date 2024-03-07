@@ -16,32 +16,44 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
         {
             title: 'Transfer Id',
             dataIndex: 'id',
+            sorter: (a, b) => a.id - b.id,
         },
 
         {
             title: 'Employee Number',
             dataIndex: ['employee', 'employee_number'],
+                  sorter: (a, b) => a.employee.employee_number.localeCompare(b.employee.employee_number),
+
         },
 
         {
             title: 'Employee Name',
             dataIndex: ['employee', 'name'],
+            sorter: (a, b) => a.employee.name.localeCompare(b.employee.name),
+
         },
 
         {
             title: 'Initiated From',
             dataIndex: ['currentdu', 'du_name'],
+            sorter: (a, b) => a.currentdu.du_name.localeCompare(b.currentdu.du_name),
+
         },
 
         {
             title: 'Initiated By',
             dataIndex: ['initiated_by','name'],
+            sorter: (a, b) => a.initiated_by.name.localeCompare(b.initiated_by.name),
+
         },
         {
             title: 'Initiated To',
             dataIndex: ['targetdu', 'du_name'],
+            sorter: (a, b) => a.targetdu.du_name.localeCompare(b.targetdu.du_name),
+
         },
         {
+            title: 'View',
             render: ( _,record) => (
             <button type='button' className={styles.button} onClick={() => handleButtonClick(record)}> <p style={{color:"#FFFF"}}>{'>'}</p>  </button>
             ),
