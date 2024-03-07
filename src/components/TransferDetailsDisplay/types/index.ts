@@ -25,6 +25,15 @@ export interface FormDataDisplayProps {
           updated_at: string; 
           du_id: number;
       };
+
+      currentdu: {
+        du_name: string
+    },
+      initiated_by: {
+        id: number;
+        employee_number:string;
+        name: string
+    },
       status: number;
       rejection_reason: string;
       transfer_date: string; 
@@ -32,6 +41,6 @@ export interface FormDataDisplayProps {
       currentdu_id: number;
       targetdu_id: number;
       newpm_id: number;
-      initiated_by: string; 
+      
   };
   
