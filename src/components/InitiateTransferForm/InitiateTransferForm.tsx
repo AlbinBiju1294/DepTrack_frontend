@@ -239,7 +239,7 @@ const InitiateTransferForm = () => {
           </div>
           <div className={styles.form_row}>
             <div className={styles.single_transfer_detail}>
-              <label className={styles.form_label}>Experion Experion:</label>
+              <label className={styles.form_label}>Experion Experience:</label>
               <input
                 type="number"
                 name="experion_experience"
