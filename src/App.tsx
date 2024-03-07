@@ -16,16 +16,21 @@ function App() {
   
   return (
     <BrowserRouter>
-      <Navbar></Navbar>
-      <SideBar></SideBar>
+     
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/initiatetransfer" element={<InitiateTransfer />} />
-        <Route path="/transferhistory" element={<TransferHistory />} />
-        <Route path="/trackrequests" element={<TrackInitiatedRequests />} />
-        <Route path="/pendingapprovals" element={<PendingApprovals/>} />
-        <Route path="/pendingapprovalsform" element={<PendingApprovalsForm/>} />
+        <Route path="/dashboard" element={<> <Navbar></Navbar>
+      <SideBar></SideBar><Dashboard /></>} />
+        <Route path="/initiatetransfer" element={<> <Navbar></Navbar>
+      <SideBar></SideBar><InitiateTransfer /></>} />
+        <Route path="/transferhistory" element={<> <Navbar></Navbar>
+      <SideBar></SideBar><TransferHistory /></>} />
+        <Route path="/trackrequests" element={<> <Navbar></Navbar>
+      <SideBar></SideBar><TrackInitiatedRequests /></>} />
+        <Route path="/pendingapprovals" element={<> <Navbar></Navbar>
+      <SideBar></SideBar><PendingApprovals/></>} />
+        <Route path="/pendingapprovalsform" element={<> <Navbar></Navbar>
+      <SideBar></SideBar><PendingApprovalsForm/></>} />
         
 
       </Routes>
