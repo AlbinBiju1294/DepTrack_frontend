@@ -12,7 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
 import axiosInstance from "../../config/AxiosConfig";
-import { Params } from 'react-router-dom';
+import {useParams } from 'react-router-dom';
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -36,8 +36,7 @@ const ConfirmButton = styled(Button)(({ theme, disabled }) => ({
 export default function RejectTransfer() {
   const [open, setOpen] = useState(false);
   const [reason, setReason] = useState<string>('');
-  // const {id} = useParams()
-  // const [transferId, setTransferId] = useState<number>(0); // Assuming you have a transfer ID state
+  const {id} = useParams()
 
 
   const token = localStorage.getItem('access_token')
@@ -48,7 +47,6 @@ export default function RejectTransfer() {
 
   const handleClickOpen = () => {
     setOpen(true);
-    // setTransferId(transferId);
   };
 
   const handleClose = () => {
@@ -61,50 +59,22 @@ export default function RejectTransfer() {
 
   const isReasonEntered = reason.trim() !== '';
 
-  const handleConfirm = () => {
-    // const transferId=3
-    
-      const fetchData = async (transfer_id: number | undefined, isReasonEntered:string) => {
-      try{
-      const res = await axiosInstance.post('http://127.0.0.1:8000/api/v1/transfer/request-rejected', {
-        transferId: transfer_id,
+
+
+  const handleConfirm = async () => {
+    try {
+      const res = await axiosInstance.patch(`http://127.0.0.1:8000/api/v1/transfer/request-rejected/${id}`, {
+        transfer_id:id,
         reason: isReasonEntered
-      })
-    
-        console.log('Rejection reason submitted successfully:', res.data);
-        handleClose();
-      }
+      });
 
-      catch(error) {
-        console.log('Error submitting rejection reason:', error);
-    
-      };
-      }
-      }
-
-  //     useEffect(() => {
-  //       const fetchData = async () => {
-  //         try {
-  //           const transferId=3
-
-  //           const res = await axiosInstance.get(
-  //             "http://127.0.0.1:8000/api/v1/transfer/request-rejected",{
-
-  //             transferId: transferId,
-  //             reason: isReasonEntered
-  //             }
-              
-  //           );
-  //           console.log("Rejection reason submitted successfully: ", res.data.data);
-  //           setTransferCount(res.data.data);
-  //         } catch (error) {
-  //           console.error("Error");
-  //         }
-  //       };
-  //       fetchData();
-  //     }, []);
-  // };}
-
+      console.log('Rejection reason submitted successfully:', res.data);
+      handleClose();
+    } catch (error) {
+      console.log('Error submitting rejection reason:', error);
+    }
+  };
+      
 
 
   return (

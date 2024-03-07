@@ -8,24 +8,22 @@ import styles from './TransferDetailsDisplay.module.css';
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 import TransferDetailsEmployeeData from '../TransferDetailsEmployeeData/TransferDetailsEmployeeData';
-
+import { useParams } from 'react-router-dom';
+import axiosInstance from '../../config/AxiosConfig';
 
 
 export default function TransferDetailsDisplay() {
 
 
   const [formData,seFormData] = useState<FormDataDisplayProps>();
+  const {id} = useParams()
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyOTA5NjExNDQ2LCJpYXQiOjE3MDk2MTE0NDYsImp0aSI6ImFjZmM4MTc0OWRlNDQ4ODdhOTRlYTNhMjZmYjQ1ZDFjIiwidXNlcl9pZCI6MTB9.SXjoSYrF5LqaE1X5tr6VoAEK0Qr-hBbgNFTVnQIZaOM';
-  const config = {
-    headers: { Authorization: `Bearer ${token}` }
-  };
 
 useEffect(() => {
     const fetchData = async () => {
       try {
-        const transfer_id=3;
-        const res = await axios.get(`http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/?transfer_id=${transfer_id}`, config);
+
+        const res = await axiosInstance.get(`http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/?transfer_id=${id}`);
         console.log('Response from API:', res.data);
         seFormData(res.data.data);
       } catch (error) {
@@ -63,8 +61,8 @@ useEffect(() => {
           <Typography className={`${styles.Form_right_side}`}color="text.secondary" gutterBottom>
             
             <TransferDetailsDisplayBody value={formData?formData.employee_id: ""}/> 
-            {/* <TransferDetailsDisplayBody  value={formData?formData.currentdu.du_name: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.details.employee_band: ""}/>
+             <TransferDetailsDisplayBody  value={formData?formData.currentdu.du_name: ""}/>
+            {/* <TransferDetailsDisplayBody value={formData?formData.details.employee_band: ""}/>
             <TransferDetailsDisplayBody value={formData?formData.details.total_experience: ""}/>
             <TransferDetailsDisplayBody value={formData?formData.details.experion_experience: ""}/>
             <TransferDetailsDisplayBody value={formData?formData.rejection_reason: ""}/>
@@ -72,7 +70,7 @@ useEffect(() => {
             <TransferDetailsDisplayBody value={formData?formData.details.upskilling_suggestions: ""} />
             <TransferDetailsDisplayBody value={formData?formData.details.strengths: ""}/>
             <TransferDetailsDisplayBody value={formData?formData.transfer_date: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.initiated_by.name:""}/> */}
+            <TransferDetailsDisplayBody value={formData?formData.initiated_by.name:""}/> */} 
           
           </Typography>
         
