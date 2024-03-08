@@ -18,7 +18,7 @@ import axiosInstance from '../../config/AxiosConfig';
 
 const TransferDetailsEmployeeData = () => {
 
-        const [userData,setUserData] = useState< EmployeeDataProps|undefined>();
+        const [userData,setUserData] = useState< EmployeeDataProps>();
         const {id}=useParams()
 
   
@@ -29,6 +29,8 @@ const TransferDetailsEmployeeData = () => {
           const res = await axiosInstance.get(`http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/?transfer_id=${id}`);
           console.log('Response from API:', res.data);
           setUserData(res.data.data);
+          
+          
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -36,6 +38,7 @@ const TransferDetailsEmployeeData = () => {
       fetchData();
     }, []);
 
+    console.log("userData: ",userData);
     
 
   return (
@@ -58,7 +61,7 @@ const TransferDetailsEmployeeData = () => {
 
     <div className= {`${styles.Right_Container}`}>
             <Card className= {`${styles.Card}`}>
-             <p>{userData?userData.currentdu.du_name:""}</p>
+             <p>{userData?userData.currentdu?.du_name:""}</p>
             </Card>
 
         <div className= {`${styles.Arrow_Container}`}>
