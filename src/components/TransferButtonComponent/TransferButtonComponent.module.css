@@ -9,7 +9,7 @@
 .FormButton .Approve {
     background-color: #ffff!important;
     font-size: 10px!important;
-    color: #012970;
+    color: var(--secondary-color);
     
 
   }
@@ -17,8 +17,14 @@
     background-color:#ffff!important;
     margin-left: 40px;
     font-size: 10px!important;
-    color: #012970;
-
-
+    color: var(--secondary-color);
   }
  
+  .transferDateDiv {
+    display: flex;
+    justify-content: space-around;
+  }
+  .transferDateDiv .transferDateLabel {
+    color: var(--secondary-color);
+    font-family: var(--font-family);
+  }

@@ -34,7 +34,7 @@ useEffect(() => {
   }, []);
 
 
-
+console.log(formData)
   return (
     <div className={`${styles.Form_Outer_Card}`}>
       <CardContent>
@@ -61,12 +61,12 @@ useEffect(() => {
           <Typography className={`${styles.Form_right_side}`}color="text.secondary" gutterBottom>
             
             <TransferDetailsDisplayBody value={formData?formData.employee_id: ""}/> 
-            <TransferDetailsDisplayBody  value={formData?formData.currentdu.du_name: ""}/>
-            {/* <TransferDetailsDisplayBody value={formData?formData.details.employee_band: ""}/> */}
-            {/* <TransferDetailsDisplayBody value={formData?formData.details.total_experience: ""}/> */}
-            {/* <TransferDetailsDisplayBody value={formData?formData.details.experion_experience: ""}/> */}
-            {/* <TransferDetailsDisplayBody value={formData?formData.details.releaseReason: ""}/> */}
-            {/* <TransferDetailsDisplayBody value={formData?formData.details.employee_skills: ""}/>
+            <TransferDetailsDisplayBody value={formData?formData.currentdu.du_name: ""}/>
+            <TransferDetailsDisplayBody value={formData?formData.details.employee_band: ""}/>
+            <TransferDetailsDisplayBody value={formData?formData.details.total_experience+" years": ""}/>
+            <TransferDetailsDisplayBody value={formData?formData.details.experion_experience+" years": ""}/>
+            <TransferDetailsDisplayBody value={formData?formData.details.releaseReason: ""}/>
+            <TransferDetailsDisplayBody value={formData?formData.details.employee_skills: ""}/>
             <TransferDetailsDisplayBody value={formData?formData.details.upskilling_suggestions: ""} />
             <TransferDetailsDisplayBody value={formData?formData.details.strengths: ""}/> */}
             <TransferDetailsDisplayBody value={formData?formData.transfer_date: ""}/>

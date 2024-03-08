@@ -16,8 +16,8 @@ import axiosInstance from '../../config/AxiosConfig';
 
 
 const TransferDetailsEmployeeData = () => {
-        "Displays the Employee details such as employee name,designation,email id ,current and traget du in the pending approvals page"
-         
+  "Displays the Employee details such as employee name,designation,email id ,current and traget du in the pending approvals page"
+
 
         const [userData,setUserData] = useState< EmployeeDataProps|undefined>();
         const {id}=useParams()
@@ -28,6 +28,7 @@ const TransferDetailsEmployeeData = () => {
         try {
           const res = await axiosInstance.get(`http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/?transfer_id=${id}`);
           console.log('Response from API:', res.data);
+                   
           setUserData(prev => res.data.data);
           console.log(userData)
         } catch (error) {
@@ -57,7 +58,7 @@ const TransferDetailsEmployeeData = () => {
 
     <div className= {`${styles.Right_Container}`}>
             <Card className= {`${styles.Card}`}>
-             <p>{userData?userData.currentdu.du_name:""}</p>
+             <p>{userData?userData.currentdu?.du_name:""}</p>
             </Card>
 
         <div className= {`${styles.Arrow_Container}`}>

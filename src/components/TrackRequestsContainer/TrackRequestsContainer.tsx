@@ -4,6 +4,7 @@ import { Pagination, Space, Table, Tag } from 'antd';
 import type { TableProps } from 'antd';
 import axiosInstance from '../../config/AxiosConfig';
 import UserContext from '../Contexts/UserContextProvider';
+import { CloseOutlined } from '@ant-design/icons';
 
 interface DataType {
     key: string;
@@ -88,6 +89,13 @@ const TrackRequestsContainer = () => {
               );
           },
         },
+        // {
+           
+        //   render: ( _,record) => (
+          
+        //   <button type='button' className={styles.button} > <CloseOutlined/>  </button>
+        //   ),
+        // },
       ];
   return (
     <div className={styles.inner_container}>
