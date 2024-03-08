@@ -1,7 +1,6 @@
 import React from 'react'
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
-// import styles from './EmployeeDetails.module.css'
 import { useState,useEffect } from 'react';
 import axios from 'axios'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -17,6 +16,8 @@ import axiosInstance from '../../config/AxiosConfig';
 
 
 const TransferDetailsEmployeeData = () => {
+        "Displays the Employee details such as employee name,designation,email id ,current and traget du in the pending approvals page"
+         
 
         const [userData,setUserData] = useState< EmployeeDataProps|undefined>();
         const {id}=useParams()
@@ -25,10 +26,10 @@ const TransferDetailsEmployeeData = () => {
   useEffect(() => {
       const fetchData = async () => {
         try {
-          // const transfer_id=3;
           const res = await axiosInstance.get(`http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/?transfer_id=${id}`);
           console.log('Response from API:', res.data);
-          setUserData(res.data.data);
+          setUserData(prev => res.data.data);
+          console.log(userData)
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -36,7 +37,6 @@ const TransferDetailsEmployeeData = () => {
       fetchData();
     }, []);
 
-    
 
   return (
     <>
@@ -53,7 +53,6 @@ const TransferDetailsEmployeeData = () => {
         
         </div>
     </div>
-
 
 
     <div className= {`${styles.Right_Container}`}>

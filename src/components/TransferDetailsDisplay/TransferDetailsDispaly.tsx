@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import TransferDetailsDisplayBody from '../TransferDetailsDisplayBody/TransferDetailsDisplayBody';
@@ -13,6 +12,7 @@ import axiosInstance from '../../config/AxiosConfig';
 
 
 export default function TransferDetailsDisplay() {
+  "Allows the target du to view the employee details in the form and then proceed with acception or rejection"
 
 
   const [formData,seFormData] = useState<FormDataDisplayProps>();
@@ -61,16 +61,16 @@ useEffect(() => {
           <Typography className={`${styles.Form_right_side}`}color="text.secondary" gutterBottom>
             
             <TransferDetailsDisplayBody value={formData?formData.employee_id: ""}/> 
-             <TransferDetailsDisplayBody  value={formData?formData.currentdu.du_name: ""}/>
-            {/* <TransferDetailsDisplayBody value={formData?formData.details.employee_band: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.details.total_experience: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.details.experion_experience: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.rejection_reason: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.details.employee_skills: ""}/>
+            <TransferDetailsDisplayBody  value={formData?formData.currentdu.du_name: ""}/>
+            {/* <TransferDetailsDisplayBody value={formData?formData.details.employee_band: ""}/> */}
+            {/* <TransferDetailsDisplayBody value={formData?formData.details.total_experience: ""}/> */}
+            {/* <TransferDetailsDisplayBody value={formData?formData.details.experion_experience: ""}/> */}
+            {/* <TransferDetailsDisplayBody value={formData?formData.details.releaseReason: ""}/> */}
+            {/* <TransferDetailsDisplayBody value={formData?formData.details.employee_skills: ""}/>
             <TransferDetailsDisplayBody value={formData?formData.details.upskilling_suggestions: ""} />
-            <TransferDetailsDisplayBody value={formData?formData.details.strengths: ""}/>
+            <TransferDetailsDisplayBody value={formData?formData.details.strengths: ""}/> */}
             <TransferDetailsDisplayBody value={formData?formData.transfer_date: ""}/>
-            <TransferDetailsDisplayBody value={formData?formData.initiated_by.name:""}/> */} 
+            <TransferDetailsDisplayBody value={formData?formData.initiated_by.name:""}/> 
           
           </Typography>
         
