@@ -1,21 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./InitiateTransferForm.module.css";
-import { Input } from "antd";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import axios from "axios";
 import "./Initiate.css";
 import Dropdown, { Option } from "react-dropdown";
 import "react-dropdown/style.css";
 import UserContext from "../Contexts/UserContextProvider";
 import { Button, Checkbox } from "@mui/material";
-import { Employee, Du } from "./types";
+import { Employee, Du, FormDataType } from "./types";
 import { fetchEmployeeData } from "./api/fetchEmployeeData";
 import { fetchDuData } from "./api/fetchDuData";
 import { fetchBandData } from "./api/fetchBandData";
-import axiosInstance from "../../config/AxiosConfig";
 import { useNavigate } from "react-router-dom";
 import { message } from "antd";
+import { postTransferData } from "./api/postTransferData";
 
 const InitiateTransferForm = () => {
   const [employeeData, setEmployeeData] = useState<Employee[]>([]);
@@ -27,11 +25,11 @@ const InitiateTransferForm = () => {
   const [bands, setBands] = useState<string[]>([]);
   const { user } = useContext(UserContext);
 
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState<FormDataType>({});
   const [isChecked, setIsChecked] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const options = duData.map((du) => {
     return du.du_name;
@@ -58,22 +56,17 @@ const InitiateTransferForm = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const res = await axiosInstance.post(
-        "/api/v1/transfer/create-transfer/",
-        formData
-      );
-      console.log("Response from API - submission:", res);
-      if(res.status === 201)
-      {
-          await messageApi.success('Transfer initiated successfully');
-          navigate('/dashboard')
+      const res = await postTransferData(formData);
+      if (res?.status) {
+        await messageApi.success(res.message, 1);
+        navigate('/trackrequests')
+      } else if (res?.status == false) {
+        await messageApi.error(res.message, 1);
       }
-      // Optionally, handle success response here
     } catch (error) {
-      console.log(error)
-      await messageApi.error('Transfer initiation failed',1);
+      console.error("Error:", error);
+      alert("An error occurred while processing the transfer.");
     }
-    console.log(formData);
   };
 
   useEffect(() => {
@@ -146,189 +139,191 @@ const InitiateTransferForm = () => {
 
   return (
     <>
-    {contextHolder}
-    <form onSubmit={handleSubmit}>
-      <div className={styles.form_wrapper}>
-        <div className={styles.form_row}>
-          <div
-            className={`${styles.single_transfer_detail} ${styles.emp_name}`}
-          >
-            <label className={styles.form_label}>Employee Name:</label>
-            <Autocomplete
-              disablePortal
-              id="combo-box-demo"
-              options={employeeData}
-              getOptionLabel={(employee: Employee) => `${employee.name}`}
-              sx={{
-                width: 251,
-                border: "0.5px solid grey",
-                borderRadius: "5px",
-              }}
+      {contextHolder}
+      <form onSubmit={handleSubmit}>
+        <div className={styles.form_wrapper}>
+          <div className={styles.form_row}>
+            <div
+              className={`${styles.single_transfer_detail} ${styles.emp_name}`}
+            >
+              <label className={styles.form_label}>Employee Name:</label>
+              <Autocomplete
+                disablePortal
+                id="combo-box-demo"
+                options={employeeData}
+                getOptionLabel={(employee: Employee) => `${employee.name}`}
+                sx={{
+                  width: 251,
+                  border: "0.5px solid grey",
+                  borderRadius: "5px",
+                }}
+                size="small"
+                onChange={(event, value) => handleAutocompleteChange(value)}
+                renderOption={(props, option) => (
+                  <li className={styles.employee_droplist} {...props}>
+                    <div className={styles.employee_name}>{option.name}</div>
+                    <div className={styles.employee_number}>
+                      {option.employee_number}
+                    </div>
+                  </li>
+                )}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    name="searchKeyword"
+                    placeholder="search employee"
+                    onChange={changeKeyword}
+                    InputLabelProps={{}}
+                  />
+                )}
+              />
+            </div>
+            <div className={styles.single_transfer_detail}>
+              <label className={styles.form_label}>Employee Number:</label>
+              <input
+                type="text"
+                value={selectedEmployee ? selectedEmployee.employee_number : ""}
+                className={styles.input_box}
+              />
+            </div>
+          </div>
+          <div className={styles.form_row}>
+            <div className={styles.single_transfer_detail}>
+              <label className={styles.form_label}>Transfer Date:</label>
+              <input
+                type="date"
+                name="transfer_date"
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+                className={styles.input_box}
+              />
+            </div>
+            <div className={styles.single_transfer_detail}>
+              <label className={styles.form_label}>Target DU:</label>
+              <Dropdown
+                options={options}
+                value="Select Delivery Unit"
+                onChange={(selectedOption) =>
+                  handleDuDropdownChange(selectedOption)
+                }
+                controlClassName={styles.input_drop_control}
+                placeholder="Select an option"
+              />
+            </div>
+          </div>
+          <div className={styles.form_row}>
+            <div className={styles.single_transfer_detail}>
+              <label className={styles.form_label}>Employee Band:</label>
+              <Dropdown
+                options={bands}
+                value="Select Band"
+                onChange={(selectedOption) =>
+                  handleBandDropdownChange(selectedOption)
+                }
+                controlClassName={styles.input_drop_control}
+                placeholder="Select an option"
+              />
+            </div>
+            <div className={styles.single_transfer_detail}>
+              <label className={styles.form_label}>Total Experience:</label>
+              <input
+                type="number"
+                className={styles.input_box}
+                name="total_experience"
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+              />
+            </div>
+          </div>
+          <div className={styles.form_row}>
+            <div className={styles.single_transfer_detail}>
+              <label className={styles.form_label}>Experion Experience:</label>
+              <input
+                type="number"
+                name="experion_experience"
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+                className={styles.input_box}
+              />
+            </div>
+            <div className={styles.single_transfer_detail}>
+              <label className={styles.form_label}>Skills:</label>
+              <textarea
+                name="employee_skills"
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+                className={`${styles.input_box} ${styles.non_resizable_textarea}`}
+              />
+            </div>
+          </div>
+          <div className={styles.form_row}>
+            <div className={styles.single_transfer_detail}>
+              <label className={styles.form_label}>
+                Upskilling Suggestions:
+              </label>
+              <textarea
+                name="upskilling_suggestions"
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+                className={`${styles.input_box} ${styles.non_resizable_textarea}`}
+              />
+            </div>
+            <div className={styles.single_transfer_detail}>
+              <label className={styles.form_label}>Areas of Strengths:</label>
+              <textarea
+                name="strengths"
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+                className={`${styles.input_box} ${styles.non_resizable_textarea}`}
+              />
+            </div>
+          </div>
+          <div className={styles.form_row}>
+            <div className={styles.single_transfer_detail}>
+              <label className={styles.form_label}>Reason for Release:</label>
+              <textarea
+                name="releaseReason"
+                onChange={(e) => {
+                  handleInputChange(e);
+                }}
+                className={`${styles.input_box} ${styles.non_resizable_textarea}`}
+              />
+            </div>
+            <div className={styles.single_transfer_detail}>
+              <label className={styles.form_label}>Remarks:</label>
+              <textarea
+                className={`${styles.input_box} ${styles.non_resizable_textarea}`}
+              />
+            </div>
+          </div>
+        </div>
+        <div className={styles.submit_area}>
+          <div>
+            <Checkbox
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+              inputProps={{ "aria-label": "controlled" }}
               size="small"
-              onChange={(event, value) => handleAutocompleteChange(value)}
-              renderOption={(props, option) => (
-                <li className={styles.employee_droplist} {...props}>
-                  <div className={styles.employee_name}>{option.name}</div>
-                  <div className={styles.employee_number}>
-                    {option.employee_number}
-                  </div>
-                </li>
-              )}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  name="searchKeyword"
-                  placeholder="search employee"
-                  onChange={changeKeyword}
-                  InputLabelProps={{}}
-                />
-              )}
             />
+            <label htmlFor="checkbox">Project Access Revoked</label>
           </div>
-          <div className={styles.single_transfer_detail}>
-            <label className={styles.form_label}>Employee Number:</label>
-            <input
-              type="text"
-              value={selectedEmployee ? selectedEmployee.employee_number : ""}
-              className={styles.input_box}
-            />
-          </div>
-        </div>
-        <div className={styles.form_row}>
-          <div className={styles.single_transfer_detail}>
-            <label className={styles.form_label}>Transfer Date:</label>
-            <input
-              type="date"
-              name="transfer_date"
-              onChange={(e) => {
-                handleInputChange(e);
-              }}
-              className={styles.input_box}
-            />
-          </div>
-          <div className={styles.single_transfer_detail}>
-            <label className={styles.form_label}>Target DU:</label>
-            <Dropdown
-              options={options}
-              value='Select Delivery Unit'
-              onChange={(selectedOption) =>
-                handleDuDropdownChange(selectedOption)
-              }
-              controlClassName={styles.input_drop_control}
-              placeholder="Select an option"
-            />
-          </div>
-        </div>
-        <div className={styles.form_row}>
-          <div className={styles.single_transfer_detail}>
-            <label className={styles.form_label}>Employee Band:</label>
-            <Dropdown
-              options={bands}
-              value="Select Band"
-              onChange={(selectedOption) =>
-                handleBandDropdownChange(selectedOption)
-              }
-              controlClassName={styles.input_drop_control}
-              placeholder="Select an option"
-            />
-          </div>
-          <div className={styles.single_transfer_detail}>
-            <label className={styles.form_label}>Total Experience:</label>
-            <input
-              type="number"
-              className={styles.input_box}
-              name="total_experience"
-              onChange={(e) => {
-                handleInputChange(e);
-              }}
-            />
-          </div>
-        </div>
-        <div className={styles.form_row}>
-          <div className={styles.single_transfer_detail}>
-            <label className={styles.form_label}>Experion Experion:</label>
-            <input
-              type="number"
-              name="experion_experience"
-              onChange={(e) => {
-                handleInputChange(e);
-              }}
-              className={styles.input_box}
-            />
-          </div>
-          <div className={styles.single_transfer_detail}>
-            <label className={styles.form_label}>Skills:</label>
-            <textarea
-              name="employee_skills"
-              onChange={(e) => {
-                handleInputChange(e);
-              }}
-              className={`${styles.input_box} ${styles.non_resizable_textarea}`}
-            />
-          </div>
-        </div>
-        <div className={styles.form_row}>
-          <div className={styles.single_transfer_detail}>
-            <label className={styles.form_label}>Upskilling Suggestions:</label>
-            <textarea
-              name="upskilling_suggestions"
-              onChange={(e) => {
-                handleInputChange(e);
-              }}
-              className={`${styles.input_box} ${styles.non_resizable_textarea}`}
-            />
-          </div>
-          <div className={styles.single_transfer_detail}>
-            <label className={styles.form_label}>Areas of Strengths:</label>
-            <textarea
-              name="strengths"
-              onChange={(e) => {
-                handleInputChange(e);
-              }}
-              className={`${styles.input_box} ${styles.non_resizable_textarea}`}
-            />
-          </div>
-        </div>
-        <div className={styles.form_row}>
-          <div className={styles.single_transfer_detail}>
-            <label className={styles.form_label}>Reason for Release:</label>
-            <textarea
-              name="releaseReason"
-              onChange={(e) => {
-                handleInputChange(e);
-              }}
-              className={`${styles.input_box} ${styles.non_resizable_textarea}`}
-            />
-          </div>
-          <div className={styles.single_transfer_detail}>
-            <label className={styles.form_label}>Remarks:</label>
-            <textarea
-              className={`${styles.input_box} ${styles.non_resizable_textarea}`}
-            />
-          </div>
-        </div>
-      </div>
-      <div className={styles.submit_area}>
-        <div>
-          <Checkbox
-            checked={isChecked}
-            onChange={handleCheckboxChange}
-            inputProps={{ "aria-label": "controlled" }}
+          <Button
+            variant="outlined"
+            color="error"
+            type="submit"
+            disabled={!isChecked}
             size="small"
-          />
-          <label htmlFor="checkbox">Project Access Revoked</label>
+          >
+            Submit
+          </Button>
         </div>
-        <Button
-          variant="outlined"
-          color="error"
-          type="submit"
-          disabled={!isChecked}
-          size="small"
-        >
-          Submit
-        </Button>
-      </div>
-    </form>
+      </form>
     </>
   );
 };

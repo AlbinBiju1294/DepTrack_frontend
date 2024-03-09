@@ -1,0 +1,30 @@
+.FormButton{
+  margin-left: 740px;
+  margin-top: -25px;
+  font-size: 10px!important;
+}
+
+
+
+.FormButton .Approve {
+    background-color: #ffff!important;
+    font-size: 10px!important;
+    color: var(--secondary-color);
+    
+
+  }
+  .FormButton .Reject {
+    background-color:#ffff!important;
+    margin-left: 40px;
+    font-size: 10px!important;
+    color: var(--secondary-color);
+  }
+ 
+  .transferDateDiv {
+    display: flex;
+    justify-content: space-around;
+  }
+  .transferDateDiv .transferDateLabel {
+    color: var(--secondary-color);
+    font-family: var(--font-family);
+  }

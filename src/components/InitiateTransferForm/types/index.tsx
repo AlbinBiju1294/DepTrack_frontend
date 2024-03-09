@@ -12,6 +12,22 @@ export interface Du {
   du_name: string;
 }
 
+export interface FormDataType {
+  currentdu_id?: number;
+  employee_band?: string;
+  employee_id?: number | null;
+  employee_skills?: string;
+  experion_experience?: string;
+  releaseReason?: string;
+  status?: number;
+  strengths?: string;
+  targetdu_id?: number;
+  total_experience?: string;
+  transfer_date?: string;
+  upskilling_suggestions?: string;
+}
+
+
 export type SetEmployeeDataFunction = (data: Employee[]) => void;
 
 export type SetDuDataFunction = (data: Du[]) => void;
