@@ -1,15 +1,15 @@
-import React, { useContext, useEffect ,useRef} from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import TransferHistoryTable from "./TransferHistoryTable";
 import axiosInstance from "../../config/AxiosConfig";
 import HistoryDataContext from "../Contexts/HistoryDataContextProvider";
-import FilterComponent
- from "../FilterComponent/FilterComponent";
+import FilterComponent from "../FilterComponent/FilterComponent";
 const TransferHistoryTableHandler = () => {
-  const filterComponentRef = useRef(null);//trying to access filtered data 
-  const { dataSource, setDataSource,pagination,setPagination } = useContext(HistoryDataContext);
-   // Initial pagination state
-   
- const fetchData = async (page: number) => {
+  const filterComponentRef = useRef(null); //trying to access filtered
+  const { dataSource, setDataSource, pagination, setPagination } =
+    useContext(HistoryDataContext);
+  // Initial pagination state
+
+  const fetchData = async (page: number) => {
     try {
       const limit = pagination.pageSize;
       const offset = (page - 1) * limit;

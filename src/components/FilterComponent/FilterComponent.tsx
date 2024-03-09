@@ -18,7 +18,7 @@ const FilterComponent = () => {
   const { setDataSource, pagination, setPagination } =
     useContext(HistoryDataContext);
 
-  const emptyForm = { limit: pagination.pageSize, offset: 0 };
+  const emptyForm = { limit: 2, offset: 0 };
 
   const statusRef = useRef<ReactDropdown>(null);
   const fromRef = useRef<ReactDropdown>(null);
@@ -110,16 +110,16 @@ const FilterComponent = () => {
     fetchDuData();
   }, []);
 
- const fetchFilteredData = async (page: number, origin: number) => {
+  const fetchFilteredData = async (page: number, origin: number) => {
     const formDataOld = formData;
     try {
       const limit = pagination.pageSize;
       const offset = (page - 1) * limit;
-      setFormData({
-        ...formData,
+      setFormData((prevFormData) => ({
+        ...prevFormData,
         limit: limit,
         offset: offset,
-      });
+      }));
       const qparam = origin === 0 ? formData : emptyForm;
       console.log(formData);
       console.log(emptyForm);
@@ -137,15 +137,15 @@ const FilterComponent = () => {
         total: responseData.count,
       }));
       setDataSource(responseData.results);
-      setFormData({
-        ...formDataOld,
-      });
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+      }));
       console.log(formData);
     } catch (error) {
       setDataSource([]);
-      setFormData({
-        ...formDataOld,
-      });
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+      }));
       console.log(formData);
       console.error("Error:", error);
     }
