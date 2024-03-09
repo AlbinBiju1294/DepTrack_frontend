@@ -1,39 +1,58 @@
 import React, { useState, createContext, ReactNode } from "react";
 
 export type dataType = {
-    currentdu: string;
-    employee:  {
-        number: string,
-        name: string,
-        id: number
-    };
+  currentdu: string;
+  employee: {
+    number: string;
+    name: string;
     id: number;
-    status: number;
-    targetdu: string;
-    transfer_date: string;
+  };
+  id: number;
+  status: number;
+  targetdu: string;
+  transfer_date: string;
+};
+
+export type paginationtype ={
+    current:number;
+    total:number;
+    pageSize:number;
 }
 
 type HistoryDataContextType = {
-    dataSource: dataType[] | null;
-    setDataSource: React.Dispatch<React.SetStateAction<dataType[] | null>>
-}
+  dataSource: dataType[];
+  setDataSource: React.Dispatch<React.SetStateAction<dataType[]>>;
+  pagination:paginationtype;
+  setPagination:React.Dispatch<React.SetStateAction<paginationtype>>;
+};
 
 const initialHistoryData = {
-    dataSource: [],
-    setDataSource: () => null
-}
+  dataSource: [],
+  setDataSource: () => [],
+  pagination: {
+    current: 1,
+    total: 0,
+    pageSize: 5,
+  },
+  setPagination: () => {},
+};
 
-const HistoryDataContext = createContext<HistoryDataContextType>(initialHistoryData);
+const HistoryDataContext =
+  createContext<HistoryDataContextType>(initialHistoryData);
 
+export const HistoryDataContextProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
+  const [dataSource, setDataSource] = useState<dataType[]>([]);
+  const [pagination, setPagination] = useState<paginationtype>(initialHistoryData.pagination);
 
-export const HistoryDataContextProvider = ({ children }: { children: ReactNode }) => {
-    const [dataSource, setDataSource] = useState<dataType[] | null>([]);
-
-    return (
-        <HistoryDataContext.Provider value={{ dataSource, setDataSource }}>
-            {children}
-        </HistoryDataContext.Provider>
-    );
-}
+  return (
+    <HistoryDataContext.Provider value={{ dataSource, setDataSource,pagination,setPagination }}>
+      {children}
+    </HistoryDataContext.Provider>
+  );
+};
 
 export default HistoryDataContext;

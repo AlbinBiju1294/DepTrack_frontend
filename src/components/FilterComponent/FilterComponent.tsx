@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import axios from "axios";
+import axiosInstance from "../../config/AxiosConfig";
 import styles from "./FilterComponent.module.css";
 import { Button } from "@mui/material";
 import Dropdown, { Option } from "react-dropdown";
@@ -7,11 +8,17 @@ import "react-dropdown/style.css";
 import { useRef, useState, useEffect } from "react";
 import { Du } from "./types/index";
 import ReactDropdown from "react-dropdown";
+import HistoryDataContext from "../Contexts/HistoryDataContextProvider";
 
 const FilterComponent = () => {
   const status = ["Completed", "Cancelled", "Rejected"];
   const [duData, setDuData] = useState<Du[]>([]);
   const [formData, setFormData] = useState({});
+
+  const { setDataSource, pagination, setPagination } =
+    useContext(HistoryDataContext);
+
+  const emptyForm = { limit: pagination.pageSize, offset: 0 };
 
   const statusRef = useRef<ReactDropdown>(null);
   const fromRef = useRef<ReactDropdown>(null);
@@ -59,7 +66,7 @@ const FilterComponent = () => {
       }));
     }
   };
-  console.log(formData, fromRef.current);
+  // console.log(formData, fromRef.current);
 
   const handleChange = (name: string, value: string | number) => {
     setFormData({
@@ -69,16 +76,16 @@ const FilterComponent = () => {
   };
 
   const handleClear = () => {
-    setFormData({});
-
+    setFormData((prev) => {});
+    fetchFilteredData(1, 1);
     if (fromRef.current) {
       fromRef.current.setState({ selected: "From", isOpen: false });
     }
     if (toRef.current) {
       toRef.current.setState({ selected: "To", isOpen: false });
     }
-    if (toRef.current) {
-      toRef.current.setState({ selected: "Status", isOpen: false });
+    if (statusRef.current) {
+      statusRef.current.setState({ selected: "Status", isOpen: false });
     }
 
     if (transferDateFromRef.current) transferDateFromRef.current.value = "";
@@ -103,18 +110,44 @@ const FilterComponent = () => {
     fetchDuData();
   }, []);
 
-  const fetchFilteredData = async () => {
+ const fetchFilteredData = async (page: number, origin: number) => {
+    const formDataOld = formData;
     try {
-      const res = await axios.get(
+      const limit = pagination.pageSize;
+      const offset = (page - 1) * limit;
+      setFormData({
+        ...formData,
+        limit: limit,
+        offset: offset,
+      });
+      const qparam = origin === 0 ? formData : emptyForm;
+      console.log(formData);
+      console.log(emptyForm);
+      const res = await axiosInstance.get(
         "http://127.0.0.1:8000/api/v1/transfer/filter-transfers/",
         {
-          params: formData,
-          ...config,
+          params: qparam,
         }
       );
-      console.log("Response from API - du's got:", res.data);
+      const responseData = res.data.data;
+      console.log("Transfer history: ", responseData.results);
+      setPagination((prevPagination) => ({
+        ...prevPagination,
+        current: page,
+        total: responseData.count,
+      }));
+      setDataSource(responseData.results);
+      setFormData({
+        ...formDataOld,
+      });
+      console.log(formData);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      setDataSource([]);
+      setFormData({
+        ...formDataOld,
+      });
+      console.log(formData);
+      console.error("Error:", error);
     }
   };
 
@@ -190,7 +223,9 @@ const FilterComponent = () => {
             disableRipple={true}
             variant="outlined"
             color="primary"
-            onClick={fetchFilteredData}
+            onClick={() => {
+              fetchFilteredData(1, 0);
+            }}
             type="submit"
             size="small"
             sx={{
@@ -204,7 +239,9 @@ const FilterComponent = () => {
             disableRipple={true}
             variant="outlined"
             color="primary"
-            onClick={handleClear}
+            onClick={() => {
+              handleClear();
+            }}
             type="submit"
             size="small"
           >
