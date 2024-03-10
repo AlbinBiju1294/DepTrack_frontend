@@ -13,30 +13,27 @@ import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
   const [activeDiv, setActiveDiv] = useState<number>(1);
-  const { user,setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleDivClick = (divId: number) => {
     setActiveDiv(divId);
     if (divId === 1) {
       navigate("/dashboard");
-    } 
-    else if (divId === 2) {
+    } else if (divId === 2) {
       navigate("/initiatetransfer");
-    }
-      else if (divId === 3) {
-        navigate("/trackrequests");
-    }
-    else if (divId === 4) {
+    } else if (divId === 3) {
+      navigate("/trackrequests");
+    } else if (divId === 4) {
       navigate("/pendingapprovals");
-  }
-    else if (divId === 5) {
+    } else if (divId === 5) {
       navigate("/transferhistory");
-    }
-    else if (divId === 6) {
-      localStorage.clear()
-      setUser(null)
+    } else if (divId === 6) {
+      localStorage.clear();
+      setUser(null);
       navigate("/login");
+    } else if (divId === 7) {
+      navigate("/managedu");
     }
   };
 
