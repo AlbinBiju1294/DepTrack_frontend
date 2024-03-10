@@ -15,6 +15,8 @@ import { useNavigate } from "react-router-dom";
 import { message } from "antd";
 import { postTransferData } from "./api/postTransferData";
 
+
+//component for displaying the form for employee transfer initiation
 const InitiateTransferForm = () => {
   const [employeeData, setEmployeeData] = useState<Employee[]>([]);
   const [searchKeyword, setSearchKeyword] = useState<string>("");
@@ -31,6 +33,7 @@ const InitiateTransferForm = () => {
 
   const navigate = useNavigate();
 
+  //for setting options for du dropdown
   const options = duData.map((du) => {
     return du.du_name;
   });
@@ -53,13 +56,14 @@ const InitiateTransferForm = () => {
     setSearchKeyword(e.target.value);
   };
 
+  // function to post the transfer details
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const res = await postTransferData(formData);
       if (res?.status) {
         await messageApi.success(res.message, 1);
-        navigate('/trackrequests')
+        navigate("/trackrequests");
       } else if (res?.status == false) {
         await messageApi.error(res.message, 1);
       }
@@ -84,8 +88,7 @@ const InitiateTransferForm = () => {
     }));
   }, []);
 
-  // Handlers for form input changes
-
+  
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -103,7 +106,7 @@ const InitiateTransferForm = () => {
       setSelectedEmployee(null);
       setFormData({
         ...formData,
-        employee_id: null, // Assuming employee_id is a string, clear it
+        employee_id: null,
       });
     } else {
       setSelectedEmployee(selectedValue);
@@ -127,7 +130,7 @@ const InitiateTransferForm = () => {
     });
     setFormData({
       ...formData,
-      targetdu_id: newDuData[0].id, // Assuming selectedOption.value is the band value
+      targetdu_id: newDuData[0].id,
     });
   };
 
