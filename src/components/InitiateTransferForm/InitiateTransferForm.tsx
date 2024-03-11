@@ -1,145 +1,28 @@
-import React, { useContext, useEffect, useState } from "react";
 import styles from "./InitiateTransferForm.module.css";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import "./Initiate.css";
-import Dropdown, { Option } from "react-dropdown";
 import "react-dropdown/style.css";
-import UserContext from "../Contexts/UserContextProvider";
 import { Button, Checkbox } from "@mui/material";
-import { Employee, Du, FormDataType } from "./types";
-import { fetchEmployeeData } from "./api/fetchEmployeeData";
-import { fetchDuData } from "./api/fetchDuData";
-import { fetchBandData } from "./api/fetchBandData";
-import { useNavigate } from "react-router-dom";
-import { message } from "antd";
-import { postTransferData } from "./api/postTransferData";
-
+import { Employee, InitiateTransferFormPropsType } from "./types";
+import Select from "react-select";
 
 //component for displaying the form for employee transfer initiation
-const InitiateTransferForm = () => {
-  const [employeeData, setEmployeeData] = useState<Employee[]>([]);
-  const [searchKeyword, setSearchKeyword] = useState<string>("");
-  const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(
-    null
-  );
-  const [duData, setDuData] = useState<Du[]>([]);
-  const [bands, setBands] = useState<string[]>([]);
-  const { user } = useContext(UserContext);
-
-  const [formData, setFormData] = useState<FormDataType>({});
-  const [isChecked, setIsChecked] = useState(false);
-  const [messageApi, contextHolder] = message.useMessage();
-
-  const navigate = useNavigate();
-
-  //for setting options for du dropdown
-  const options = duData.map((du) => {
-    return du.du_name;
-  });
-
-  useEffect(() => {
-    fetchEmployeeData(searchKeyword, setEmployeeData);
-  }, [searchKeyword]);
-
-  useEffect(() => {
-    fetchDuData(setDuData);
-  }, []);
-
-  useEffect(() => {
-    fetchBandData(setBands);
-  }, []);
-
-  const changeKeyword = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setSearchKeyword(e.target.value);
-  };
-
-  // function to post the transfer details
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      const res = await postTransferData(formData);
-      if (res?.status) {
-        await messageApi.success(res.message, 1);
-        navigate("/trackrequests");
-      } else if (res?.status == false) {
-        await messageApi.error(res.message, 1);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("An error occurred while processing the transfer.");
-    }
-  };
-
-  useEffect(() => {
-    let newStatus: number;
-    if (user?.role === 1) {
-      newStatus = 2;
-    } else {
-      newStatus = 1;
-    }
-    console.log(newStatus);
-    setFormData((prevState) => ({
-      ...prevState,
-      currentdu_id: user?.du_id,
-      status: newStatus,
-    }));
-  }, []);
-
-  
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    if (value != "") {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
-  };
-
-  const handleAutocompleteChange = (selectedValue: Employee | null) => {
-    if (selectedValue === null) {
-      setSelectedEmployee(null);
-      setFormData({
-        ...formData,
-        employee_id: null,
-      });
-    } else {
-      setSelectedEmployee(selectedValue);
-      setFormData({
-        ...formData,
-        employee_id: selectedValue.id,
-      });
-    }
-  };
-
-  const handleBandDropdownChange = (selectedOption: Option) => {
-    setFormData({
-      ...formData,
-      employee_band: selectedOption.value, // Assuming selectedOption.value is the band value
-    });
-  };
-
-  const handleDuDropdownChange = (selectedOption: Option) => {
-    const newDuData = duData.filter((du) => {
-      return du.du_name === selectedOption.value;
-    });
-    setFormData({
-      ...formData,
-      targetdu_id: newDuData[0].id,
-    });
-  };
-
-  const handleCheckboxChange = () => {
-    setIsChecked((prev) => {
-      return !prev;
-    });
-  };
-
+const InitiateTransferForm = ({
+  employeeData,
+  selectedEmployee,
+  bands,
+  isChecked,
+  contextHolder,
+  options,
+  changeKeyword,
+  handleSubmit,
+  handleInputChange,
+  handleAutocompleteChange,
+  handleBandDropdownChange,
+  handleDuDropdownChange,
+  handleCheckboxChange,
+}: InitiateTransferFormPropsType) => {
   return (
     <>
       {contextHolder}
@@ -149,10 +32,11 @@ const InitiateTransferForm = () => {
             <div
               className={`${styles.single_transfer_detail} ${styles.emp_name}`}
             >
-              <label className={styles.form_label}>Employee Name:</label>
+              <label className={styles.form_label}>Employee Name:*</label>
               <Autocomplete
                 disablePortal
                 id="combo-box-demo"
+                aria-required
                 options={employeeData}
                 getOptionLabel={(employee: Employee) => `${employee.name}`}
                 sx={{
@@ -176,13 +60,13 @@ const InitiateTransferForm = () => {
                     name="searchKeyword"
                     placeholder="search employee"
                     onChange={changeKeyword}
-                    InputLabelProps={{}}
+                    required
                   />
                 )}
               />
             </div>
             <div className={styles.single_transfer_detail}>
-              <label className={styles.form_label}>Employee Number:</label>
+              <label className={styles.form_label}>Employee Number:*</label>
               <input
                 type="text"
                 value={selectedEmployee ? selectedEmployee.employee_number : ""}
@@ -192,8 +76,9 @@ const InitiateTransferForm = () => {
           </div>
           <div className={styles.form_row}>
             <div className={styles.single_transfer_detail}>
-              <label className={styles.form_label}>Transfer Date:</label>
+              <label className={styles.form_label}>Transfer Date:*</label>
               <input
+                required
                 type="date"
                 name="transfer_date"
                 onChange={(e) => {
@@ -203,35 +88,121 @@ const InitiateTransferForm = () => {
               />
             </div>
             <div className={styles.single_transfer_detail}>
-              <label className={styles.form_label}>Target DU:</label>
-              <Dropdown
+              <label className={styles.form_label}>Target DU:*</label>
+              <Select
                 options={options}
-                value="Select Delivery Unit"
-                onChange={(selectedOption) =>
-                  handleDuDropdownChange(selectedOption)
-                }
-                controlClassName={styles.input_drop_control}
-                placeholder="Select an option"
+                placeholder="Select Target Du"
+                required
+                onChange={(selectedOption) => {
+                  handleDuDropdownChange(selectedOption?.value);
+                }}
+                styles={{
+                  control: (baseStyles, state) => ({
+                    ...baseStyles,
+                    width: 250,
+                    minHeight: "10px",
+                    maxHeight: "28px",
+                    fontSize: "11px",
+                    borderRadius: "3px",
+                    border: state.isFocused ? "none" : "none",
+                    outline: state.isFocused
+                      ? "1px solid blue"
+                      : "1px solid #7D7D7D",
+                    boxShadow: "none",
+                    "&:hover": {
+                      borderColor: "none",
+                    },
+                  }),
+                  indicatorSeparator: (provided) => ({
+                    ...provided,
+                    display: "none",
+                  }),
+                  dropdownIndicator: (provided) => ({
+                    ...provided,
+                    minHeight: "25px",
+                    maxHeight: "30px",
+                    marginTop: "-8px",
+                    width: "30px",
+                    color: "grey",
+                  }),
+                  menuList: (provided) => ({
+                    ...provided,
+                    fontSize: 10,
+                    width: 250,
+                    height: 120,
+                    overflowY: "scroll",
+                  }),
+                  option: (provided) => ({
+                    ...provided,
+                    fontSize: 10,
+                  }),
+                }}
+                // components={{
+                //   DropdownIndicator: () => <span>&#9660;</span>, // Unicode for down arrow
+                // }}
               />
             </div>
           </div>
           <div className={styles.form_row}>
             <div className={styles.single_transfer_detail}>
-              <label className={styles.form_label}>Employee Band:</label>
-              <Dropdown
+              <label className={styles.form_label}>Employee Band:*</label>
+              <Select
                 options={bands}
-                value="Select Band"
-                onChange={(selectedOption) =>
-                  handleBandDropdownChange(selectedOption)
-                }
-                controlClassName={styles.input_drop_control}
-                placeholder="Select an option"
+                placeholder="Select Employee Band"
+                required
+                onChange={(selectedOption) => {
+                  handleBandDropdownChange(selectedOption?.value);
+                }}
+                styles={{
+                  control: (baseStyles, state) => ({
+                    ...baseStyles,
+                    width: 250,
+                    minHeight: "10px",
+                    maxHeight: "28px",
+                    fontSize: "11px",
+                    borderRadius: "3px",
+                    border: state.isFocused ? "none" : "none",
+                    outline: state.isFocused
+                      ? "1px solid blue"
+                      : "1px solid #7D7D7D",
+                    boxShadow: "none",
+                    "&:hover": {
+                      borderColor: "none",
+                    },
+                  }),
+                  indicatorSeparator: (provided) => ({
+                    ...provided,
+                    display: "none",
+                  }),
+                  dropdownIndicator: (provided) => ({
+                    ...provided,
+                    minHeight: "10px",
+                    maxHeight: "28px",
+                    marginTop: "-8px",
+                    width: "30px",
+                    color: "grey",
+                  }),
+                  menuList: (provided) => ({
+                    ...provided,
+                    fontSize: 10,
+                    width: 250,
+                    height: 120,
+                    overflowY: "scroll",
+                  }),
+                  option: (provided) => ({
+                    ...provided,
+                    fontSize: 10,
+                  }),
+                }}
               />
             </div>
             <div className={styles.single_transfer_detail}>
-              <label className={styles.form_label}>Total Experience:</label>
+              <label className={styles.form_label}>Total Experience:*</label>
               <input
+                required
                 type="number"
+                min={0}
+                max={25}
                 className={styles.input_box}
                 name="total_experience"
                 onChange={(e) => {
@@ -242,9 +213,12 @@ const InitiateTransferForm = () => {
           </div>
           <div className={styles.form_row}>
             <div className={styles.single_transfer_detail}>
-              <label className={styles.form_label}>Experion Experience:</label>
+              <label className={styles.form_label}>Experion Experience:*</label>
               <input
+                required
                 type="number"
+                min={0}
+                max={25}
                 name="experion_experience"
                 onChange={(e) => {
                   handleInputChange(e);
