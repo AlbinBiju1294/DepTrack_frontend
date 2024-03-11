@@ -6,6 +6,7 @@ import { pmDataType, datePmPostDataType } from './types';
 import { postApprovalData } from './api/postApprovalData';
 import TransferButtonComponent from './TransferButtonComponent';
 import { fetchPmData } from './api/fetchPmData';
+import { patchRejectData } from './api/patchRejectData';
 import axiosInstance from "../../config/AxiosConfig";
 
 
@@ -69,6 +70,8 @@ useEffect(()=>{
     fetchPmData(setPmData);
   },[])
 
+  
+
 //logic to handle transfer reject
  
 const success = () => {
@@ -98,17 +101,12 @@ const success = () => {
   const isReasonEntered = reason.trim() !== '';
 
   const handleRejectConfirm = async () => {
-    try {
-      const res = await axiosInstance.patch(`http://127.0.0.1:8000/api/v1/transfer/request-rejected`, {
-        transfer_id:id,
-        rejection_reason: reason
-      });
- 
-      console.log('Rejection reason submitted successfully:', res.data);
-      handleCloseReject();
-    } catch (error) {
-      console.log('Error submitting rejection reason:', error);
+    try{
+      await patchRejectData(id, reason, handleCloseReject);
     }
+   catch (error) {
+    console.error("Error:", error);
+}
   };
 
 
