@@ -1,47 +1,111 @@
-import {useState} from 'react'
-import { Button, Modal } from 'antd';
+import { Button, Modal, Input } from 'antd';
+import Dropdown from "react-dropdown";
 import styles from './TransferButtonComponent.module.css';
+import { TransferButtonComponentPropsType } from './types';
 
-const TransferButtonComponent = () => {
+const TransferButtonComponent = ({
+  contextHolder, 
+  showModal, 
+  open,
+  handleOk,
+  handleCloseApproval,
+  handleDateChange,
+  pmOptions,
+  handleSelectPm,
+  transferDate,
+  openReject,
+  handleOpenReject,
+  handleCloseReject,
+  isReasonEntered,
+  handleRejectConfirm,
+  success,
+  reason,
+  handleReasonChange
+  }: TransferButtonComponentPropsType) => {
 
-  const [open, setOpen] = useState(false);
-
-  const showModal = () => {
-    setOpen(true);
-  };
-
-  const handleOk = () => {
-    // logic to handle thetransfer approval
-  };
-
+    const { TextArea } = Input;
+    
   return (
+    <>
+    {contextHolder}
     <div className={styles.FormButton}>
-      <button onClick={showModal}>Approve</button>
-      <button>Reject</button>
+      <Button onClick={showModal}>Approve</Button>
+      <Button onClick={handleOpenReject}>Reject</Button>
 
+      {/* Modal for approval */}
       <Modal
         open={open}
-        title="Enter Approval Details"
+        title={<span className={styles.customTitle}>Enter Approval Details</span>}
         centered
         onOk={handleOk}
+        onCancel={handleCloseApproval}
         footer={[
           <Button key="submit" type="primary" onClick={handleOk}>
             Submit
           </Button>
         ]}
       >
-        <div className={styles.transferDateDiv}>
-            <label className={styles.transferDateLabel}>Transfer Date:</label>
-            <input
-              type="date"
-              name="transfer_date"
-              className={styles.transferDateInput}
-            />
+        <div className={styles.modalContentContainer}>
+          <div className={styles.transferDateDiv}>
+              <label className={styles.transferDateLabel}>Select Acceptance Date : </label>
+              <input
+                type="date"
+                name="transfer_date"
+                value={transferDate}
+                onChange={(e) => {
+                  handleDateChange(e);
+                }}
+                className={styles.transferDateInput}
+              />
+          </div>
+          <div className={styles.transferDateDiv}>
+              <label className={styles.transferDateLabel}>Select Project Manager :</label>
+              <Dropdown
+                options={pmOptions}
+                value="Select a project manager"
+                className={styles.pmSelectDropdown}
+                controlClassName={styles.input_drop_control}
+                onChange={(selectedOption) =>
+                  handleSelectPm(selectedOption)
+                }
+                placeholder="Select an option"
+              />
+          </div>
         </div>
-        
+      </Modal>
+
+      {/* Modal for reject */}
+       <Modal
+        open={openReject}
+        title="Enter the Rejection Reason"
+        centered
+        onCancel={handleCloseReject}
+        footer={[
+          <Button key="submit" type="primary"  disabled={!isReasonEntered} onClick={() => {
+            {handleRejectConfirm()}
+            {success()}}}>
+            Confirm
+          </Button>
+        ]}
+      >
+        <div className={styles.transferDateDiv}>
+       
+          <TextArea
+            autoSize={{ minRows: 4, maxRows: 5 }}
+            autoFocus
+            required
+            id="reason"
+            placeholder="Reason"
+            style={{ width: '100%', maxHeight: '200px', overflowY: 'auto' }}
+            value={reason}
+            onChange={handleReasonChange}
+          />
+       </div>
       </Modal>
 
     </div>
+    </>
+    
   )
 }
 

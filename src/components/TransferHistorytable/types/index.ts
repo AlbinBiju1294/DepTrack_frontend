@@ -21,8 +21,8 @@ export type dataSourceType = {
   transfer_date: string;
 };
 
-export type TransferHistoryTablePropsType = {
-  dataSource: dataSourceType[];
-  pagination: PaginationProps;
-  handlePaginationChange: HandlePaginationChangeType;
-};
+export type TransferHistoryTablePropsType = { 
+    dataSource: dataSourceType[], 
+    pagination: PaginationProps, 
+    handlePaginationChange: HandlePaginationChangeType
+}
