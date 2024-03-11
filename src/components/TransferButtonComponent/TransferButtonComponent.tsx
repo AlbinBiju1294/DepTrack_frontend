@@ -29,8 +29,10 @@ const TransferButtonComponent = ({
     <>
     {contextHolder}
     <div className={styles.FormButton}>
-      <Button onClick={showModal}>Approve</Button>
-      <Button onClick={handleOpenReject}>Reject</Button>
+      {/* <Button  size='small'  style={{ backgroundColor: '#5cb85c', color: 'white' }} onClick={showModal}>Approve</Button>
+      <Button size='small'style={{ backgroundColor: '#F32013',opacity: "75%", color: 'white' }} onClick={handleOpenReject}>Reject</Button> */}
+      <button className={styles.Approve} onClick={showModal}>Approve</button>
+      <button className={styles.Reject} onClick={handleOpenReject}>Reject</button>
 
       {/* Modal for approval */}
       <Modal
