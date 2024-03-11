@@ -1,4 +1,4 @@
-.Form_left_side{
+/* .Form_left_side{
     text-align: left;
     background-color: #E5ECF8;
     width: 600px;
@@ -9,18 +9,76 @@
 }
 
 .Form_right_side{
-    text-align: left;
+    /* text-align: left;
     background-color: #F6F9FF;
     width: 200px;
     flex: 2;
     border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px; */
+    /* text-align: left;
+    background-color: #F6F9FF;
+    width: 600px;
+    flex: 2;
+    height: 306px;
+    border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     
-}
+} */
 
 
-.Form_Inner_container{
+/* .Form_Inner_container{
     display: flex;
     
 }
 
+.Form_data{
+    margin-top: 10px;
+    padding-bottom:100px;
+    margin-left: 25px;
+    font-size: 12.7px;
+    font-family: "Poppins";
+    justify-self: center;
+    color: #012970 !important;;
+} */ 
+
+
+
+
+
+.Form_left_side {
+    text-align: left;
+    background-color: #E5ECF8;
+    width: 600px;
+    flex: 2;
+    height: 306px; /* Changed height to min-height */
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    word-wrap: break-word; /* Added to enable word wrap */
+}
+
+.Form_right_side {
+    text-align: left;
+    background-color: #F6F9FF;
+    width: 600px;
+    flex: 2;
+    height: 306px; /* Changed height to min-height */
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    word-wrap: break-word; /* Added to enable word wrap */
+    /* margin-left: 20px; Added margin-left for extra space */
+}
+
+.Form_Inner_container {
+    display: flex;
+    flex-wrap: wrap; /* Added to allow items to wrap to the next line */
+}
+
+.Form_data {
+    margin-top: 10px;
+    padding-bottom: 100px;
+    margin-left: 25px;
+    font-size: 12.7px;
+    font-family: "Poppins";
+    justify-self: center;
+    color: #012970 !important;;
+}
