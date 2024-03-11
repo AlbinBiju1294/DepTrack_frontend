@@ -1,23 +1,41 @@
-.FormButton{
-  margin-left: 740px;
-  margin-top: -25px;
+ .FormButton{
+  margin-left: 799px!important;
+  margin-top: -12px;
   font-size: 10px!important;
+  display: flex; 
+  gap: 10px!important;
 }
 
+.Approve {
+    background-color: #5cb85c!important;
+    width: 55px;
+    height: 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px!important;
+    color:white
+    /* color: var(--secondary-color); */
+    
+   
 
-
-.FormButton .Approve {
-    background-color: #ffff!important;
-    font-size: 10px!important;
-    color: var(--secondary-color);
     
 
   }
-  .FormButton .Reject {
-    background-color:#ffff!important;
-    margin-left: 40px;
-    font-size: 10px!important;
-    color: var(--secondary-color);
+  .Reject {
+    background-color:#eb3e35!important;
+    width: 53px;
+    height: 24.5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px!important;
+    color:white
+  }
+
+  .modalContentContainer {
+    display: flex;
+    flex-direction: column;
+    height: 8rem;
+    justify-content: space-around;
   }
  
   .transferDateDiv {
@@ -27,4 +45,21 @@
   .transferDateDiv .transferDateLabel {
     color: var(--secondary-color);
     font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  .transferDateDiv .transferDateInput, .input_drop_control {
+    width: 14rem;
+    height: 2rem;
+    border: 1px solid gray;
+    border-radius: 0.3rem;
+    color: gray;
+  }
+
+  .customTitle {
+    color: var(--secondary-color);
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 1.2rem;
   }
