@@ -62,7 +62,7 @@ console.log(formData)
            
           <Typography className={`${styles.Form_right_side}`}color="text.secondary" gutterBottom>
             
-            <TransferDetailsDisplayBody value={formData?formData.employee_id: ""}/> 
+            <TransferDetailsDisplayBody value={formData?formData.employee.id: ""}/> 
             <TransferDetailsDisplayBody value={formData?formData.currentdu.du_name: ""}/>
             <TransferDetailsDisplayBody value={formData?formData.details.employee_band: ""}/>
             <TransferDetailsDisplayBody value={formData?formData.details.total_experience+" years": ""}/>
