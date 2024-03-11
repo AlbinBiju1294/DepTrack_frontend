@@ -85,7 +85,7 @@ const DuBar = () => {
             scaleType: 'band',
             label: 'DU Name',
             labelStyle: {
-              fontSize: 11,
+              fontSize: 12,
             },
             categoryGapRatio: 0.6,
             fontSize:1
@@ -102,7 +102,7 @@ const DuBar = () => {
             id: 'yAxis',
             label: 'No of Transfers',
             labelStyle: {
-              fontSize: 11,
+              fontSize: 12,
             },
           } as YaxisConfig,
         ]}
