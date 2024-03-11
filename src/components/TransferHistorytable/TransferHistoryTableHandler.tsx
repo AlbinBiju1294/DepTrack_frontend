@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import TransferHistoryTable from './TransferHistoryTable'
 import axiosInstance from '../../config/AxiosConfig';

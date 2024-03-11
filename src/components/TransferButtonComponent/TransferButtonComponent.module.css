@@ -19,6 +19,13 @@
     font-size: 10px!important;
     color: var(--secondary-color);
   }
+
+  .modalContentContainer {
+    display: flex;
+    flex-direction: column;
+    height: 8rem;
+    justify-content: space-around;
+  }
  
   .transferDateDiv {
     display: flex;
@@ -27,4 +34,21 @@
   .transferDateDiv .transferDateLabel {
     color: var(--secondary-color);
     font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  .transferDateDiv .transferDateInput, .input_drop_control {
+    width: 14rem;
+    height: 2rem;
+    border: 1px solid gray;
+    border-radius: 0.3rem;
+    color: gray;
+  }
+
+  .customTitle {
+    color: var(--secondary-color);
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 1.2rem;
   }
