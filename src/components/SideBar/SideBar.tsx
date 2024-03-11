@@ -107,7 +107,7 @@ const SideBar = () => {
       </div>
       <div
         className={`${
-          user?.role !== 1 && user?.role !== 2
+          user?.role !== 1 && user?.role !== 2 && user?.role !== 5
             ? `${styles.no_display}`
             : activeDiv === 2
             ? `${styles.sidebar_items_active}`
@@ -130,9 +130,7 @@ const SideBar = () => {
       </div>
       <div
         className={`${
-          user?.role === 5
-            ? `${styles.no_display}`
-            : activeDiv === 3
+          activeDiv === 3
             ? `${styles.sidebar_items_active}`
             : `${styles.sidebar_items}`
         }`}
@@ -153,7 +151,7 @@ const SideBar = () => {
       </div>
       <div
         className={`${
-          user?.role !== 1
+          user?.role !== 1 && user?.role !== 5
             ? `${styles.no_display}`
             : activeDiv === 4
             ? `${styles.sidebar_items_active}`
@@ -176,9 +174,7 @@ const SideBar = () => {
       </div>
       <div
         className={`${
-          user?.role === 5
-            ? `${styles.no_display}`
-            : activeDiv === 5
+          activeDiv === 5
             ? `${styles.sidebar_items_active}`
             : `${styles.sidebar_items}`
         }`}
@@ -207,7 +203,7 @@ const SideBar = () => {
           handleDivClick(6);
         }}
       >
-        <LogoutIcon className={styles.icon} />
+        <LogoutIcon className={styles.icon_logout} />
         <h6
           className={`${
             activeDiv === 6
