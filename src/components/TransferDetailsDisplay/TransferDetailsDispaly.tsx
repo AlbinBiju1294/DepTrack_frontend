@@ -12,7 +12,7 @@ import { useParams } from 'react-router-dom';
 import axiosInstance from '../../config/AxiosConfig';
 
 
-export default function TransferDetailsDisplay() {
+export default function TransferDetailsDisplay({setTransferDate}: {setTransferDate: React.Dispatch<React.SetStateAction<string>>}) {
 
 
   const [formData,seFormData] = useState<FormDataDisplayProps>();
@@ -26,6 +26,8 @@ useEffect(() => {
         const res = await axiosInstance.get(`http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/?transfer_id=${id}`);
         console.log('Response from API:', res.data);
         seFormData(res.data.data);
+        setTransferDate(res.data.data?.transfer_date ?? '')
+        
       } catch (error) {
         console.error('Error fetching data:', error);
       }
