@@ -1,120 +1,82 @@
-import {useState} from 'react'
-import { Button, Modal,message } from 'antd';
+import { Button, Modal, Input } from 'antd';
+import Dropdown from "react-dropdown";
 import styles from './TransferButtonComponent.module.css';
-import {useParams } from 'react-router-dom';
-import axiosInstance from '../../config/AxiosConfig';
-import { Input} from 'antd';
-import { useNavigate } from 'react-router-dom';
-import {patchRejectReason} from './api/patchRejectReason'
+import { TransferButtonComponentPropsType } from './types';
 
+const TransferButtonComponent = ({
+  contextHolder, 
+  showModal, 
+  open,
+  handleOk,
+  handleCloseApproval,
+  handleDateChange,
+  pmOptions,
+  handleSelectPm,
+  transferDate,
+  openReject,
+  handleOpenReject,
+  handleCloseReject,
+  isReasonEntered,
+  handleRejectConfirm,
+  success,
+  reason,
+  handleReasonChange
+  }: TransferButtonComponentPropsType) => {
 
-
-
-const { TextArea } = Input;
-
-
-const TransferButtonComponent = () => {
-
-  const [open, setOpen] = useState(false);
-  const [OpenReject, setOpenReject] = useState(false);
-  const [reason, setReason] = useState<string>('');
-  const [messageApi, contextHolder] = message.useMessage();
-  const navigate = useNavigate()
-
-  const {id} = useParams()
-
-  const showModal = () => {
-    setOpen(true);
-  };
-
-  const handleOk = () => {
-    // logic to handle thetransfer approval
-  };
-
-
-
-
-
-
-
-//logic to handle transfer reject
-
-const success = () => {
-  messageApi.open({
-    type: 'success',
-    content: 'Rejection reason submitted successfully!',
-    duration:1,
-  })
-  setTimeout(() => {
-    navigate('/pendingapprovals');
-  }, 1500);
-};
-
-  const handleOpenReject = () => {
-      setOpenReject(true);
-  };
-
-  const handleCloseReject= () => {
-    setOpenReject(false);
-  };
-
-  const handleReasonChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setReason(event.target.value);
-      
-  };
-
-  const isReasonEntered = reason.trim() !== '';
-
-
-
-  //api for reject pop up
-  
-  const handleRejectConfirm = async () => {
-    try{
-      await patchRejectReason(id, reason, handleCloseReject);
-    }
-   catch (error) {
-    console.error("Error:", error);
-}
-  };
-
-
+    const { TextArea } = Input;
+    
   return (
     <>
-    
+    {contextHolder}
     <div className={styles.FormButton}>
-      <Button size='small'  style={{ backgroundColor: '#5cb85c', color: 'white' }} onClick={showModal}>Approve</Button>
-      <Button size='small'style={{ backgroundColor: '#F32013',opacity: "75%", color: 'white' }}  onClick={handleOpenReject}>Reject</Button>
+      <Button onClick={showModal}>Approve</Button>
+      <Button onClick={handleOpenReject}>Reject</Button>
 
+      {/* Modal for approval */}
       <Modal
         open={open}
-        title="Enter Approval Details"
+        title={<span className={styles.customTitle}>Enter Approval Details</span>}
         centered
         onOk={handleOk}
+        onCancel={handleCloseApproval}
         footer={[
           <Button key="submit" type="primary" onClick={handleOk}>
             Submit
           </Button>
         ]}
       >
-        <div className={styles.transferDateDiv}>
-            <label className={styles.transferDateLabel}>Transfer Date:</label>
-            <input
-              type="date"
-              name="transfer_date"
-              className={styles.transferDateInput}
-            />
+        <div className={styles.modalContentContainer}>
+          <div className={styles.transferDateDiv}>
+              <label className={styles.transferDateLabel}>Select Acceptance Date : </label>
+              <input
+                type="date"
+                name="transfer_date"
+                value={transferDate}
+                onChange={(e) => {
+                  handleDateChange(e);
+                }}
+                className={styles.transferDateInput}
+              />
+          </div>
+          <div className={styles.transferDateDiv}>
+              <label className={styles.transferDateLabel}>Select Project Manager :</label>
+              <Dropdown
+                options={pmOptions}
+                value="Select a project manager"
+                className={styles.pmSelectDropdown}
+                controlClassName={styles.input_drop_control}
+                onChange={(selectedOption) =>
+                  handleSelectPm(selectedOption)
+                }
+                placeholder="Select an option"
+              />
+          </div>
         </div>
-        
-      </Modal> 
-
-
+      </Modal>
 
       {/* Modal for reject */}
-      
-    {contextHolder}
        <Modal
-        open={OpenReject}
+        open={openReject}
         title="Enter the Rejection Reason"
         centered
         onCancel={handleCloseReject}
@@ -127,7 +89,7 @@ const success = () => {
         ]}
       >
         <div className={styles.transferDateDiv}>
-        
+       
           <TextArea
             autoSize={{ minRows: 4, maxRows: 5 }}
             autoFocus
@@ -140,8 +102,10 @@ const success = () => {
           />
        </div>
       </Modal>
-     </div>
-     </>
+
+    </div>
+    </>
+    
   )
 }
 
