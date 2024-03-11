@@ -35,7 +35,7 @@ const TrackRequestsContainer = () => {
     TransferDetailsType[]
   >([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 8; // Number of items per page
+  const [pageSize,setPageSize] = useState(8); // Number of items per page
   const totalItems = initiatedTransfers.length;
   const { user } = useContext(UserContext);
   const [open, setOpen] = useState(false);
@@ -44,6 +44,8 @@ const TrackRequestsContainer = () => {
   const du_id = user?.du_id;
 
   const [messageApi, contextHolder] = message.useMessage();
+
+  const pageSizeOptions = ['5', '8', '10', '20', '50'];
 
   const navigate = useNavigate();
 
@@ -79,6 +81,11 @@ const TrackRequestsContainer = () => {
     } catch (error) {
       console.error("Error cancelling request", error);
     }
+  };
+
+  const handlePageSizeChange = (current: number, size: number) => {
+    setCurrentPage(current); // Update current page if needed
+    setPageSize(size); // Update page size
   };
 
   const startIndex = (currentPage - 1) * pageSize;
@@ -177,11 +184,14 @@ const TrackRequestsContainer = () => {
       <div className={styles.inner_container}>
         <Table columns={columns} dataSource={currentItems} pagination={false} />
         <Pagination
-          simple
+          size="small"
+          showSizeChanger
           current={currentPage}
           pageSize={pageSize}
           total={totalItems}
+          onShowSizeChange={handlePageSizeChange}
           onChange={handlePageChange}
+          pageSizeOptions={pageSizeOptions}
           className={styles.pagination}
         />
       </div>

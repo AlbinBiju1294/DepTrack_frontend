@@ -315,7 +315,7 @@ const InitiateTransferForm = ({
               inputProps={{ "aria-label": "controlled" }}
               size="small"
             />
-            <label htmlFor="checkbox">Project Access Revoked</label>
+            <label htmlFor="checkbox">Is Project Access Revoked</label>
           </div>
           <Button
             variant="outlined"

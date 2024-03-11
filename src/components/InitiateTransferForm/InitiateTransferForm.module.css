@@ -112,7 +112,7 @@ textarea{
 
 .submit_area label{
     font-size: 13px;
-    color: #7D7D7D;
+    color: var(--secondary-color);
 }
 
 .non_resizable_textarea{
