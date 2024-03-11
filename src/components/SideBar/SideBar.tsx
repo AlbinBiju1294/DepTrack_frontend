@@ -12,9 +12,29 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
-  const [activeDiv, setActiveDiv] = useState<number>(1);
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, activeDiv, setActiveDiv } = useContext(UserContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Update activePage based on the current pathname
+    setActivePage(window.location.pathname);
+  }, []);
+
+  const setActivePage = (location: string) => {
+    if (location === "/dashboard") {
+      setActiveDiv(1);
+    } else if (location === "/initiatetransfer") {
+      setActiveDiv(2);
+    } else if (location === "/trackrequests") {
+      setActiveDiv(3);
+    } else if (location === "/pendingapprovals") {
+      setActiveDiv(4);
+    } else if (location === "/transferhistory") {
+      setActiveDiv(5);
+    } else if (location === "/managedu") {
+      setActiveDiv(7);
+    }
+  };
 
   const handleDivClick = (divId: number) => {
     setActiveDiv(divId);
