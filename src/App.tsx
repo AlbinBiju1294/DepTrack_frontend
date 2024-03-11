@@ -11,7 +11,6 @@ import TransferHistory from "./pages/TransferHistory/TransferHistory";
 import PendingApprovals from "./pages/PendingApprovals/PendingApprovals";
 import TrackInitiatedRequests from "./pages/TrackInitiatedRequests/TrackInitiatedRequests";
 import TransferDetailsDisplayForm from "./pages/TransferDetailsDisplayForm/TransferDetailsDisplayForm";
-import Test from "./Test";
 
 function App() {
   
@@ -19,7 +18,6 @@ function App() {
     <BrowserRouter>
      
       <Routes>
-      <Route path="" element={<Test/>} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<> <Navbar></Navbar>
       <SideBar></SideBar><Dashboard /></>} />
