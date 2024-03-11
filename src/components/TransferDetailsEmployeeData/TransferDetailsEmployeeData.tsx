@@ -19,8 +19,8 @@ const TransferDetailsEmployeeData = () => {
   "Displays the Employee details such as employee name,designation,email id ,current and traget du in the pending approvals page"
 
 
-        const [userData,setUserData] = useState< EmployeeDataProps|undefined>();
-        const {id}=useParams()
+  const [userData,setUserData] = useState< EmployeeDataProps|undefined>();
+  const {id}=useParams()
 
   
   useEffect(() => {
