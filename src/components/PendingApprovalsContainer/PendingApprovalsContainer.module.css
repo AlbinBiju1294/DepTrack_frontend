@@ -5,3 +5,24 @@
     padding: 20px
     ;
   }
+.single_transfer_detail {
+    display: flex;
+    justify-content: space-around;
+}
+.form_label
+{
+    color: var(--secondary-color);
+    font-size: 15px;
+    font-weight: 500;
+    font-family: var(--font-family);
+}
+
+.input_box
+{
+    height: 28px;
+    width: 250px;
+    border: 1px solid #7D7D7D;
+    border-radius: 3px;
+    align-items: center;
+    color: #7D7D7D;
+}

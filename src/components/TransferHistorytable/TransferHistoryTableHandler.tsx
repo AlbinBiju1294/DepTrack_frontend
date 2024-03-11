@@ -1,23 +1,17 @@
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import TransferHistoryTable from './TransferHistoryTable'
+import axiosInstance from '../../config/AxiosConfig';
 
 const TransferHistoryTableHandler = () => {
     const [dataSource, setDataSource] = useState([])
     const [pagination, setPagination] = useState({ current: 1, total: 0, pageSize: 5 }); // Initial pagination state
 
-    const token = localStorage.getItem('access_token')
-    const config = {
-    headers: { Authorization: `Bearer ${token}` },
-    };
-
     const fetchData = async (page: number) => {
         try {
             const limit = pagination.pageSize;
             const offset = (page - 1) * limit;
-            const res = await axios.get(`http://127.0.0.1:8000/api/v1/transfer/list-transfer-history/?${limit?`limit=${limit}`:""}${offset?`&offset=${offset}`:""}`,
-                                            config);
+            const res = await axiosInstance.get(`/api/v1/transfer/list-transfer-history/?${limit?`limit=${limit}`:""}${offset?`&offset=${offset}`:""}`);
             const responseData = res.data.data;
             console.log("Transfer history: ", responseData.results);
             setPagination(prevPagination => ({

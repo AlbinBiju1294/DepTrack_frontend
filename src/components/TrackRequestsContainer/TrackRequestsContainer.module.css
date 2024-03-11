@@ -19,3 +19,42 @@
     margin-right: 5vw;
     color: var(--secondary-color);
   }
+
+  .button {
+    display: flex;
+    width: 18px; /* Increase width to accommodate the icon */
+    height: 18px; /* Increase height to accommodate the icon */
+    background-color: #F08080;
+    border: none;
+    border-radius: 50%; /* Adjusted to create a circular button */
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cancel_popup_buttons{
+    margin-left: 290px;
+    margin-top: 20px;
+    width: 160px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cancel_button{
+    background-color: white;
+    width: 70px;
+    height: 25px;
+    border: 1px solid red;
+    color: red;
+    border-radius: 3px;
+  }
+
+  .close_button
+  {
+    background-color: white;
+    width: 70px;
+    height: 25px;
+    border: 1px solid green;
+    color: green;
+    border-radius: 3px;
+  }

@@ -16,49 +16,54 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
         {
             title: 'Transfer Id',
             dataIndex: 'id',
+            sorter: (a, b) => a.id - b.id,
         },
-        // ...(dataSource.length > 0 ? Object.keys(dataSource[0].employee).filter(key => key !== 'id').map(key => ({
-        //     title: key.charAt(0).toUpperCase() + key.slice(1), // Capitalize first letter of key
-        //     dataIndex: ['employee', key],
-        // })) : []),
 
         {
             title: 'Employee Number',
             dataIndex: ['employee', 'employee_number'],
+                  sorter: (a, b) => a.employee.employee_number.localeCompare(b.employee.employee_number),
+
         },
 
         {
             title: 'Employee Name',
             dataIndex: ['employee', 'name'],
+            sorter: (a, b) => a.employee.name.localeCompare(b.employee.name),
+
         },
 
         {
-            title: 'Transfer Initiated From',
+            title: 'Initiated From',
             dataIndex: ['currentdu', 'du_name'],
+            sorter: (a, b) => a.currentdu.du_name.localeCompare(b.currentdu.du_name),
+
         },
 
         {
-            title: 'Transfer Initiated By',
+            title: 'Initiated By',
             dataIndex: ['initiated_by','name'],
+            sorter: (a, b) => a.initiated_by.name.localeCompare(b.initiated_by.name),
+
         },
         {
-            title: 'Transfer Initiated To',
+            title: 'Initiated To',
             dataIndex: ['targetdu', 'du_name'],
+            sorter: (a, b) => a.targetdu.du_name.localeCompare(b.targetdu.du_name),
+
         },
         {
-           
+            title: 'View',
             render: ( _,record) => (
-            
             <button type='button' className={styles.button} onClick={() => handleButtonClick(record)}> <p style={{color:"#FFFF"}}>{'>'}</p>  </button>
             ),
           },
         ];
       
-        // Function to handle button click
         const handleButtonClick = (record: dataSourceType) => {
-          // Handle button click logic here
           console.log('Button clicked for record:', record);
-          navigate('/pendingapprovalsform')
+          const id = record.id; 
+          navigate(`/transferdetailsdisplay/${id}`)
         };
        
         

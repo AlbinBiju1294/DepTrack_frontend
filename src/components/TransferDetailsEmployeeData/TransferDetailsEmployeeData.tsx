@@ -9,6 +9,8 @@ import IconButton from '@mui/material/IconButton';
 import { EmployeeDataProps} from './types';
 import styles from './TransferDetailsEmployeeData.module.css'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useParams } from 'react-router-dom';
+import axiosInstance from '../../config/AxiosConfig';
 
 
 
@@ -16,26 +18,19 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const TransferDetailsEmployeeData = () => {
 
-        const [userData,setUserData] = useState< EmployeeDataProps|undefined>();
+        const [userData,setUserData] = useState< EmployeeDataProps>();
+        const {id}=useParams()
 
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoyOTA5NjExNDQ2LCJpYXQiOjE3MDk2MTE0NDYsImp0aSI6ImFjZmM4MTc0OWRlNDQ4ODdhOTRlYTNhMjZmYjQ1ZDFjIiwidXNlcl9pZCI6MTB9.SXjoSYrF5LqaE1X5tr6VoAEK0Qr-hBbgNFTVnQIZaOM';
-    const config = {
-      headers: { Authorization: `Bearer ${token}` }
-    };
   
-
-  // const token = localStorage.getItem('access_token')
-  // const config = {
-  // headers: { Authorization: `Bearer ${token}` },
-  // };
-
   useEffect(() => {
       const fetchData = async () => {
         try {
-          const transfer_id=3;
-          const res = await axios.get(`http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/?transfer_id=${transfer_id}`, config);
+          // const transfer_id=3;
+          const res = await axiosInstance.get(`http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/?transfer_id=${id}`);
           console.log('Response from API:', res.data);
           setUserData(res.data.data);
+          
+          
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -43,6 +38,7 @@ const TransferDetailsEmployeeData = () => {
       fetchData();
     }, []);
 
+    console.log("userData: ",userData);
     
 
   return (
@@ -65,8 +61,7 @@ const TransferDetailsEmployeeData = () => {
 
     <div className= {`${styles.Right_Container}`}>
             <Card className= {`${styles.Card}`}>
-             {/* <p>{userData?userData.:""}</p> */}
-             {/* <p>DU3</p> */}
+             <p>{userData?userData.currentdu?.du_name:""}</p>
             </Card>
 
         <div className= {`${styles.Arrow_Container}`}>
@@ -77,8 +72,7 @@ const TransferDetailsEmployeeData = () => {
 
         <div className= {`${styles.CDU_container}`}>
             <Card className= {`${styles.Card}`}>
-                <p>{userData?userData.targetdu_id:""}</p>
-                {/* <p>DU4</p> */}
+                <p>{userData?userData.targetdu.du_name:""}</p>
             </Card>
         </div>
     </div>
