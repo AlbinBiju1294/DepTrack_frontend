@@ -22,4 +22,5 @@ export type dataSourceType = {
 export type TransferHistoryTablePropsType = { 
     dataSource: dataSourceType[], 
     pagination: PaginationProps, 
-    handlePaginationChange: HandlePaginationChangeType}
+    handlePaginationChange: HandlePaginationChangeType
+}
