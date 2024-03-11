@@ -15,10 +15,14 @@ const TransferHistoryTable = ({dataSource, pagination, handlePaginationChange}: 
             title: 'Transfer Id',
             dataIndex: 'id',
         },
-        ...(dataSource.length > 0 ? Object.keys(dataSource[0].employee).filter(key => key !== 'id').map(key => ({
-            title: key === 'employee_number' ? 'Employee Number' : key === 'name' ? 'Employee Name' : key.charAt(0).toUpperCase() + key.slice(1), 
-            dataIndex: ['employee', key],
-        })) : []),
+        {
+            title: 'Employee Number',
+            dataIndex: ['employee', 'employee_number'],
+        },
+        {
+            title: 'Employee Name',
+            dataIndex: ['employee', 'name'],
+        },
         {
             title: 'Transferred From',
             dataIndex: ['currentdu', 'du_name'],
@@ -32,11 +36,11 @@ const TransferHistoryTable = ({dataSource, pagination, handlePaginationChange}: 
             dataIndex: 'status',
             render: (status) => {
                 let color = 'green'; // Default color
-                if (status === "REJECTED") 
+                if (status === "Rejected") 
                     color = 'red';
-                else if (status === "COMPLETED") 
+                else if (status === "Completed") 
                     color = 'green';
-                else if( status === "CANCELLED")
+                else if( status === "Cancelled")
                     color = "#808080"
                 return (
                     <Tag color={color}>

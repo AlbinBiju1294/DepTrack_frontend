@@ -2,7 +2,7 @@ import React from 'react'
 import styles from "./TransferDetailsDisplayContainer.module.css"
 import TransferDetailsDisplay from "../TransferDetailsDisplay/TransferDetailsDispaly";
 import TransferDetailsEmployeeData from '../TransferDetailsEmployeeData/TransferDetailsEmployeeData'
-import RejectTransfer from '../RejectTransfer/RejectTransfer';
+import TransferButtonComponent from '../TransferButtonComponent/TransferButtonComponent';
 
 const TransferDetailsDisplayContainer = () => {
   return (
@@ -11,7 +11,7 @@ const TransferDetailsDisplayContainer = () => {
         {/* <PendingApprovalsTransferDetails/> */}
          <TransferDetailsEmployeeData/>
         <TransferDetailsDisplay/>
-        <RejectTransfer/> 
+        <TransferButtonComponent/>
        
     </div>
   )
