@@ -4,8 +4,8 @@ import styles from './TransferButtonComponent.module.css';
 import {useParams } from 'react-router-dom';
 import axiosInstance from '../../config/AxiosConfig';
 import { Input} from 'antd';
-import { TextField } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import {patchRejectReason} from './api/patchRejectReason'
 
 
 
@@ -37,7 +37,7 @@ const TransferButtonComponent = () => {
 
 
 
-////logic to handle transfer reject
+//logic to handle transfer reject
 
 const success = () => {
   messageApi.open({
@@ -66,23 +66,16 @@ const success = () => {
   const isReasonEntered = reason.trim() !== '';
 
 
-   //api for reject pop up
+
+  //api for reject pop up
+  
   const handleRejectConfirm = async () => {
-    console.log(id)
-    console.log(reason)
-    try {
-      const res = await axiosInstance.patch(`http://127.0.0.1:8000/api/v1/transfer/request-rejected`, {
-        transfer_id:id,
-        rejection_reason: reason
-      });
-
-      console.log('Rejection reason submitted successfully:', res.data);
-      handleCloseReject();
-    } catch (error) {
-      console.log('Error submitting rejection reason:', error);
+    try{
+      await patchRejectReason(id, reason, handleCloseReject);
     }
-
-
+   catch (error) {
+    console.error("Error:", error);
+}
   };
 
 
@@ -90,8 +83,8 @@ const success = () => {
     <>
     
     <div className={styles.FormButton}>
-      <Button onClick={showModal}>Approve</Button>
-      <Button  onClick={handleOpenReject}>Reject</Button>
+      <Button size='small'  style={{ backgroundColor: '#5cb85c', color: 'white' }} onClick={showModal}>Approve</Button>
+      <Button size='small'style={{ backgroundColor: '#F32013',opacity: "75%", color: 'white' }}  onClick={handleOpenReject}>Reject</Button>
 
       <Modal
         open={open}
