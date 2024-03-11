@@ -6,6 +6,7 @@ import axiosInstance from "../../config/AxiosConfig";
 import UserContext from "../Contexts/UserContextProvider";
 import { CloseOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import './TrackRequests.css'
 
 interface Employee {
   designation: string;
@@ -34,7 +35,7 @@ const TrackRequestsContainer = () => {
     TransferDetailsType[]
   >([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 7; // Number of items per page
+  const pageSize = 8; // Number of items per page
   const totalItems = initiatedTransfers.length;
   const { user } = useContext(UserContext);
   const [open, setOpen] = useState(false);
@@ -104,28 +105,37 @@ const TrackRequestsContainer = () => {
       title: "Transfer Id",
       dataIndex: ["id"],
       key: "transfer_id",
-      render: (text) => <a>{text}</a>,
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: "Employee Number",
       dataIndex: ["employee", "employee_number"],
       key: "employee_number",
-      render: (text) => <a>{text}</a>,
+      sorter: (a, b) => a.employee.employee_number.localeCompare(b.employee.employee_number),
     },
     {
       title: "Employee Name",
       dataIndex: ["employee", "name"],
       key: "employee_name",
+      sorter: (a, b) => a.employee.name.localeCompare(b.employee.name),
+    },
+    {
+      title: "Initiated from",
+      dataIndex: ["currentdu", "du_name"],
+      key: "initiated_from",
+      sorter: (a, b) => a.currentdu.du_name.localeCompare(b.currentdu.du_name),
     },
     {
       title: "Initiated to",
       dataIndex: ["targetdu", "du_name"],
       key: "initiated_to",
+      sorter: (a, b) => a.targetdu.du_name.localeCompare(b.targetdu.du_name),
     },
     {
       title: "Initiated by",
       dataIndex: ["initiated_by", "name"],
       key: "initiated_by",
+      sorter: (a, b) => a.initiated_by.name.localeCompare(b.initiated_by.name),
     },
     {
       title: "Status",
@@ -147,7 +157,7 @@ const TrackRequestsContainer = () => {
           <CloseOutlined
             style={{
               color: "white",
-              fontSize: "10px",
+              fontSize: "8px",
               verticalAlign: "middle",
             }}
             onClick={() => {
