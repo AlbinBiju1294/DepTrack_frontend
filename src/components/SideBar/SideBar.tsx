@@ -6,13 +6,15 @@ import HistoryIcon from "@mui/icons-material/History";
 import LogoutIcon from "@mui/icons-material/Logout";
 import TimelineIcon from "@mui/icons-material/Timeline";
 import styles from "./SideBar.module.css";
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import UserContext from "../Contexts/UserContextProvider";
+import sideBarContext from "../Contexts/SideBarContextProvider";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
-  const { user, setUser, activeDiv, setActiveDiv } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  const { activeDiv, setActiveDiv } = useContext(sideBarContext);
   const navigate = useNavigate();
 
   useEffect(() => {
