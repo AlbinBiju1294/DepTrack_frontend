@@ -153,100 +153,124 @@ const FilterComponent = () => {
 
   return (
     <>
-      <div>
+      <div className={styles.filter_container}>
         <div className={styles.first_row}>
-          <Dropdown
-            options={options}
-            value="From"
-            ref={fromRef}
-            onChange={(selectedOption) =>
-              handleDuDropdownChange(selectedOption, "currentdu_id")
-            }
-            className={styles.dropdown}
-            controlClassName={styles.input_drop_control}
-          />
-
-          <Dropdown
-            options={options}
-            value="To"
-            ref={toRef}
-            onChange={(selectedOption) =>
-              handleDuDropdownChange(selectedOption, "targetdu_id")
-            }
-            className={styles.dropdown}
-            controlClassName={styles.input_drop_control}
-          />
-          <Dropdown
-            options={status}
-            value="status"
-            ref={statusRef}
-            onChange={(selectedOption) =>
-              handleDuDropdownChange(selectedOption, "status")
-            }
-            className={styles.dropdown}
-            controlClassName={styles.input_drop_control}
-          />
-          <input
-            type="date"
-            name="transfer_date"
-            onChange={(e) => handleChange("start_date", e.target.value)}
-            ref={transferDateFromRef}
-            className={styles.input_box}
-          />
-          <div>---&gt;</div>
-          <input
-            type="date"
-            name="transfer_date"
-            ref={transferDateToRef}
-            onChange={(e) => handleChange("end_date", e.target.value)}
-            className={styles.input_box}
-          />
+          <div className={styles.eachdiv}>
+            <p className={styles.labels}>Transferred From:</p>
+            <Dropdown
+              options={options}
+              value="From"
+              ref={fromRef}
+              onChange={(selectedOption) =>
+                handleDuDropdownChange(selectedOption, "currentdu_id")
+              }
+              className={styles.dropdown}
+              controlClassName={styles.input_drop_control}
+            />
+          </div>
+          <div className={styles.eachdiv}>
+            <p className={styles.labels}>Transferred To:</p>
+            <Dropdown
+              options={options}
+              value="To"
+              ref={toRef}
+              onChange={(selectedOption) =>
+                handleDuDropdownChange(selectedOption, "targetdu_id")
+              }
+              className={styles.dropdown}
+              controlClassName={styles.input_drop_control}
+            />
+          </div>
+          <div className={styles.eachdiv}>
+            <p className={styles.labels}>From:</p>
+            <input
+              type="date"
+              name="transfer_date"
+              onChange={(e) => handleChange("start_date", e.target.value)}
+              ref={transferDateFromRef}
+              className={styles.date_box}
+            />
+          </div>
+          <div className={styles.eachdiv}>
+            <p className={styles.labels}>To:</p>
+            <input
+              type="date"
+              name="transfer_date"
+              ref={transferDateToRef}
+              onChange={(e) => handleChange("end_date", e.target.value)}
+              className={styles.date_box}
+            />
+          </div>
         </div>
+
         <div className={styles.second_row}>
-          <input
-            type="text"
-            name="employee_name"
-            ref={employeeNameRef}
-            placeholder="Employee Name"
-            onChange={(e) => handleChange("employee_name", e.target.value)}
-            className={styles.input_box}
-          />
-          <input
-            type="text"
-            name="employee_number"
-            ref={employeeNumberRef}
-            onChange={(e) => handleChange("employee_id", e.target.value)}
-            placeholder="Employee Number"
-            className={styles.input_box}
-          />
-          <Button
-            disableRipple={true}
-            variant="outlined"
-            color="primary"
-            onClick={() => {
-              fetchFilteredData(1, 0);
-            }}
-            type="submit"
-            size="small"
-            sx={{
-              marginRight: "5px",
-            }}
-            className={styles.button}
-          >
-            Search
-          </Button>
-          <Button
-            disableRipple={true}
-            variant="outlined"
-            color="primary"
-            onClick={() => {
-              handleClear();
-            }}
-            type="submit"
-            size="small"
-          >
-            Clear
-          </Button>
+          <div className={styles.eachdiv}>
+            <p className={styles.labels}>Status:</p>
+            <Dropdown
+              options={status}
+              value="status"
+              ref={statusRef}
+              onChange={(selectedOption) =>
+                handleDuDropdownChange(selectedOption, "status")
+              }
+              className={styles.dropdown_status}
+              controlClassName={styles.input_drop_control}
+            />
+          </div>
+          <div className={styles.eachdiv}>
+            <p className={styles.labels}> Name:</p>
+            <input
+              type="text"
+              name="employee_name"
+              ref={employeeNameRef}
+              placeholder="Employee Name"
+              onChange={(e) => handleChange("employee_name", e.target.value)}
+              className={styles.input_box_name}
+            />
+          </div>
+          <div className={styles.eachdiv}>
+            <p className={styles.labels}>Number:</p>
+            <input
+              type="text"
+              name="employee_number"
+              ref={employeeNumberRef}
+              onChange={(e) => handleChange("employee_number", e.target.value)}
+              placeholder="Employee Number"
+              className={styles.input_box}
+            />
+          </div>
+          <div className={styles.eachdiv}>
+            <Button
+              disableRipple={true}
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                fetchFilteredData(1, 0);
+              }}
+              type="submit"
+              size="small"
+              sx={{
+                marginRight: "5px",
+              }}
+              className={styles.button}
+            >
+              Search
+            </Button>
+          </div>
+          <div className={styles.eachdiv}>
+            <Button
+              disableRipple={true}
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                handleClear();
+              }}
+              type="submit"
+              size="small"
+            >
+              Clear
+            </Button>
+          </div>
         </div>
       </div>
     </>

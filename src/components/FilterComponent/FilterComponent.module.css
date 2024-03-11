@@ -2,28 +2,76 @@
   position: relative;
   top: 10px;
   display: flex;
+  margin-bottom: 18px;
+  justify-content: space-evenly;
 }
+
+.filter_container {
+  background-color: #fafafa;
+  padding: 3px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.eachdiv {
+  display: flex;
+}
+
 .second_row {
   margin-top: 15px;
+  display: flex;
+  margin-right: 1.6rem;
+  margin-bottom: 5px;
+  justify-content: flex-end;
+}
+
+.labels {
+  font-size: 12.5px;
+  padding-right: 6px;
+  cursor: default;
+  margin-top: 2px;
 }
 
 .input_drop_control {
   height: 28px;
-  width: 110px;
+  width: 120px;
   border: 1px solid #7d7d7d !important;
   border-radius: 3px !important;
   display: flex;
   align-items: center;
   font-size: 12px;
+  margin-right: 15px;
 }
 
 .dropdown {
-  padding-right: 5px;
+  padding-right: 3px;
 }
 
 .input_box {
   height: 28px;
-  width: 150px;
+  width: 130px;
+  border: 1px solid #7d7d7d;
+  border-radius: 3px;
+  align-items: center;
+  padding-left: 10px;
+  margin-right: 38px;
+  color: #7d7d7d;
+}
+
+.input_box_name {
+  height: 28px;
+  width: 130px;
+  border: 1px solid #7d7d7d;
+  border-radius: 3px;
+  align-items: center;
+  padding-left: 10px;
+  margin-right: 20.5px;
+  color: #7d7d7d;
+}
+
+.date_box {
+  height: 28px;
+  width: 130px;
   border: 1px solid #7d7d7d;
   border-radius: 3px;
   align-items: center;
@@ -39,4 +87,5 @@
 
 .button {
   padding-right: 5px;
+  margin-right: 5px;
 }
