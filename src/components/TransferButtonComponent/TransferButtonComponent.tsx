@@ -1,4 +1,4 @@
-import { Button, Modal } from 'antd';
+import { Button, Modal, Input } from 'antd';
 import Dropdown from "react-dropdown";
 import styles from './TransferButtonComponent.module.css';
 import { TransferButtonComponentPropsType } from './types';
@@ -8,12 +8,22 @@ const TransferButtonComponent = ({
   showModal, 
   open,
   handleOk,
+  handleCloseApproval,
   handleDateChange,
   pmOptions,
   handleSelectPm,
-  transferDate
+  transferDate,
+  openReject,
+  handleOpenReject,
+  handleCloseReject,
+  isReasonEntered,
+  handleRejectConfirm,
+  success,
+  reason,
+  handleReasonChange
   }: TransferButtonComponentPropsType) => {
-    console.log("butnComponent",transferDate);
+
+    const { TextArea } = Input;
     
   return (
     <>
@@ -22,11 +32,13 @@ const TransferButtonComponent = ({
       <Button onClick={showModal}>Approve</Button>
       <Button onClick={handleOpenReject}>Reject</Button>
 
+      {/* Modal for approval */}
       <Modal
         open={open}
         title={<span className={styles.customTitle}>Enter Approval Details</span>}
         centered
         onOk={handleOk}
+        onCancel={handleCloseApproval}
         footer={[
           <Button key="submit" type="primary" onClick={handleOk}>
             Submit
@@ -60,6 +72,35 @@ const TransferButtonComponent = ({
               />
           </div>
         </div>
+      </Modal>
+
+      {/* Modal for reject */}
+       <Modal
+        open={openReject}
+        title="Enter the Rejection Reason"
+        centered
+        onCancel={handleCloseReject}
+        footer={[
+          <Button key="submit" type="primary"  disabled={!isReasonEntered} onClick={() => {
+            {handleRejectConfirm()}
+            {success()}}}>
+            Confirm
+          </Button>
+        ]}
+      >
+        <div className={styles.transferDateDiv}>
+       
+          <TextArea
+            autoSize={{ minRows: 4, maxRows: 5 }}
+            autoFocus
+            required
+            id="reason"
+            placeholder="Reason"
+            style={{ width: '100%', maxHeight: '200px', overflowY: 'auto' }}
+            value={reason}
+            onChange={handleReasonChange}
+          />
+       </div>
       </Modal>
 
     </div>

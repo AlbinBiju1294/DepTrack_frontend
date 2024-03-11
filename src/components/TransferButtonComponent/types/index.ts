@@ -21,8 +21,17 @@ export type TransferButtonComponentPropsType = {
   showModal: () => void;
   open: boolean;
   handleOk: (e: React.MouseEvent<HTMLElement>) => Promise<void>;
+  handleCloseApproval: () => void;
   handleDateChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   pmOptions: string[];
   handleSelectPm: (selectedOption: Option) => void;
   transferDate: string;
+  handleOpenReject: () => void;
+  openReject: boolean;
+  handleCloseReject: () => void;
+  isReasonEntered: boolean;
+  handleRejectConfirm: () => Promise<void>;
+  success: () => void;
+  reason: string;
+  handleReasonChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
