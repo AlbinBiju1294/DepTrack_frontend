@@ -11,9 +11,10 @@ import TransferHistory from "./pages/TransferHistory/TransferHistory";
 import PendingApprovals from "./pages/PendingApprovals/PendingApprovals";
 import TrackInitiatedRequests from "./pages/TrackInitiatedRequests/TrackInitiatedRequests";
 import TransferDetailsDisplayForm from "./pages/TransferDetailsDisplayForm/TransferDetailsDisplayForm";
+import Admin from "./pages/Admin/Admin";
 
 function App() {
-  
+
   return (
     <BrowserRouter>
      
@@ -31,6 +32,9 @@ function App() {
       <SideBar></SideBar><PendingApprovals/></>} />
       <Route path="/transferdetailsdisplay/:id" element={<> <Navbar></Navbar>
       <SideBar></SideBar><TransferDetailsDisplayForm/></>} />
+      <Route path="/managedu" element={<><Navbar></Navbar>
+      <SideBar></SideBar><Admin/></>}/>
+        
         
 
       </Routes>
