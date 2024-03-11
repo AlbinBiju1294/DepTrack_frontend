@@ -7,7 +7,7 @@ const TransferHistroyContainer = () => {
   return (
     <div className={styles.inner_container}>
       <FilterComponent />
-      <TransferHistoryTableHandler></TransferHistoryTableHandler>
+     
     </div>
   );
 };

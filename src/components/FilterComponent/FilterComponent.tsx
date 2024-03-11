@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import axios from "axios";
 import axiosInstance from "../../config/AxiosConfig";
 import styles from "./FilterComponent.module.css";
@@ -6,19 +6,25 @@ import { Button } from "@mui/material";
 import Dropdown, { Option } from "react-dropdown";
 import "react-dropdown/style.css";
 import { useRef, useState, useEffect } from "react";
-import { Du } from "./types/index";
+import { Du, dataSourceType, paginationtype } from "./types/index";
 import ReactDropdown from "react-dropdown";
-import HistoryDataContext from "../Contexts/HistoryDataContextProvider";
+import { Table } from "antd";
+import type { PaginationProps, TableColumnsType, TableProps } from "antd";
+import { Tag } from "antd";
 
 const FilterComponent = () => {
   const status = ["Completed", "Cancelled", "Rejected"];
   const [duData, setDuData] = useState<Du[]>([]);
   const [formData, setFormData] = useState({});
 
-  const { setDataSource, pagination, setPagination } =
-    useContext(HistoryDataContext);
+  const [dataSource, setDataSource] = useState<dataSourceType[]>([]);
+  const [pagination, setPagination] = useState<paginationtype>({
+    current: 1,
+    total: 0,
+    pageSize: 1,
+  });
 
-  const emptyForm = { limit: 2, offset: 0 };
+  const emptyForm = { limit: pagination.pageSize, offset: 0 };
 
   const statusRef = useRef<ReactDropdown>(null);
   const fromRef = useRef<ReactDropdown>(null);
@@ -78,6 +84,7 @@ const FilterComponent = () => {
   const handleClear = () => {
     setFormData((prev) => {});
     fetchFilteredData(1, 1);
+    console.log(formData, "after");
     if (fromRef.current) {
       fromRef.current.setState({ selected: "From", isOpen: false });
     }
@@ -110,17 +117,32 @@ const FilterComponent = () => {
     fetchDuData();
   }, []);
 
+  useEffect(() => {
+    fetchFilteredData(1, 1);
+  }, []);
+
+  const handlePaginationChange = (newPagination: any) => {
+    console.log(newPagination.current);
+    fetchFilteredData(newPagination.current, 0);
+  };
+
   const fetchFilteredData = async (page: number, origin: number) => {
-    const formDataOld = formData;
     try {
       const limit = pagination.pageSize;
       const offset = (page - 1) * limit;
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        limit: limit,
-        offset: offset,
-      }));
-      const qparam = origin === 0 ? formData : emptyForm;
+      // setFormData((prevFormData) => ({
+      //   ...prevFormData,
+      //   limit: limit,
+      //   offset: offset,
+      // }));
+      const qparam =
+        origin === 0
+          ? {
+              ...formData,
+              limit: limit,
+              offset: offset,
+            }
+          : emptyForm;
       console.log(formData);
       console.log(emptyForm);
       const res = await axiosInstance.get(
@@ -137,19 +159,62 @@ const FilterComponent = () => {
         total: responseData.count,
       }));
       setDataSource(responseData.results);
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-      }));
+      // setFormData((prevFormData) => ({
+      //   ...prevFormData,
+      // }));
       console.log(formData);
     } catch (error) {
-      setDataSource([]);
-      setFormData((prevFormData) => ({
-        ...prevFormData,
+      setPagination((prevPagination) => ({
+        ...prevPagination,
+        current: page,
+        total: 0,
       }));
+      setDataSource([]);
+      // setFormData((prevFormData) => ({
+      //   ...prevFormData,
+      // }));
       console.log(formData);
       console.error("Error:", error);
     }
   };
+
+  const columns: TableColumnsType<dataSourceType> = [
+    {
+      title: "Transfer Id",
+      dataIndex: "id",
+    },
+    {
+      title: "Employee Number",
+      dataIndex: ["employee", "employee_number"],
+    },
+    {
+      title: "Employee Name",
+      dataIndex: ["employee", "name"],
+    },
+    {
+      title: "Transferred From",
+      dataIndex: ["currentdu", "du_name"],
+    },
+    {
+      title: "Transferred To",
+      dataIndex: ["targetdu", "du_name"],
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      render: (status) => {
+        let color = "green"; // Default color
+        if (status === "Rejected") color = "red";
+        else if (status === "Completed") color = "green";
+        else if (status === "Cancelled") color = "#808080";
+        return <Tag color={color}>{status}</Tag>;
+      },
+    },
+    {
+      title: "Transfer Date",
+      dataIndex: "transfer_date",
+    },
+  ];
 
   return (
     <>
@@ -272,6 +337,15 @@ const FilterComponent = () => {
             </Button>
           </div>
         </div>
+      </div>
+
+      <div>
+        <Table
+          columns={columns}
+          dataSource={dataSource}
+          pagination={pagination}
+          onChange={handlePaginationChange}
+        />
       </div>
     </>
   );

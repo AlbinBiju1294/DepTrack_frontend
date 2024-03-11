@@ -69,6 +69,11 @@
   color: #7d7d7d;
 }
 
+.input_box_name:focus {
+  border: 1px solid blue;
+  outline: 1px solid blue;
+}
+
 .date_box {
   height: 28px;
   width: 130px;
