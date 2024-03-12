@@ -1,0 +1,11 @@
+.piechart_heading {
+    font-size: 13px;
+    font-weight: 500;
+    padding-left: 80px;
+    margin-bottom: -30px;
+    margin-top: 20px;
+}
+.pieChart {
+    display: flex;
+    flex-direction: column;
+}
