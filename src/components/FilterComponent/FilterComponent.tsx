@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import axios from "axios";
+import axiosInstance from "../../config/AxiosConfig";
 import styles from "./FilterComponent.module.css";
 import { Button } from "@mui/material";
 import Dropdown, { Option } from "react-dropdown";
@@ -7,11 +8,17 @@ import "react-dropdown/style.css";
 import { useRef, useState, useEffect } from "react";
 import { Du } from "./types/index";
 import ReactDropdown from "react-dropdown";
+import HistoryDataContext from "../Contexts/HistoryDataContextProvider";
 
 const FilterComponent = () => {
   const status = ["Completed", "Cancelled", "Rejected"];
   const [duData, setDuData] = useState<Du[]>([]);
   const [formData, setFormData] = useState({});
+
+  const { setDataSource, pagination, setPagination } =
+    useContext(HistoryDataContext);
+
+  const emptyForm = { limit: 2, offset: 0 };
 
   const statusRef = useRef<ReactDropdown>(null);
   const fromRef = useRef<ReactDropdown>(null);
@@ -59,7 +66,7 @@ const FilterComponent = () => {
       }));
     }
   };
-  console.log(formData, fromRef.current);
+  // console.log(formData, fromRef.current);
 
   const handleChange = (name: string, value: string | number) => {
     setFormData({
@@ -69,16 +76,16 @@ const FilterComponent = () => {
   };
 
   const handleClear = () => {
-    setFormData({});
-
+    setFormData((prev) => {});
+    fetchFilteredData(1, 1);
     if (fromRef.current) {
       fromRef.current.setState({ selected: "From", isOpen: false });
     }
     if (toRef.current) {
       toRef.current.setState({ selected: "To", isOpen: false });
     }
-    if (toRef.current) {
-      toRef.current.setState({ selected: "Status", isOpen: false });
+    if (statusRef.current) {
+      statusRef.current.setState({ selected: "Status", isOpen: false });
     }
 
     if (transferDateFromRef.current) transferDateFromRef.current.value = "";
@@ -103,113 +110,167 @@ const FilterComponent = () => {
     fetchDuData();
   }, []);
 
-  const fetchFilteredData = async () => {
+  const fetchFilteredData = async (page: number, origin: number) => {
+    const formDataOld = formData;
     try {
-      const res = await axios.get(
+      const limit = pagination.pageSize;
+      const offset = (page - 1) * limit;
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        limit: limit,
+        offset: offset,
+      }));
+      const qparam = origin === 0 ? formData : emptyForm;
+      console.log(formData);
+      console.log(emptyForm);
+      const res = await axiosInstance.get(
         "http://127.0.0.1:8000/api/v1/transfer/filter-transfers/",
         {
-          params: formData,
-          ...config,
+          params: qparam,
         }
       );
-      console.log("Response from API - du's got:", res.data);
+      const responseData = res.data.data;
+      console.log("Transfer history: ", responseData.results);
+      setPagination((prevPagination) => ({
+        ...prevPagination,
+        current: page,
+        total: responseData.count,
+      }));
+      setDataSource(responseData.results);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+      }));
+      console.log(formData);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      setDataSource([]);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+      }));
+      console.log(formData);
+      console.error("Error:", error);
     }
   };
 
   return (
     <>
-      <div>
+      <div className={styles.filter_container}>
         <div className={styles.first_row}>
-          <Dropdown
-            options={options}
-            value="From"
-            ref={fromRef}
-            onChange={(selectedOption) =>
-              handleDuDropdownChange(selectedOption, "currentdu_id")
-            }
-            className={styles.dropdown}
-            controlClassName={styles.input_drop_control}
-          />
-
-          <Dropdown
-            options={options}
-            value="To"
-            ref={toRef}
-            onChange={(selectedOption) =>
-              handleDuDropdownChange(selectedOption, "targetdu_id")
-            }
-            className={styles.dropdown}
-            controlClassName={styles.input_drop_control}
-          />
-          <Dropdown
-            options={status}
-            value="status"
-            ref={statusRef}
-            onChange={(selectedOption) =>
-              handleDuDropdownChange(selectedOption, "status")
-            }
-            className={styles.dropdown}
-            controlClassName={styles.input_drop_control}
-          />
-          <input
-            type="date"
-            name="transfer_date"
-            onChange={(e) => handleChange("start_date", e.target.value)}
-            ref={transferDateFromRef}
-            className={styles.input_box}
-          />
-          <div>---&gt;</div>
-          <input
-            type="date"
-            name="transfer_date"
-            ref={transferDateToRef}
-            onChange={(e) => handleChange("end_date", e.target.value)}
-            className={styles.input_box}
-          />
+          <div className={styles.eachdiv}>
+            <p className={styles.labels}>Transferred From:</p>
+            <Dropdown
+              options={options}
+              value="From"
+              ref={fromRef}
+              onChange={(selectedOption) =>
+                handleDuDropdownChange(selectedOption, "currentdu_id")
+              }
+              className={styles.dropdown}
+              controlClassName={styles.input_drop_control}
+            />
+          </div>
+          <div className={styles.eachdiv}>
+            <p className={styles.labels}>Transferred To:</p>
+            <Dropdown
+              options={options}
+              value="To"
+              ref={toRef}
+              onChange={(selectedOption) =>
+                handleDuDropdownChange(selectedOption, "targetdu_id")
+              }
+              className={styles.dropdown}
+              controlClassName={styles.input_drop_control}
+            />
+          </div>
+          <div className={styles.eachdiv}>
+            <p className={styles.labels}>From:</p>
+            <input
+              type="date"
+              name="transfer_date"
+              onChange={(e) => handleChange("start_date", e.target.value)}
+              ref={transferDateFromRef}
+              className={styles.date_box}
+            />
+          </div>
+          <div className={styles.eachdiv}>
+            <p className={styles.labels}>To:</p>
+            <input
+              type="date"
+              name="transfer_date"
+              ref={transferDateToRef}
+              onChange={(e) => handleChange("end_date", e.target.value)}
+              className={styles.date_box}
+            />
+          </div>
         </div>
+
         <div className={styles.second_row}>
-          <input
-            type="text"
-            name="employee_name"
-            ref={employeeNameRef}
-            placeholder="Employee Name"
-            onChange={(e) => handleChange("employee_name", e.target.value)}
-            className={styles.input_box}
-          />
-          <input
-            type="text"
-            name="employee_number"
-            ref={employeeNumberRef}
-            onChange={(e) => handleChange("employee_id", e.target.value)}
-            placeholder="Employee Number"
-            className={styles.input_box}
-          />
-          <Button
-            disableRipple={true}
-            variant="outlined"
-            color="primary"
-            onClick={fetchFilteredData}
-            type="submit"
-            size="small"
-            sx={{
-              marginRight: "5px",
-            }}
-            className={styles.button}
-          >
-            Search
-          </Button>
-          <Button
-            disableRipple={true}
-            variant="outlined"
-            color="primary"
-            onClick={handleClear}
-            type="submit"
-            size="small"
-          >
-            Clear
-          </Button>
+          <div className={styles.eachdiv}>
+            <p className={styles.labels}>Status:</p>
+            <Dropdown
+              options={status}
+              value="status"
+              ref={statusRef}
+              onChange={(selectedOption) =>
+                handleDuDropdownChange(selectedOption, "status")
+              }
+              className={styles.dropdown_status}
+              controlClassName={styles.input_drop_control}
+            />
+          </div>
+          <div className={styles.eachdiv}>
+            <p className={styles.labels}> Name:</p>
+            <input
+              type="text"
+              name="employee_name"
+              ref={employeeNameRef}
+              placeholder="Employee Name"
+              onChange={(e) => handleChange("employee_name", e.target.value)}
+              className={styles.input_box_name}
+            />
+          </div>
+          <div className={styles.eachdiv}>
+            <p className={styles.labels}>Number:</p>
+            <input
+              type="text"
+              name="employee_number"
+              ref={employeeNumberRef}
+              onChange={(e) => handleChange("employee_number", e.target.value)}
+              placeholder="Employee Number"
+              className={styles.input_box}
+            />
+          </div>
+          <div className={styles.eachdiv}>
+            <Button
+              disableRipple={true}
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                fetchFilteredData(1, 0);
+              }}
+              type="submit"
+              size="small"
+              sx={{
+                marginRight: "5px",
+              }}
+              className={styles.button}
+            >
+              Search
+            </Button>
+          </div>
+          <div className={styles.eachdiv}>
+            <Button
+              disableRipple={true}
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                handleClear();
+              }}
+              type="submit"
+              size="small"
+            >
+              Clear
+            </Button>
+          </div>
         </div>
       </div>
     </>

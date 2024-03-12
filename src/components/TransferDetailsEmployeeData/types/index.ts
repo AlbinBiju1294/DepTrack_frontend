@@ -10,7 +10,7 @@ export interface EmployeeDataProps {
     strengths: string; 
     areas_of_improvement: string; 
     additional_training_needs: string; 
-    releaseReason: string; 
+    releaseReason: string|null; 
     transfer_id: number;
   }
   employee: {

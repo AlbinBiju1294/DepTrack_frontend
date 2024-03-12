@@ -26,13 +26,13 @@ const TabSwitchTables = ({}) => {
                                             `${styles.activeBtn} ${styles.tabs}`
                                             :`${styles.inactiveBtn} ${styles.tabs}`
                                             }`} >
-        External
+        Incoming
       </button>
       <button type='button' onClick={() => setActiveButton(2)} className={`${activeButton === 2 ?
                                             `${styles.activeBtn} ${styles.tabs}`
                                             :`${styles.inactiveBtn} ${styles.tabs}`
                                             }`} >
-        Internal
+        Outgoing
       </button>
       <PendingApprovalsTable dataSource={dataSource} ></PendingApprovalsTable>
     </div>
