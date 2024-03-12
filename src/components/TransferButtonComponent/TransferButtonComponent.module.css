@@ -14,13 +14,8 @@
     border-radius: 5px;
     font-size: 12px!important;
     color:white
-    /* color: var(--secondary-color); */
-    
-   
-
-    
-
   }
+
   .Reject {
     background-color:#eb3e35!important;
     width: 53px;
@@ -46,20 +41,26 @@
     color: var(--secondary-color);
     font-family: var(--font-family);
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .transferDateDiv .transferDateInput, .input_drop_control {
     width: 14rem;
-    height: 2rem;
+    height: 1.6rem;
     border: 1px solid gray;
     border-radius: 0.3rem;
     color: gray;
+    padding-top: 0px;
   }
 
   .customTitle {
     color: var(--secondary-color);
     font-family: var(--font-family);
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 1rem;
+  }
+
+  .pmSelectDropdown {
+    margin-top: 0;
+    font-size: 0.8rem;
   }
