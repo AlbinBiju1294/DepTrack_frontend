@@ -1,19 +1,45 @@
 .columnHeader > tr > th {
     background-color: aquamarine!important;
 }
-
-
-.button{
-    background-color:#4154F1;
-    opacity:50%;
+   .button {
+    opacity: 70%; 
+    background-color:#5cb85c;
     width: 20px;
     height: 21px;
-    border:none;
+    border: none;
     border-radius: 5px;
-    
+    position: relative;
+    transition: opacity 0.3s; 
+}
+
+
+
+.approveText {
+    position: absolute;
+    top: calc(80% 100px);
+    left: calc(0 -70px); 
+    transform: translateY(-50%);
+    padding: 4px 8px; 
+    border-radius: 4px; 
+    opacity: 0;
+    font-size: 12px;
+}
+
+.button:hover .approveText {
+    opacity: 1; 
 }
 
 .table{
     align-items: center!important;
     font-size: 10px!important;
 }
+
+  .pagination
+  {
+    align-self: end;
+    margin-right: 4vw;
+    color: var(--secondary-color);
+    
+  }
+
+ 
