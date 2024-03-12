@@ -91,7 +91,7 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
         
     
   return (
-    <div style={{display:"flex",flexDirection:"column",justifyContent:"space-between"}}>
+    <div style={{display:"flex",flexDirection:"column",justifyContent:"space-between",height:"430px"}}>
       <Table className={styles.table} columns={columns}  dataSource={currentItems} pagination={false} />
       <Pagination
           size="small"
