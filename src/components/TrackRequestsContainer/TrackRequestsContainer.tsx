@@ -45,7 +45,7 @@ const TrackRequestsContainer = () => {
 
   const [messageApi, contextHolder] = message.useMessage();
 
-  const pageSizeOptions = ['5', '8', '10', '20', '50'];
+  const pageSizeOptions = [ '1', '5', '8', '10', '20', '50'];
 
   const navigate = useNavigate();
 
