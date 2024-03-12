@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
 import { getPieChartData } from './api/getPieChartData';
 import {  pieChartDataType } from './types';
+import styles from'./DashboardPieChart.module.css'
 
 const DashboardPieChart = () => {
 
@@ -20,14 +21,18 @@ const DashboardPieChart = () => {
     
     console.log(data);
   return (
+    <div className={styles.pieChart}>
+    <p className={styles.piechart_heading}>Number of Employees</p>
     <PieChart
       series={[
         {
             outerRadius: 80,
             innerRadius: 40,
+            cornerRadius: 2,
+            highlightScope: { faded: 'global', highlighted: 'item' },
             data: data,
-            cx: 200,
-            cy: 100
+            cx: 250,
+            cy: 120
         }
       ]}
       height={300}
@@ -36,6 +41,8 @@ const DashboardPieChart = () => {
         legend: { hidden: true },
       }}
     />
+    </div>
+    
   );
 }
 

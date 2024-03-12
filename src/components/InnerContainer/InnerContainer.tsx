@@ -13,6 +13,7 @@ const InnerContainer = () => {
       <DashboardWelcome></DashboardWelcome>
       <div className={styles.statistical_data}>
         <DuBar></DuBar>
+        
         <DashboardPieChart></DashboardPieChart>
       </div>
         <div className={styles.du_transfer_details}>
