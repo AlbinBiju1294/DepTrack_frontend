@@ -12,7 +12,7 @@ const DashboardPieChart = () => {
         getPieChartData(setPieChartData);
     }, [])
     
-    const colors = ['#d3e3ff', '#adcafe', '#86b1fe', '#5f98fe', '#387ffd', '#1166fd', '#0245be']
+    const colors = ['#a0c3ff', '#adcafe', '#86b1fe', '#5f98fe', '#387ffd', '#1166fd', '#0245be']
     const data = pieChartData.map((chartData, index) => ({
       label: chartData.du_name,
       value: chartData.no_of_employees,
@@ -22,7 +22,7 @@ const DashboardPieChart = () => {
     console.log(data);
   return (
     <div className={styles.pieChart}>
-    <p className={styles.piechart_heading}>Number of Employees</p>
+    <p className={styles.piechart_heading}>Employee Count</p>
     <PieChart
       series={[
         {
