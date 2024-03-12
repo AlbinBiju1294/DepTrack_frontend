@@ -12,7 +12,7 @@ const DashboardPieChart = () => {
         getPieChartData(setPieChartData);
     }, [])
     
-    const colors = ['#a0c3ff', '#adcafe', '#86b1fe', '#5f98fe', '#387ffd', '#1166fd', '#0245be']
+    const colors = ['#99befe', '#72a5fe', '#4b8cfd', '#2473fd', '#025bf8', '#0245be', '#013083']
     const data = pieChartData.map((chartData, index) => ({
       label: chartData.du_name,
       value: chartData.no_of_employees,
@@ -29,8 +29,9 @@ const DashboardPieChart = () => {
             outerRadius: 80,
             innerRadius: 40,
             cornerRadius: 2,
-            highlightScope: { faded: 'global', highlighted: 'item' },
             data: data,
+            highlightScope: { faded: 'global', highlighted: 'item' },
+            faded: { innerRadius: 40, additionalRadius: -5},
             cx: 250,
             cy: 120
         }
