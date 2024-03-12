@@ -4,15 +4,18 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { UserContextProvider } from "./components/Contexts/UserContextProvider";
+import { SideBarContextProvider } from "./components/Contexts/SideBarContextProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <>
-  <UserContextProvider>
-    <App />
-  </UserContextProvider>
+    <SideBarContextProvider>
+      <UserContextProvider>
+        <App />
+      </UserContextProvider>
+    </SideBarContextProvider>
   </>
 );
 

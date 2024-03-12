@@ -6,6 +6,7 @@ import axiosInstance from "../../config/AxiosConfig";
 import UserContext from "../Contexts/UserContextProvider";
 import { CloseOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import './TrackRequests.css'
 
 interface Employee {
   designation: string;
@@ -34,7 +35,7 @@ const TrackRequestsContainer = () => {
     TransferDetailsType[]
   >([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 7; // Number of items per page
+  const [pageSize,setPageSize] = useState(8); // Number of items per page
   const totalItems = initiatedTransfers.length;
   const { user } = useContext(UserContext);
   const [open, setOpen] = useState(false);
@@ -43,6 +44,8 @@ const TrackRequestsContainer = () => {
   const du_id = user?.du_id;
 
   const [messageApi, contextHolder] = message.useMessage();
+
+  const pageSizeOptions = ['5', '8', '10', '20', '50'];
 
   const navigate = useNavigate();
 
@@ -80,6 +83,11 @@ const TrackRequestsContainer = () => {
     }
   };
 
+  const handlePageSizeChange = (current: number, size: number) => {
+    setCurrentPage(current); // Update current page if needed
+    setPageSize(size); // Update page size
+  };
+
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = Math.min(startIndex + pageSize, totalItems);
   const currentItems = initiatedTransfers.slice(startIndex, endIndex);
@@ -104,28 +112,37 @@ const TrackRequestsContainer = () => {
       title: "Transfer Id",
       dataIndex: ["id"],
       key: "transfer_id",
-      render: (text) => <a>{text}</a>,
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: "Employee Number",
       dataIndex: ["employee", "employee_number"],
       key: "employee_number",
-      render: (text) => <a>{text}</a>,
+      sorter: (a, b) => a.employee.employee_number.localeCompare(b.employee.employee_number),
     },
     {
       title: "Employee Name",
       dataIndex: ["employee", "name"],
       key: "employee_name",
+      sorter: (a, b) => a.employee.name.localeCompare(b.employee.name),
+    },
+    {
+      title: "Initiated from",
+      dataIndex: ["currentdu", "du_name"],
+      key: "initiated_from",
+      sorter: (a, b) => a.currentdu.du_name.localeCompare(b.currentdu.du_name),
     },
     {
       title: "Initiated to",
       dataIndex: ["targetdu", "du_name"],
       key: "initiated_to",
+      sorter: (a, b) => a.targetdu.du_name.localeCompare(b.targetdu.du_name),
     },
     {
       title: "Initiated by",
       dataIndex: ["initiated_by", "name"],
       key: "initiated_by",
+      sorter: (a, b) => a.initiated_by.name.localeCompare(b.initiated_by.name),
     },
     {
       title: "Status",
@@ -147,7 +164,7 @@ const TrackRequestsContainer = () => {
           <CloseOutlined
             style={{
               color: "white",
-              fontSize: "10px",
+              fontSize: "8px",
               verticalAlign: "middle",
             }}
             onClick={() => {
@@ -167,11 +184,14 @@ const TrackRequestsContainer = () => {
       <div className={styles.inner_container}>
         <Table columns={columns} dataSource={currentItems} pagination={false} />
         <Pagination
-          simple
+          size="small"
+          showSizeChanger
           current={currentPage}
           pageSize={pageSize}
           total={totalItems}
+          onShowSizeChange={handlePageSizeChange}
           onChange={handlePageChange}
+          pageSizeOptions={pageSizeOptions}
           className={styles.pagination}
         />
       </div>

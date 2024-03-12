@@ -22,8 +22,8 @@
 
   .button {
     display: flex;
-    width: 18px; /* Increase width to accommodate the icon */
-    height: 18px; /* Increase height to accommodate the icon */
+    width: 15px; /* Increase width to accommodate the icon */
+    height: 15px; /* Increase height to accommodate the icon */
     background-color: #F08080;
     border: none;
     border-radius: 50%; /* Adjusted to create a circular button */
