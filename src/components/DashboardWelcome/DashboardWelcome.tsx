@@ -12,8 +12,7 @@ const DashboardWelcome = () => {
     
   return (
     <>
-    <h2 className={`${styles.welcome} ${styles.new}`}>Welcome</h2>
-    <h2 className={styles.welcome}>{user ? capitalizeFirstLetter(user.username) : null}</h2>
+    <h2 className={`${styles.welcome} ${styles.new}`}>Welcome {user ? capitalizeFirstLetter(user.username) : null}</h2>
     </>
   )
 }

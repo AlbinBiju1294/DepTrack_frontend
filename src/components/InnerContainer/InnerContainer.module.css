@@ -8,3 +8,8 @@
 {
   display: flex;
 }
+
+.statistical_data {
+  display: flex;
+  height: 17rem;
+}
