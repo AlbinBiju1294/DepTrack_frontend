@@ -1,6 +1,5 @@
-import { useContext } from "react";
-import axios from "axios";
 import axiosInstance from "../../config/AxiosConfig";
+import "./historytable.css";
 import styles from "./FilterComponent.module.css";
 import { Button } from "@mui/material";
 import Dropdown, { Option } from "react-dropdown";
@@ -8,23 +7,23 @@ import "react-dropdown/style.css";
 import { useRef, useState, useEffect } from "react";
 import { Du, dataSourceType, paginationtype } from "./types/index";
 import ReactDropdown from "react-dropdown";
-import { Table } from "antd";
-import type { PaginationProps, TableColumnsType, TableProps } from "antd";
+import { Table, Pagination } from "antd";
+import type { TableColumnsType } from "antd";
 import { Tag } from "antd";
 
 const FilterComponent = () => {
   const status = ["Completed", "Cancelled", "Rejected"];
   const [duData, setDuData] = useState<Du[]>([]);
   const [formData, setFormData] = useState({});
-
   const [dataSource, setDataSource] = useState<dataSourceType[]>([]);
   const [pagination, setPagination] = useState<paginationtype>({
     current: 1,
     total: 0,
-    pageSize: 1,
+    pageSize: 2,
   });
 
   const emptyForm = { limit: pagination.pageSize, offset: 0 };
+  const pageSizeOptions = ["1", "2", "8", "10", "20", "50"];
 
   const statusRef = useRef<ReactDropdown>(null);
   const fromRef = useRef<ReactDropdown>(null);
@@ -37,11 +36,6 @@ const FilterComponent = () => {
   const options = duData.map((du) => {
     return du.du_name;
   });
-
-  const token = localStorage.getItem("access_token");
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
 
   const handleDuDropdownChange = (
     selectedOption: Option,
@@ -72,7 +66,6 @@ const FilterComponent = () => {
       }));
     }
   };
-  // console.log(formData, fromRef.current);
 
   const handleChange = (name: string, value: string | number) => {
     setFormData({
@@ -104,9 +97,8 @@ const FilterComponent = () => {
   useEffect(() => {
     const fetchDuData = async () => {
       try {
-        const res = await axios.get(
-          "http://127.0.0.1:8000/api/v1/delivery-unit/list-delivery-units/",
-          config
+        const res = await axiosInstance.get(
+          "/api/v1/delivery-unit/list-delivery-units/"
         );
         console.log("Response from API - du's got:", res.data.data);
         setDuData(res.data.data);
@@ -117,24 +109,25 @@ const FilterComponent = () => {
     fetchDuData();
   }, []);
 
-  useEffect(() => {
-    fetchFilteredData(1, 1);
-  }, []);
+  const handlePaginationChange = (newPagination: number, size: number) => {
+    setPagination((prevPagination) => ({
+      ...prevPagination,
+      current: newPagination,
+      pageSize: size,
+    }));
 
-  const handlePaginationChange = (newPagination: any) => {
-    console.log(newPagination.current);
-    fetchFilteredData(newPagination.current, 0);
+    console.log(newPagination);
   };
+
+  useEffect(() => {
+    console.log(pagination);
+    fetchFilteredData(pagination.current, 0);
+  }, [pagination.pageSize, pagination.current]);
 
   const fetchFilteredData = async (page: number, origin: number) => {
     try {
       const limit = pagination.pageSize;
       const offset = (page - 1) * limit;
-      // setFormData((prevFormData) => ({
-      //   ...prevFormData,
-      //   limit: limit,
-      //   offset: offset,
-      // }));
       const qparam =
         origin === 0
           ? {
@@ -146,7 +139,7 @@ const FilterComponent = () => {
       console.log(formData);
       console.log(emptyForm);
       const res = await axiosInstance.get(
-        "http://127.0.0.1:8000/api/v1/transfer/filter-transfers/",
+        "/api/v1/transfer/filter-transfers/",
         {
           params: qparam,
         }
@@ -159,9 +152,6 @@ const FilterComponent = () => {
         total: responseData.count,
       }));
       setDataSource(responseData.results);
-      // setFormData((prevFormData) => ({
-      //   ...prevFormData,
-      // }));
       console.log(formData);
     } catch (error) {
       setPagination((prevPagination) => ({
@@ -170,9 +160,6 @@ const FilterComponent = () => {
         total: 0,
       }));
       setDataSource([]);
-      // setFormData((prevFormData) => ({
-      //   ...prevFormData,
-      // }));
       console.log(formData);
       console.error("Error:", error);
     }
@@ -182,6 +169,7 @@ const FilterComponent = () => {
     {
       title: "Transfer Id",
       dataIndex: "id",
+      key: "id",
     },
     {
       title: "Employee Number",
@@ -233,21 +221,9 @@ const FilterComponent = () => {
               controlClassName={styles.input_drop_control}
             />
           </div>
+
           <div className={styles.eachdiv}>
-            <p className={styles.labels}>Transferred To:</p>
-            <Dropdown
-              options={options}
-              value="To"
-              ref={toRef}
-              onChange={(selectedOption) =>
-                handleDuDropdownChange(selectedOption, "targetdu_id")
-              }
-              className={styles.dropdown}
-              controlClassName={styles.input_drop_control}
-            />
-          </div>
-          <div className={styles.eachdiv}>
-            <p className={styles.labels}>From:</p>
+            <p className={styles.label_datefrom}>From:</p>
             <input
               type="date"
               name="transfer_date"
@@ -257,7 +233,7 @@ const FilterComponent = () => {
             />
           </div>
           <div className={styles.eachdiv}>
-            <p className={styles.labels}>To:</p>
+            <p className={styles.label_to}>To:</p>
             <input
               type="date"
               name="transfer_date"
@@ -266,11 +242,8 @@ const FilterComponent = () => {
               className={styles.date_box}
             />
           </div>
-        </div>
-
-        <div className={styles.second_row}>
           <div className={styles.eachdiv}>
-            <p className={styles.labels}>Status:</p>
+            <p className={styles.label_status}>Status:</p>
             <Dropdown
               options={status}
               value="status"
@@ -282,8 +255,25 @@ const FilterComponent = () => {
               controlClassName={styles.input_drop_control}
             />
           </div>
+        </div>
+
+        <div className={styles.second_row}>
           <div className={styles.eachdiv}>
-            <p className={styles.labels}> Name:</p>
+            <p className={styles.label_transto}>Transferred To:</p>
+            <Dropdown
+              options={options}
+              value="To"
+              ref={toRef}
+              onChange={(selectedOption) =>
+                handleDuDropdownChange(selectedOption, "targetdu_id")
+              }
+              className={styles.dropdown}
+              controlClassName={styles.input_drop_control}
+            />
+          </div>
+
+          <div className={styles.eachdiv}>
+            <p className={styles.label_name}> Name:</p>
             <input
               type="text"
               name="employee_name"
@@ -294,7 +284,7 @@ const FilterComponent = () => {
             />
           </div>
           <div className={styles.eachdiv}>
-            <p className={styles.labels}>Number:</p>
+            <p className={styles.label_number}>Number:</p>
             <input
               type="text"
               name="employee_number"
@@ -304,47 +294,59 @@ const FilterComponent = () => {
               className={styles.input_box}
             />
           </div>
-          <div className={styles.eachdiv}>
-            <Button
-              disableRipple={true}
-              variant="outlined"
-              color="primary"
-              onClick={() => {
-                fetchFilteredData(1, 0);
-              }}
-              type="submit"
-              size="small"
-              sx={{
-                marginRight: "5px",
-              }}
-              className={styles.button}
-            >
-              Search
-            </Button>
-          </div>
-          <div className={styles.eachdiv}>
-            <Button
-              disableRipple={true}
-              variant="outlined"
-              color="primary"
-              onClick={() => {
-                handleClear();
-              }}
-              type="submit"
-              size="small"
-            >
-              Clear
-            </Button>
+          <div className={styles.buttondiv}>
+            <div className={styles.eachdiv}>
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={() => {
+                  fetchFilteredData(1, 0);
+                }}
+                type="submit"
+                size="small"
+                sx={{
+                  marginRight: "5px",
+                }}
+                className={styles.button}
+              >
+                Search
+              </Button>
+            </div>
+            <div className={styles.eachdiv}>
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={() => {
+                  handleClear();
+                }}
+                type="submit"
+                size="small"
+                className={styles.button}
+              >
+                Clear
+              </Button>
+            </div>
           </div>
         </div>
       </div>
 
-      <div>
+      <div className={styles.history_container}>
         <Table
           columns={columns}
+          rowKey={(record) => record.id.toString()}
           dataSource={dataSource}
-          pagination={pagination}
+          pagination={false}
+        />
+        <Pagination
+          size="small"
+          showSizeChanger
+          current={pagination.current}
+          pageSize={pagination.pageSize}
+          total={pagination.total}
+          onShowSizeChange={handlePaginationChange}
           onChange={handlePaginationChange}
+          pageSizeOptions={pageSizeOptions}
+          className={styles.pagination}
         />
       </div>
     </>
