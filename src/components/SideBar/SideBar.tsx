@@ -6,15 +6,37 @@ import HistoryIcon from "@mui/icons-material/History";
 import LogoutIcon from "@mui/icons-material/Logout";
 import TimelineIcon from "@mui/icons-material/Timeline";
 import styles from "./SideBar.module.css";
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import UserContext from "../Contexts/UserContextProvider";
+import sideBarContext from "../Contexts/SideBarContextProvider";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { useNavigate } from "react-router-dom";
 
 const SideBar = () => {
-  const [activeDiv, setActiveDiv] = useState<number>(1);
   const { user, setUser } = useContext(UserContext);
+  const { activeDiv, setActiveDiv } = useContext(sideBarContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Update activePage based on the current pathname
+    setActivePage(window.location.pathname);
+  }, []);
+
+  const setActivePage = (location: string) => {
+    if (location === "/dashboard") {
+      setActiveDiv(1);
+    } else if (location === "/initiatetransfer") {
+      setActiveDiv(2);
+    } else if (location === "/trackrequests") {
+      setActiveDiv(3);
+    } else if (location === "/pendingapprovals") {
+      setActiveDiv(4);
+    } else if (location === "/transferhistory") {
+      setActiveDiv(5);
+    } else if (location === "/managedu") {
+      setActiveDiv(7);
+    }
+  };
 
   const handleDivClick = (divId: number) => {
     setActiveDiv(divId);
@@ -85,7 +107,7 @@ const SideBar = () => {
       </div>
       <div
         className={`${
-          user?.role !== 1 && user?.role !== 2
+          user?.role !== 1 && user?.role !== 2 && user?.role !== 5
             ? `${styles.no_display}`
             : activeDiv === 2
             ? `${styles.sidebar_items_active}`
@@ -108,9 +130,7 @@ const SideBar = () => {
       </div>
       <div
         className={`${
-          user?.role === 5
-            ? `${styles.no_display}`
-            : activeDiv === 3
+          activeDiv === 3
             ? `${styles.sidebar_items_active}`
             : `${styles.sidebar_items}`
         }`}
@@ -131,7 +151,7 @@ const SideBar = () => {
       </div>
       <div
         className={`${
-          user?.role !== 1
+          user?.role !== 1 && user?.role !== 5
             ? `${styles.no_display}`
             : activeDiv === 4
             ? `${styles.sidebar_items_active}`
@@ -154,9 +174,7 @@ const SideBar = () => {
       </div>
       <div
         className={`${
-          user?.role === 5
-            ? `${styles.no_display}`
-            : activeDiv === 5
+          activeDiv === 5
             ? `${styles.sidebar_items_active}`
             : `${styles.sidebar_items}`
         }`}
@@ -185,7 +203,7 @@ const SideBar = () => {
           handleDivClick(6);
         }}
       >
-        <LogoutIcon className={styles.icon} />
+        <LogoutIcon className={styles.icon_logout} />
         <h6
           className={`${
             activeDiv === 6

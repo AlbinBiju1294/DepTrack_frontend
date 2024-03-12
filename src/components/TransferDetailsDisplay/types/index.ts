@@ -44,3 +44,7 @@ export interface FormDataDisplayProps {
       
   };
   
+  export type TransferDataDisplayPropsType={
+    formData: FormDataDisplayProps|undefined
+    
+  }

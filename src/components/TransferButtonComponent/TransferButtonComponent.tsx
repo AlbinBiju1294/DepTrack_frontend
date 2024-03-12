@@ -29,10 +29,10 @@ const TransferButtonComponent = ({
     <>
     {contextHolder}
     <div className={styles.FormButton}>
-      {/* <Button  size='small'  style={{ backgroundColor: '#5cb85c', color: 'white' }} onClick={showModal}>Approve</Button>
-      <Button size='small'style={{ backgroundColor: '#F32013',opacity: "75%", color: 'white' }} onClick={handleOpenReject}>Reject</Button> */}
-      <button className={styles.Approve} onClick={showModal}>Approve</button>
-      <button className={styles.Reject} onClick={handleOpenReject}>Reject</button>
+      <button className={styles.Approve} onClick={showModal}>Approve <span className={styles.ApproveText}>Approve Transfer</span>
+</button>
+      <button className={styles.Reject} onClick={handleOpenReject}>Reject   <span className={styles.RejectText}>Reject Transfer</span>
+ </button>
 
       {/* Modal for approval */}
       <Modal
@@ -42,7 +42,7 @@ const TransferButtonComponent = ({
         onOk={handleOk}
         onCancel={handleCloseApproval}
         footer={[
-          <Button key="submit" type="primary" onClick={handleOk}>
+          <Button  className={styles.approveSuccessButton} key="submit" type="primary" size='small' onClick={handleOk}>
             Submit
           </Button>
         ]}
@@ -79,16 +79,17 @@ const TransferButtonComponent = ({
       {/* Modal for reject */}
        <Modal
         open={openReject}
-        title="Enter the Rejection Reason"
+        title ="Enter the Rejection Reason"
         centered
         onCancel={handleCloseReject}
         footer={[
-          <Button key="submit" type="primary"  disabled={!isReasonEntered} onClick={() => {
+          <Button key="submit" type="primary"size='small' disabled={!isReasonEntered} onClick={() => {
             {handleRejectConfirm()}
             {success()}}}>
             Confirm
           </Button>
         ]}
+        
       >
         <div className={styles.transferDateDiv}>
        

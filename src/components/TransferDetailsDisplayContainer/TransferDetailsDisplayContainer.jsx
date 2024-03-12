@@ -4,6 +4,7 @@ import TransferDetailsDisplay from "../TransferDetailsDisplay/TransferDetailsDis
 import TransferDetailsEmployeeData from '../TransferDetailsEmployeeData/TransferDetailsEmployeeData'
 import TransferButtonComponent from '../TransferButtonComponent/TransferButtonComponent';
 import TransferButtonComponentHandler from '../TransferButtonComponent/TransferButtonComponentHandler';
+import TransferDetailsDisplayHandler from '../TransferDetailsDisplay/TransferDetailsDisplayHandler';
 
 const TransferDetailsDisplayContainer = () => {
 
@@ -15,7 +16,8 @@ const TransferDetailsDisplayContainer = () => {
         {/* <h4 className={styles.form_heading}>Please fill the form</h4> */}
         {/* <PendingApprovalsTransferDetails/> */}
          <TransferDetailsEmployeeData/>
-        <TransferDetailsDisplay setTransferDate={setTransferDate}/>
+        <TransferDetailsDisplayHandler setTransferDate={setTransferDate}/>
+
         <TransferButtonComponentHandler transferDate={transferDate}/>
        
     </div>
