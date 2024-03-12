@@ -41,7 +41,7 @@
 .form_label
 {
     color: var(--secondary-color);
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 500;
     margin-right: 10px;
 }
@@ -90,7 +90,6 @@ textarea{
 
 .input_box:focus
 {
-    /* border: 1px solid blue; */
     border: none;
     outline: 1px solid blue;
 }
@@ -111,7 +110,7 @@ textarea{
 }
 
 .submit_area label{
-    font-size: 13px;
+    font-size: 11px;
     color: var(--secondary-color);
 }
 

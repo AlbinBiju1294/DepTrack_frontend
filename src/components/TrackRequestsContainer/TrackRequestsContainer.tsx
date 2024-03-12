@@ -160,20 +160,23 @@ const TrackRequestsContainer = () => {
     },
     {
       render: (_, record) => (
-        <button className={styles.button}>
-          <CloseOutlined
+        <button className={styles.button}
+        // title="Cancel Request"
+         onClick={() => {
+          setOpen(true);
+          setSelectedTransfer(record);
+          console.log(record.id);
+          console.log(record);
+        }}>
+          {/* <CloseOutlined
             style={{
               color: "white",
               fontSize: "8px",
               verticalAlign: "middle",
             }}
-            onClick={() => {
-              setOpen(true);
-              setSelectedTransfer(record);
-              console.log(record.id);
-              console.log(record);
-            }}
-          />
+            
+          /> */}
+          Cancel
         </button>
       ),
     },
@@ -203,7 +206,7 @@ const TrackRequestsContainer = () => {
         onCancel={handleCancel}
         footer={null}
       >
-        Are you sure you want to cancel transfer of{" "}
+        Are you sure you want to cancel the Transfer of{" "}
         {selectedTransfer?.employee.name} to{" "}
         {selectedTransfer?.targetdu.du_name} ?
         <br />
