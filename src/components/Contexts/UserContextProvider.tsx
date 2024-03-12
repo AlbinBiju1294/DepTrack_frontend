@@ -1,11 +1,11 @@
 import React, { useState, createContext, ReactNode } from "react";
 
 type User = {
-  id:number,
-  username:string,
-  role:number,
-  email?:string,
-  du_id:number
+  id: number;
+  username: string;
+  role: number;
+  email?: string;
+  du_id: number;
 };
 
 type UserContextType = {
@@ -25,8 +25,10 @@ type UserContextProviderProps = {
 };
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
-  const storedUser = localStorage.getItem('user')
-  const [user, setUser] = useState<User | null>(storedUser ? JSON.parse(storedUser) : null);
+  const storedUser = localStorage.getItem("user");
+  const [user, setUser] = useState<User | null>(
+    storedUser ? JSON.parse(storedUser) : null
+  );
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}

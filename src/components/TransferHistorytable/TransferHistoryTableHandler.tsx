@@ -35,6 +35,7 @@ const TransferHistoryTableHandler = () => {
     fetchData(1);
   }, []);
 
+  
   const handlePaginationChange = (newPagination: any) => {
     fetchData(newPagination.current);
   };
