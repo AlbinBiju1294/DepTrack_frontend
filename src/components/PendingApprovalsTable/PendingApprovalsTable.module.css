@@ -11,18 +11,15 @@
     position: relative;
     transition: opacity 0.3s; 
 }
-
-
-
 .approveText {
     position: absolute;
-    top: calc(80% 100px);
-    left: calc(0 -70px); 
+     top: calc( 10px);
+    left: calc(-70px); 
     transform: translateY(-50%);
     padding: 4px 8px; 
-    border-radius: 4px; 
     opacity: 0;
-    font-size: 12px;
+    font-size: 10px;
+    color: grey;
 }
 
 .button:hover .approveText {
@@ -34,11 +31,12 @@
     font-size: 10px!important;
 }
 
-  .pagination
+.pagination
   {
     align-self: end;
     margin-right: 4vw;
     color: var(--secondary-color);
+    margin-top: 12px;
     
   }
 

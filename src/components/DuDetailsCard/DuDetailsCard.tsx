@@ -6,6 +6,7 @@ export interface DuDetailsCardProps {
     name: string;
     value: string |number|null;
   }
+
 const DuDetailsCard = (props:DuDetailsCardProps) => {
   return (
     <div  className={`${styles.body}`}>  
