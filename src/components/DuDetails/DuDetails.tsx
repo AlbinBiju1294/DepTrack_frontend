@@ -3,6 +3,7 @@ import styles from './DuDetails.module.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import DuDetailsCard from '../DuDetailsCard/DuDetailsCard';
+import axiosInstance from '../../config/AxiosConfig';
  
  
 export interface DuDetailsProps {
@@ -10,20 +11,16 @@ export interface DuDetailsProps {
     no_of_pms:  number;
     no_of_employees:number;
   }
- 
+//To display the du details in the dashboard
 const DuDetails =() => {
  
   const [duData,setDuData] = useState<DuDetailsProps>();
- 
-  const token = localStorage.getItem('access_token');
-  const config = {
-    headers: { Authorization: `Bearer ${token}` }
-  };
+
  
 useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('http://127.0.0.1:8000/api/v1/delivery-unit/dashboard-du-details', config);
+        const res = await  axiosInstance.get('http://127.0.0.1:8000/api/v1/delivery-unit/dashboard-du-details');
         console.log('Response from API:', res.data);
         setDuData(res.data.data);
       } catch (error) {

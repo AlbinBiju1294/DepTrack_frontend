@@ -65,23 +65,4 @@
 
 
 
-  .Approve:hover .ApproveText {
-    display: block;
-  }
   
-  .Reject:hover .RejectText {
-    display: block;
-  }
-  
-  .ApproveText,
-  .RejectText {
-    display: none;
-    position: absolute;
-    color:black;
-    /* margin-right: 2000px; */
-    padding: 5px;
-    opacity: 50%;
-    /* border-radius: 5px; */
-    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); */
-  }
-
