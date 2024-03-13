@@ -129,16 +129,6 @@ const InitiateTransferFormHandler = () => {
     });
   };
 
-  // const handleDuDropdownChange = (selectedOption: Option) => {
-  //   const newDuData = duData.filter((du) => {
-  //     return du.du_name === selectedOption.value;
-  //   });
-  //   setFormData({
-  //     ...formData,
-  //     targetdu_id: newDuData[0].id,
-  //   });
-  // };
-
   const handleDuDropdownChange = (selectedOption: Du | undefined ) => {
     setFormData({
       ...formData,
