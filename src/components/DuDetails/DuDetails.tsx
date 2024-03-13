@@ -33,7 +33,7 @@ useEffect(() => {
  
 return (
     <div className={styles.dudetails}>
-    <div className={`${styles.header}`}>Du Details</div>
+    <div className={`${styles.header}`}>DU Details</div>
     <div className={`${styles.card}`}>
      
       <DuDetailsCard name="Delivery Unit Name :" value={duData?duData.du_name: ""}/>

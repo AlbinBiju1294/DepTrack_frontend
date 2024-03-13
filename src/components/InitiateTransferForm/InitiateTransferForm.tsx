@@ -42,7 +42,7 @@ const InitiateTransferForm = ({
     if (month < 10) {
       newmonth = '0' + month.toString();
     }
-  
+
     return `${year}-${newmonth}-${newday}`;
   }
 

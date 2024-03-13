@@ -53,7 +53,8 @@ const TransferButtonComponent = ({
               <input
                 type="date"
                 name="transfer_date"
-                value={transferDate}
+                defaultValue={transferDate}
+                min={transferDate}
                 onChange={(e) => {
                   handleDateChange(e);
                 }}

@@ -3,7 +3,6 @@
   top: 10px;
   display: flex;
   margin-bottom: 18px;
-  justify-content: space-evenly;
 }
 
 .filter_container {
@@ -16,18 +15,71 @@
 .eachdiv {
   display: flex;
 }
+.buttondiv {
+  display: flex;
+  margin-left: 0.8rem;
+}
 
 .second_row {
   margin-top: 15px;
   display: flex;
-  margin-right: 1.6rem;
+  margin-left: 3.1rem;
   margin-bottom: 5px;
-  justify-content: flex-end;
 }
 
 .labels {
   font-size: 12.5px;
+  margin-left: 2rem;
   padding-right: 6px;
+  cursor: default;
+  margin-top: 2px;
+}
+
+.label_transto {
+  font-size: 12.5px;
+  padding-right: 24px;
+  margin-left: -1.1rem;
+  cursor: default;
+  margin-top: 2px;
+}
+
+.label_datefrom {
+  font-size: 12.5px;
+  padding-right: 8px;
+  margin-left: 0;
+  cursor: default;
+  margin-top: 2px;
+}
+
+.label_name {
+  font-size: 12.5px;
+  padding-right: 1px;
+  margin-left: 0;
+  cursor: default;
+  margin-top: 2px;
+}
+
+.label_to {
+  font-size: 12.5px;
+  margin-left: 0.8rem;
+  padding-right: 10px;
+  margin-right: 2rem;
+  cursor: default;
+  margin-top: 2px;
+}
+
+.label_number {
+  font-size: 12.5px;
+  padding-right: 6px;
+  margin-left: -0.2rem;
+  cursor: default;
+  margin-top: 2px;
+}
+
+.label_status {
+  font-size: 12.5px;
+  padding-right: 10px;
+  margin-left: 0.8rem;
   cursor: default;
   margin-top: 2px;
 }
@@ -69,6 +121,11 @@
   color: #7d7d7d;
 }
 
+.input_box_name:focus {
+  border: 1px solid blue;
+  outline: 1px solid blue;
+}
+
 .date_box {
   height: 28px;
   width: 130px;
@@ -88,4 +145,17 @@
 .button {
   padding-right: 5px;
   margin-right: 5px;
+  background-color: blue;
+}
+
+.pagination {
+  align-self: end;
+  color: var(--secondary-color);
+}
+
+.history_container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  min-height: 360px;
 }
