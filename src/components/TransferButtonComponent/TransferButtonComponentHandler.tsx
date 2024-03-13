@@ -26,7 +26,7 @@ const [reason, setReason] = useState<string>('');
 
 const showModal = () => {
   setOpen(true);
-  setDatePmPostData({...datePmPostData, transfer_id: +id})
+  setDatePmPostData({...datePmPostData, transfer_id: +id, transfer_date: transferDate})
 };
 const handleCloseApproval= () => {
   setOpen(false);
