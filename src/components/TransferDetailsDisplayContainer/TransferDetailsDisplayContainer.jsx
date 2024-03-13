@@ -13,13 +13,9 @@ const TransferDetailsDisplayContainer = () => {
 
   return (
     <div className={styles.inner_container}>
-        {/* <h4 className={styles.form_heading}>Please fill the form</h4> */}
-        {/* <PendingApprovalsTransferDetails/> */}
-         <TransferDetailsEmployeeData/>
+        <TransferDetailsEmployeeData/>
         <TransferDetailsDisplayHandler setTransferDate={setTransferDate}/>
-
         <TransferButtonComponentHandler transferDate={transferDate}/>
-       
     </div>
   )
 }

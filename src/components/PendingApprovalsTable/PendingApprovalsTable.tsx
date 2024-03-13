@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { Display } from 'react-bootstrap-icons';
 
 
-  
+  //Table to display both internal and external pending approvals of a du
 const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) => {
     
   const navigate = useNavigate()
@@ -91,7 +91,7 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
         
     
   return (
-    <div style={{display:"flex",flexDirection:"column",justifyContent:"space-between",height:"430px"}}>
+    <div style={{display:"flex",flexDirection:"column",justifyContent:"space-between",height:"420px",overflowY:"scroll"}}>
       <Table className={styles.table} columns={columns}  dataSource={currentItems} pagination={false} />
       <Pagination
           size="small"

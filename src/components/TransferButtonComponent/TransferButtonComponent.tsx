@@ -29,9 +29,9 @@ const TransferButtonComponent = ({
     <>
     {contextHolder}
     <div className={styles.FormButton}>
-      <button className={styles.Approve} onClick={showModal}>Approve <span className={styles.ApproveText}>Approve Transfer</span>
+      <button className={styles.Approve} onClick={showModal}>Approve
 </button>
-      <button className={styles.Reject} onClick={handleOpenReject}>Reject   <span className={styles.RejectText}>Reject Transfer</span>
+      <button className={styles.Reject} onClick={handleOpenReject}>Reject   
  </button>
 
       {/* Modal for approval */}

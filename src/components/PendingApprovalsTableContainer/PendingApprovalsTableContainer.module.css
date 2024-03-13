@@ -1,7 +1,7 @@
 .inner_container {
-    background-color: white;
+    background-color: rgb(248, 246, 246);
     margin-top: 10px;
-    height: 490px;
+    min-height: 490px;
     padding: 20px
     ;
   }
