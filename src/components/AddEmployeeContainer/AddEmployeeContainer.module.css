@@ -1,0 +1,8 @@
+.inner_container {
+  background-color: white;
+  margin-top: 10px;
+  height: 490px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
