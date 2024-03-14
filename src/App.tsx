@@ -14,29 +14,86 @@ import TransferDetailsDisplayForm from "./pages/TransferDetailsDisplayForm/Trans
 import Admin from "./pages/Admin/Admin";
 
 function App() {
-
   return (
     <BrowserRouter>
-     
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<> <Navbar></Navbar>
-      <SideBar></SideBar><Dashboard /></>} />
-        <Route path="/initiatetransfer" element={<> <Navbar></Navbar>
-      <SideBar></SideBar><InitiateTransfer /></>} />
-        <Route path="/transferhistory" element={<> <Navbar></Navbar>
-      <SideBar></SideBar><TransferHistory /></>} />
-        <Route path="/trackrequests" element={<> <Navbar></Navbar>
-      <SideBar></SideBar><TrackInitiatedRequests /></>} />
-        <Route path="/pendingapprovals" element={<> <Navbar></Navbar>
-      <SideBar></SideBar><PendingApprovals/></>} />
-      <Route path="/transferdetailsdisplay/:id" element={<> <Navbar></Navbar>
-      <SideBar></SideBar><TransferDetailsDisplayForm/></>} />
-      <Route path="/managedu" element={<><Navbar></Navbar>
-      <SideBar></SideBar><Admin/></>}/>
-        
-        
-
+        <Route
+          path="/dashboard"
+          element={
+            <>
+              {" "}
+              <Navbar></Navbar>
+              <SideBar></SideBar>
+              <Dashboard />
+            </>
+          }
+        />
+        <Route
+          path="/initiatetransfer"
+          element={
+            <>
+              {" "}
+              <Navbar></Navbar>
+              <SideBar></SideBar>
+              <InitiateTransfer />
+            </>
+          }
+        />
+        <Route
+          path="/transferhistory"
+          element={
+            <>
+              {" "}
+              <Navbar></Navbar>
+              <SideBar></SideBar>
+              <TransferHistory />
+            </>
+          }
+        />
+        <Route
+          path="/trackrequests"
+          element={
+            <>
+              {" "}
+              <Navbar></Navbar>
+              <SideBar></SideBar>
+              <TrackInitiatedRequests />
+            </>
+          }
+        />
+        <Route
+          path="/pendingapprovals"
+          element={
+            <>
+              {" "}
+              <Navbar></Navbar>
+              <SideBar></SideBar>
+              <PendingApprovals />
+            </>
+          }
+        />
+        <Route
+          path="/transferdetailsdisplay/:id"
+          element={
+            <>
+              {" "}
+              <Navbar></Navbar>
+              <SideBar></SideBar>
+              <TransferDetailsDisplayForm />
+            </>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <>
+              <Navbar></Navbar>
+              <SideBar></SideBar>
+              <Admin />
+            </>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

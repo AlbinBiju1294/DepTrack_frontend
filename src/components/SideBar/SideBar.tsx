@@ -35,7 +35,7 @@ const SideBar = () => {
       setActiveDiv(4);
     } else if (location === "/transferhistory") {
       setActiveDiv(5);
-    } else if (location === "/managedu") {
+    } else if (location === "/admin") {
       setActiveDiv(7);
     }
   };
@@ -57,7 +57,7 @@ const SideBar = () => {
       setUser(null);
       navigate("/login");
     } else if (divId === 7) {
-      navigate("/managedu");
+      navigate("/admin");
     }
   };
 
@@ -104,7 +104,7 @@ const SideBar = () => {
               : `${styles.sidebar_item}`
           }`}
         >
-          Manage DU
+          Admin
         </h6>
       </div>
       <div
