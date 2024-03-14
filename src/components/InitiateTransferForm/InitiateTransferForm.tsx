@@ -304,15 +304,6 @@ let currentDate = getCurrentDate()
           </div>
         </div>
         <div className={styles.submit_area}>
-          {/* <div>
-            <Checkbox
-              checked={isChecked}
-              onChange={handleCheckboxChange}
-              inputProps={{ "aria-label": "controlled" }}
-              size="small"
-            />
-            <label htmlFor="checkbox">Is Project Access Revoked</label>
-          </div> */}
           <Button
             variant="outlined"
             color="error"

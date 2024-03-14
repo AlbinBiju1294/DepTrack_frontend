@@ -33,16 +33,17 @@ const InitiateTransferFormHandler = () => {
   const navigate = useNavigate();
 
   //for setting options for du dropdown
-  const options = duData.map((du) => {
-    return {value:du, label:du.du_name};
-  });
+  const options = duData
+  .filter(du => du.id !== user?.du_id)
+  .map(du => ({ value: du, label: du.du_name }));
+
 
   const bandData = bands.map((band) => {
     return {value:band, label:band};
   });
 
   useEffect(() => {
-    fetchEmployeeData(searchKeyword, setEmployeeData);
+    fetchEmployeeData(searchKeyword, setEmployeeData, user?.employee_id);
   }, [searchKeyword]);
 
   useEffect(() => {
