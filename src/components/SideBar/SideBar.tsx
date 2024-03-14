@@ -127,7 +127,7 @@ const SideBar = () => {
               : `${styles.sidebar_item}`
           }`}
         >
-          Initiate transfer
+          Initiate Transfer
         </h6>
       </div>
       <div
@@ -148,7 +148,7 @@ const SideBar = () => {
               : `${styles.sidebar_item}`
           }`}
         >
-          Track requests
+          Track Requests
         </h6>
       </div>
       <div
@@ -171,7 +171,7 @@ const SideBar = () => {
               : `${styles.sidebar_item}`
           }`}
         >
-          Pending approvals
+          Pending Approvals
         </h6>
       </div>
       <div
@@ -192,7 +192,7 @@ const SideBar = () => {
               : `${styles.sidebar_item}`
           }`}
         >
-          Transfer history
+          Transfer History
         </h6>
       </div>
       <div
