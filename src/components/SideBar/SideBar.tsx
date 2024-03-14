@@ -11,16 +11,18 @@ import UserContext from "../Contexts/UserContextProvider";
 import sideBarContext from "../Contexts/SideBarContextProvider";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const SideBar = () => {
   const { user, setUser } = useContext(UserContext);
   const { activeDiv, setActiveDiv } = useContext(sideBarContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     // Update activePage based on the current pathname
-    setActivePage(window.location.pathname);
-  }, []);
+    setActivePage(location.pathname);
+  }, [location]);
 
   const setActivePage = (location: string) => {
     if (location === "/dashboard") {
