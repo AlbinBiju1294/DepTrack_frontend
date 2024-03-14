@@ -19,6 +19,7 @@ import TrackInitiatedRequests from "./pages/TrackInitiatedRequests/TrackInitiate
 import TransferDetailsDisplayForm from "./pages/TransferDetailsDisplayForm/TransferDetailsDisplayForm";
 import Admin from "./pages/Admin/Admin";
 import UserContext from "./components/Contexts/UserContextProvider";
+import LoginPage from "./pages/LoginPage/LoginPage";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -27,6 +28,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="" element={<LoginPage />} />
         {/* <Route path="/dashboard" element={user?<> <Navbar></Navbar>
       <SideBar></SideBar><Dashboard /></>:navigate('/login')} /> */}
         <Route
