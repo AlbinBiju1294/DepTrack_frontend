@@ -11,7 +11,7 @@ export type dataSourceType = {
     du_name: string;
   };
   employee: {
-    number: string;
+    employee_number: string;
     name: string;
     id: number;
   };
@@ -21,6 +21,7 @@ export type dataSourceType = {
     du_name: string;
   };
   transfer_date: string;
+  
 };
 
 export type paginationtype = {

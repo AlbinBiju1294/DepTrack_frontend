@@ -1,4 +1,5 @@
 import { Option } from "react-dropdown";
+import { User } from "../../Contexts/UserContextProvider";
 
 export type pmDataType = {
     employee_details: {
@@ -26,6 +27,7 @@ export type TransferButtonComponentPropsType = {
   pmOptions: string[];
   handleSelectPm: (selectedOption: Option) => void;
   transferDate: string;
+  currentDuNumber: number;
   handleOpenReject: () => void;
   openReject: boolean;
   handleCloseReject: () => void;
@@ -34,4 +36,5 @@ export type TransferButtonComponentPropsType = {
   success: () => void;
   reason: string;
   handleReasonChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  user : User | null;
 }

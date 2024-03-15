@@ -17,7 +17,7 @@
 }
 .buttondiv {
   display: flex;
-  margin-left: 0.8rem;
+  margin-left: 0.9rem;
 }
 
 .second_row {
@@ -144,8 +144,11 @@
 
 .button {
   padding-right: 5px;
-  margin-right: 5px;
-  background-color: blue;
+  margin-right: 5px!important;
+  margin-left: 2px;
+  width:30px;
+  height:27px;
+
 }
 
 .pagination {

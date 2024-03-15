@@ -52,11 +52,7 @@ const SideBar = () => {
       navigate("/pendingapprovals");
     } else if (divId === 5) {
       navigate("/transferhistory");
-    } else if (divId === 6) {
-      localStorage.clear();
-      setUser(null);
-      navigate("/");
-    } else if (divId === 7) {
+    }  else if (divId === 7) {
       navigate("/admin");
     }
   };
@@ -192,28 +188,7 @@ const SideBar = () => {
               : `${styles.sidebar_item}`
           }`}
         >
-          Transfer History
-        </h6>
-      </div>
-      <div
-        className={`${
-          activeDiv === 6
-            ? `${styles.sidebar_items_active}`
-            : `${styles.sidebar_items}`
-        }`}
-        onClick={() => {
-          handleDivClick(6);
-        }}
-      >
-        <LogoutIcon className={styles.icon_logout} />
-        <h6
-          className={`${
-            activeDiv === 6
-              ? `${styles.sidebar_item_active}`
-              : `${styles.sidebar_item}`
-          }`}
-        >
-          Logout
+          Transfer history
         </h6>
       </div>
     </div>
