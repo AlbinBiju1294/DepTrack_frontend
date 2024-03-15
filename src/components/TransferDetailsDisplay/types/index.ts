@@ -48,3 +48,6 @@ export interface FormDataDisplayProps {
     formData: FormDataDisplayProps|undefined
     
   }
+
+  export type TransferDetailsDisplayHandlerPropsType = {
+    setTransferDate: React.Dispatch<React.SetStateAction<string>>,  }

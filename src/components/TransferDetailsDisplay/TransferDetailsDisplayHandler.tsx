@@ -1,17 +1,15 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { FormDataDisplayProps } from './types';
+import { FormDataDisplayProps, TransferDetailsDisplayHandlerPropsType } from './types';
 import { fetchTransferData } from './api/fetchTransferData';
 import TransferDetailsDisplay from './TransferDetailsDispaly';
-import {TransferDataDisplayPropsType} from './types/index'
 
-const TransferDetailsDisplayHandler = ({setTransferDate}: {setTransferDate: React.Dispatch<React.SetStateAction<string>>}) => {
+const TransferDetailsDisplayHandler = ({setTransferDate}: TransferDetailsDisplayHandlerPropsType) => {
     const [formData,setFormData] = useState<FormDataDisplayProps>();
     const {id} = useParams()
 
     useEffect(() => {
-   
         fetchTransferData(id,setFormData,setTransferDate);
       }, []);
     

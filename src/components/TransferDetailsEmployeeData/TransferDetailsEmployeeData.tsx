@@ -10,12 +10,13 @@ import styles from './TransferDetailsEmployeeData.module.css'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useParams } from 'react-router-dom';
 import axiosInstance from '../../config/AxiosConfig';
+import { kMaxLength } from 'buffer';
 
 
 
 
 
-const TransferDetailsEmployeeData = () => {
+const TransferDetailsEmployeeData = ({setCurrentDuNumber}:{setCurrentDuNumber: React.Dispatch<React.SetStateAction<number>>}) => {
   "Displays the Employee details such as employee name,designation,email id ,current and traget du in the pending approvals page"
 
 
@@ -27,10 +28,10 @@ const TransferDetailsEmployeeData = () => {
       const fetchData = async () => {
         try {
           const res = await axiosInstance.get(`http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/?transfer_id=${id}`);
-          console.log('Response from API:', res.data);
-                   
+          console.log('Response from API to find employee du:', res.data);         
           setUserData(prev => res.data.data);
-          console.log(userData)
+          setCurrentDuNumber(res.data.data.currentdu.id);
+          
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -51,7 +52,6 @@ const TransferDetailsEmployeeData = () => {
             <h4  className= {`${styles.Employee_name}`}>{userData?userData.employee.name:""}</h4>
                 <h4>{userData?userData.employee.designation:""}</h4>
                 <p>{userData?userData.employee.mail_id:""}</p>
-        
         </div>
     </div>
 

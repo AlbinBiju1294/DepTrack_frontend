@@ -29,19 +29,21 @@
   .modalContentContainer {
     display: flex;
     flex-direction: column;
-    height: 8rem;
+    /* height: 8rem; */
     justify-content: space-around;
   }
  
   .transferDateDiv {
     display: flex;
     justify-content: space-around;
+    padding: 10px;
   }
   .transferDateDiv .transferDateLabel {
     color: var(--secondary-color);
     font-family: var(--font-family);
     font-weight: 500;
     font-size: 0.8rem;
+    min-width: 13rem;
   }
 
   .transferDateDiv .transferDateInput, .input_drop_control {
@@ -51,6 +53,7 @@
     border-radius: 0.3rem;
     color: gray;
     padding-top: 0px;
+    padding-left: 8px
   }
 
   .customTitle {

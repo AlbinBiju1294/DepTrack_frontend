@@ -1,6 +1,6 @@
 import React, { useState, createContext, ReactNode } from "react";
 
-type User = {
+export type User = {
   id: number;
   username: string;
   role: number;
@@ -8,7 +8,7 @@ type User = {
   du_id: number;
 };
 
-type UserContextType = {
+export type UserContextType = {
   user: User | null;
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
 };

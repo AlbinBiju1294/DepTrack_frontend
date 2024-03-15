@@ -7,6 +7,27 @@ import { Button, Checkbox } from "@mui/material";
 import { Employee, InitiateTransferFormPropsType } from "./types";
 import Select from "react-select";
 
+export const getCurrentDate = () => {
+  const today = new Date();
+  let day = today.getDate();
+  console.log(day)
+  let month = today.getMonth() + 1;
+  const year = today.getFullYear();
+  let newday;
+  let newmonth;
+
+  if (day < 10) {
+    newday = '0' + day.toString();
+  }
+  else{
+    newday = day.toString();
+  }
+  if (month < 10) {
+    newmonth = '0' + month.toString();
+  }
+  return `${year}-${newmonth}-${newday}`;
+}
+
 //component for displaying the form for employee transfer initiation
 const InitiateTransferForm = ({
   employeeData,
@@ -24,30 +45,7 @@ const InitiateTransferForm = ({
   handleCheckboxChange,
 }: InitiateTransferFormPropsType) => {
 
-  function getCurrentDate() {
-    const today = new Date();
-    let day = today.getDate();
-    console.log(day)
-    let month = today.getMonth() + 1;
-    const year = today.getFullYear();
-    let newday;
-    let newmonth;
-  
-    if (day < 10) {
-      newday = '0' + day.toString();
-    }
-    else{
-      newday = day.toString();
-    }
-    if (month < 10) {
-      newmonth = '0' + month.toString();
-    }
-
-    return `${year}-${newmonth}-${newday}`;
-  }
-
-  let currentDate = getCurrentDate()
-  console.log(currentDate)
+  let currentDate = getCurrentDate();
 
   return (
     <>

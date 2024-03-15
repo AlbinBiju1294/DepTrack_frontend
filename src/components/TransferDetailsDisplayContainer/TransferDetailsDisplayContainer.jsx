@@ -9,13 +9,14 @@ import TransferDetailsDisplayHandler from '../TransferDetailsDisplay/TransferDet
 const TransferDetailsDisplayContainer = () => {
 
   const[ transferDate, setTransferDate] = useState("");
+  const[currentDuNumber, setCurrentDuNumber] = useState(0);
 
 
   return (
     <div className={styles.inner_container}>
-        <TransferDetailsEmployeeData/>
-        <TransferDetailsDisplayHandler setTransferDate={setTransferDate}/>
-        <TransferButtonComponentHandler transferDate={transferDate}/>
+        <TransferDetailsEmployeeData setCurrentDuNumber={setCurrentDuNumber}/>
+        <TransferDetailsDisplayHandler setTransferDate={setTransferDate} />
+        <TransferButtonComponentHandler transferDate={transferDate} currentDuNumber={currentDuNumber}/>
     </div>
   )
 }
