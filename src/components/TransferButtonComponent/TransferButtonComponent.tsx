@@ -2,6 +2,7 @@ import { Button, Modal, Input } from 'antd';
 import Dropdown from "react-dropdown";
 import styles from './TransferButtonComponent.module.css';
 import { TransferButtonComponentPropsType } from './types';
+import { getCurrentDate } from '../InitiateTransferForm/InitiateTransferForm';
 
 const TransferButtonComponent = ({
   contextHolder, 
@@ -13,6 +14,7 @@ const TransferButtonComponent = ({
   pmOptions,
   handleSelectPm,
   transferDate,
+  currentDuNumber,
   openReject,
   handleOpenReject,
   handleCloseReject,
@@ -20,10 +22,12 @@ const TransferButtonComponent = ({
   handleRejectConfirm,
   success,
   reason,
-  handleReasonChange
+  handleReasonChange,
+  user
   }: TransferButtonComponentPropsType) => {
 
     const { TextArea } = Input;
+    const currentDate = getCurrentDate();
     
   return (
     <>
@@ -49,31 +53,34 @@ const TransferButtonComponent = ({
       >
         <div className={styles.modalContentContainer}>
           <div className={styles.transferDateDiv}>
-              <label className={styles.transferDateLabel}>Select Acceptance Date : </label>
+              <label className={styles.transferDateLabel}>Select Effective Transfer Date : </label>
               <input
                 type="date"
                 name="transfer_date"
                 defaultValue={transferDate}
-                min={transferDate}
+                min={currentDate}
                 onChange={(e) => {
                   handleDateChange(e);
                 }}
                 className={styles.transferDateInput}
               />
           </div>
-          <div className={styles.transferDateDiv}>
-              <label className={styles.transferDateLabel}>Select Project Manager :</label>
-              <Dropdown
-                options={pmOptions}
-                value="Select a project manager"
-                className={styles.pmSelectDropdown}
-                controlClassName={styles.input_drop_control}
-                onChange={(selectedOption) =>
-                  handleSelectPm(selectedOption)
-                }
-                placeholder="Select an option"
-              />
-          </div>
+          {(user?.role == 1 && user?.du_id != currentDuNumber)
+            ? <div className={styles.transferDateDiv}>
+                <label className={styles.transferDateLabel}>Select Project Manager :</label>
+                <Dropdown
+                  options={pmOptions}
+                  value="Select a project manager"
+                  className={styles.pmSelectDropdown}
+                  controlClassName={styles.input_drop_control}
+                  onChange={(selectedOption) =>
+                    handleSelectPm(selectedOption)
+                  }
+                  placeholder="Select an option"
+                />
+              </div>
+            : ''
+          }
         </div>
       </Modal>
 

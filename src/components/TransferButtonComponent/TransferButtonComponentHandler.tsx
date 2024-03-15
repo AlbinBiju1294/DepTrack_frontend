@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { useNavigate, useParams } from "react-router-dom";
 import { message } from "antd";
 import { Option } from "react-dropdown";
@@ -7,10 +7,10 @@ import { postApprovalData } from './api/postApprovalData';
 import TransferButtonComponent from './TransferButtonComponent';
 import { fetchPmData } from './api/fetchPmData';
 import { patchRejectData } from './api/patchRejectData';
-import axiosInstance from "../../config/AxiosConfig";
+import UserContext from '../Contexts/UserContextProvider';
 
 
-const TransferButtonComponentHandler = ({transferDate}: {transferDate: string}) => {
+const TransferButtonComponentHandler = ({transferDate, currentDuNumber}: {transferDate: string, currentDuNumber: number}) => {
 
 const navigate = useNavigate();
 const [open, setOpen] = useState(false);
@@ -18,6 +18,7 @@ const [pmData, setPmData] = useState<pmDataType[]>([])
 const [datePmPostData, setDatePmPostData] = useState<datePmPostDataType>({});
 const [messageApi, contextHolder] = message.useMessage();
 const {id='0'} = useParams();
+const {user} = useContext(UserContext);
 
 //variables for reject modal
 const [openReject, setOpenReject] = useState(false);
@@ -122,6 +123,7 @@ const success = () => {
       pmOptions={pmOptions}
       handleSelectPm={handleSelectPm}
       transferDate={transferDate}
+      currentDuNumber={currentDuNumber}
       openReject={openReject}
       handleOpenReject={handleOpenReject}
       handleCloseReject={handleCloseReject}
@@ -130,6 +132,7 @@ const success = () => {
       success={success}
       reason={reason}
       handleReasonChange={handleReasonChange}
+      user={user}
       ></TransferButtonComponent>
     </div>
   )
