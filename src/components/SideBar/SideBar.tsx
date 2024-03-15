@@ -11,16 +11,18 @@ import UserContext from "../Contexts/UserContextProvider";
 import sideBarContext from "../Contexts/SideBarContextProvider";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const SideBar = () => {
   const { user, setUser } = useContext(UserContext);
   const { activeDiv, setActiveDiv } = useContext(sideBarContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     // Update activePage based on the current pathname
-    setActivePage(window.location.pathname);
-  }, []);
+    setActivePage(location.pathname);
+  }, [location]);
 
   const setActivePage = (location: string) => {
     if (location === "/dashboard") {
@@ -33,7 +35,7 @@ const SideBar = () => {
       setActiveDiv(4);
     } else if (location === "/transferhistory") {
       setActiveDiv(5);
-    } else if (location === "/managedu") {
+    } else if (location === "/admin") {
       setActiveDiv(7);
     }
   };
@@ -51,7 +53,7 @@ const SideBar = () => {
     } else if (divId === 5) {
       navigate("/transferhistory");
     }  else if (divId === 7) {
-      navigate("/managedu");
+      navigate("/admin");
     }
   };
 
@@ -98,7 +100,7 @@ const SideBar = () => {
               : `${styles.sidebar_item}`
           }`}
         >
-          Manage DU
+          Admin
         </h6>
       </div>
       <div
@@ -121,7 +123,7 @@ const SideBar = () => {
               : `${styles.sidebar_item}`
           }`}
         >
-          Initiate transfer
+          Initiate Transfer
         </h6>
       </div>
       <div
@@ -142,7 +144,7 @@ const SideBar = () => {
               : `${styles.sidebar_item}`
           }`}
         >
-          Track requests
+          Track Requests
         </h6>
       </div>
       <div
@@ -165,7 +167,7 @@ const SideBar = () => {
               : `${styles.sidebar_item}`
           }`}
         >
-          Pending approvals
+          Pending Approvals
         </h6>
       </div>
       <div

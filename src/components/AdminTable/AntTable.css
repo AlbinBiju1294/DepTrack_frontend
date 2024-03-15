@@ -1,0 +1,14 @@
+.ant-table-row {
+  font-size: 11px;
+  height: 10px;
+}
+
+.ant-table-thead {
+  font-size: 11px;
+  height: 20px;
+}
+
+.ant-table-cell {
+  padding-top: 13px !important;
+  padding-bottom: 13px !important;
+}

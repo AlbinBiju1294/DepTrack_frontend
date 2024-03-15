@@ -2,6 +2,7 @@ import React, { useState, createContext, ReactNode } from "react";
 
 export type User = {
   id: number;
+  employee_id: number;
   username: string;
   role: number;
   email?: string;

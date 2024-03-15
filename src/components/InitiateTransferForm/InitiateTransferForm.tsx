@@ -162,9 +162,6 @@ const InitiateTransferForm = ({
                     fontSize: 10,
                   }),
                 }}
-                // components={{
-                //   DropdownIndicator: () => <span>&#9660;</span>, // Unicode for down arrow
-                // }}
               />
             </div>
           </div>
@@ -252,7 +249,7 @@ const InitiateTransferForm = ({
               />
             </div>
             <div className={styles.single_transfer_detail}>
-              <label className={styles.form_label}>Skills:</label>
+              <label className={styles.form_label}>Skills:*</label>
               <textarea
                 name="employee_skills"
                 onChange={(e) => {
@@ -265,7 +262,7 @@ const InitiateTransferForm = ({
           <div className={styles.form_row}>
             <div className={styles.single_transfer_detail}>
               <label className={styles.form_label}>
-                Upskilling Suggestions:
+                Upskilling Suggestions:*
               </label>
               <textarea
                 name="upskilling_suggestions"
@@ -276,7 +273,7 @@ const InitiateTransferForm = ({
               />
             </div>
             <div className={styles.single_transfer_detail}>
-              <label className={styles.form_label}>Areas of Strengths:</label>
+              <label className={styles.form_label}>Areas of Strengths:*</label>
               <textarea
                 name="strengths"
                 onChange={(e) => {
@@ -288,7 +285,7 @@ const InitiateTransferForm = ({
           </div>
           <div className={styles.form_row}>
             <div className={styles.single_transfer_detail}>
-              <label className={styles.form_label}>Reason for Release:</label>
+              <label className={styles.form_label}>Reason for Release:*</label>
               <textarea
                 name="releaseReason"
                 onChange={(e) => {
@@ -306,15 +303,6 @@ const InitiateTransferForm = ({
           </div>
         </div>
         <div className={styles.submit_area}>
-          <div>
-            <Checkbox
-              checked={isChecked}
-              onChange={handleCheckboxChange}
-              inputProps={{ "aria-label": "controlled" }}
-              size="small"
-            />
-            <label htmlFor="checkbox">Is Project Access Revoked</label>
-          </div>
           <Button
             variant="outlined"
             color="error"
