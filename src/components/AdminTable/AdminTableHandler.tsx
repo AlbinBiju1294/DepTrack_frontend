@@ -9,11 +9,10 @@ import AdminTable from "./AdminTable";
 const AdminTableHandler = () => {
   const [adminDataSource, setAdminData] = useState<adminDataSourceType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(8); // Number of items per page
+  const [pageSize, setPageSize] = useState(10); // Number of items per page
   const [open, setOpen] = useState(false);
   const totalItems = adminDataSource.length;
-  const pageSizeOptions = ["1", "5", "8", "10", "20", "50"];
-
+  const pageSizeOptions = ["10", "20", "30", "40", "50"];
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = Math.min(startIndex + pageSize, totalItems);
   const currentItems = adminDataSource.slice(startIndex, endIndex);
