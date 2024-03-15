@@ -7,6 +7,8 @@ export const fetchTransferData = async (id:string|undefined,setFormData:React.Di
         const res = await axiosInstance.get(`http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/?transfer_id=${id}`);
         console.log('Response from API:', res.data);
         setFormData(res.data.data);
+        
+
         setTransferDate(res.data.data?.transfer_date ?? '')
         
       } catch (error) {
