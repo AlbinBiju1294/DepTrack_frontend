@@ -19,11 +19,11 @@ const FilterComponent = () => {
   const [pagination, setPagination] = useState<paginationtype>({
     current: 1,
     total: 0,
-    pageSize: 2,
+    pageSize: 6,
   });
 
   const emptyForm = { limit: pagination.pageSize, offset: 0 };
-  const pageSizeOptions = ["1", "2", "8", "10", "20", "50"];
+  const pageSizeOptions = ["5", "6", "8", "10", "20", "50"];
 
   const statusRef = useRef<ReactDropdown>(null);
   const fromRef = useRef<ReactDropdown>(null);
