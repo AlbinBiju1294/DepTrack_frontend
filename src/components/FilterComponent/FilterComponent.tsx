@@ -10,6 +10,7 @@ import ReactDropdown from "react-dropdown";
 import { Table, Pagination } from "antd";
 import type { TableColumnsType } from "antd";
 import { Tag } from "antd";
+import moment from "moment";
 
 const FilterComponent = () => {
   const status = ["Completed", "Cancelled", "Rejected"];
@@ -201,6 +202,7 @@ const FilterComponent = () => {
     {
       title: "Transfer Date",
       dataIndex: "transfer_date",
+      render: (date) => moment(date).format("DD-MM-YYYY"),
     },
   ];
 
