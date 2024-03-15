@@ -10,6 +10,9 @@ import ReactDropdown from "react-dropdown";
 import { Table, Pagination } from "antd";
 import type { TableColumnsType } from "antd";
 import { Tag } from "antd";
+import * as XLSX from "xlsx";
+
+
 
 const FilterComponent = () => {
   const status = ["Completed", "Cancelled", "Rejected"];
@@ -164,6 +167,7 @@ const FilterComponent = () => {
       console.error("Error:", error);
     }
   };
+  
 
   const columns: TableColumnsType<dataSourceType> = [
     {
@@ -202,8 +206,71 @@ const FilterComponent = () => {
       title: "Transfer Date",
       dataIndex: "transfer_date",
     },
-  ];
+  ]
 
+
+
+  //Excel Export: to Export the transfer history to excel
+    const fetchData = async () => {
+      try {        
+        const qparam =
+         {
+              ...formData,
+              
+            }
+          
+        const res = await axiosInstance.get(
+          "/api/v1/transfer/filter-transfers/",
+          {
+            params: qparam,
+          }
+        );
+        console.log('Response from API:', res.data);
+ 
+  
+    const rows = res.data.data.results.map((transfer: dataSourceType) => ({
+
+      id: transfer.id,
+      name: transfer.employee?.name,
+      employee_number: transfer.employee?.employee_number,
+      currentdu:transfer.currentdu?.du_name,
+      targetdu:transfer.targetdu?.du_name,
+      status:transfer.status,
+      transfer_date:transfer.transfer_date
+    }));
+
+
+    const workbook = XLSX.utils.book_new();
+    const worksheet = XLSX.utils.json_to_sheet(rows);
+
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Transfers");
+
+    XLSX.utils.sheet_add_aoa(worksheet, [
+      ["Transfer ID", "Employee Name", "Employee Number","Transferred From","Transferred To","Status","Transfer Date"],
+    ]);
+
+    
+    const columnWidths = [
+      { wch: 15 },
+      { wch: 20 }, 
+      { wch: 15 }, 
+      { wch: 20 }, 
+      { wch: 20 }, 
+      { wch: 15 }, 
+      { wch: 15 }, 
+    ];
+    worksheet['!cols'] = columnWidths;
+
+
+   
+    XLSX.writeFile(workbook, "TransferHistory.xlsx", { compression: false});
+        
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+  
+  
   return (
     <>
       <div className={styles.filter_container}>
@@ -304,9 +371,6 @@ const FilterComponent = () => {
                 }}
                 type="submit"
                 size="small"
-                sx={{
-                  marginRight: "5px",
-                }}
                 className={styles.button}
               >
                 Search
@@ -326,6 +390,18 @@ const FilterComponent = () => {
                 Clear
               </Button>
             </div>
+                                    
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={fetchData}
+                type="submit"
+                size="small"
+
+                className={styles.button}
+              >
+                EXPORT 
+              </Button>
           </div>
         </div>
       </div>

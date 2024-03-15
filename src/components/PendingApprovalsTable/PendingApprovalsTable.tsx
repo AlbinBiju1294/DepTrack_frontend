@@ -7,6 +7,7 @@ import {dataSourceType } from './types';
 import styles from './PendingApprovalsTable.module.css'
 import { useNavigate } from 'react-router-dom';
 import { Display } from 'react-bootstrap-icons';
+// import moment from moment;
 
 
   //Table to display both internal and external pending approvals of a du
@@ -73,6 +74,13 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
             sorter: (a, b) => a.targetdu.du_name.localeCompare(b.targetdu.du_name),
 
         },
+      //   {
+      //     title: 'Transfer Raised Date',
+      //     dataIndex: ['targetdu', 'du_name'],
+      //     // render:(date)=>moment(date).format("DD-MM-YYYY")
+      //     // sorter: (a, b) => a.targetdu.du_name.localeCompare(b.targetdu.du_name),
+
+      // },
         {
             title: 'View',
             render: ( _,record) => (
@@ -91,7 +99,7 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
         
     
   return (
-    <div style={{display:"flex",flexDirection:"column",justifyContent:"space-between",height:"420px",overflowY:"scroll"}}>
+    <div style={{display:"flex",flexDirection:"column",justifyContent:"space-between",height:"420px"}}>
       <Table className={styles.table} columns={columns}  dataSource={currentItems} pagination={false} />
       <Pagination
           size="small"
