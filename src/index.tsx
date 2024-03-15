@@ -6,6 +6,13 @@ import reportWebVitals from "./reportWebVitals";
 import { UserContextProvider } from "./components/Contexts/UserContextProvider";
 import { SideBarContextProvider } from "./components/Contexts/SideBarContextProvider";
 
+import { PublicClientApplication } from '@azure/msal-browser';
+import { MsalProvider } from '@azure/msal-react';
+import { msalConfig } from './Authentication/authConfig';
+
+const msalInstance = new PublicClientApplication(msalConfig);
+
+
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -13,7 +20,9 @@ root.render(
   <>
     <SideBarContextProvider>
       <UserContextProvider>
+      <MsalProvider instance={msalInstance}>
         <App />
+        </MsalProvider>
       </UserContextProvider>
     </SideBarContextProvider>
   </>

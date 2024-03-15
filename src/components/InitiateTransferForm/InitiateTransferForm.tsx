@@ -7,6 +7,28 @@ import { Button, Checkbox } from "@mui/material";
 import { Employee, InitiateTransferFormPropsType } from "./types";
 import Select from "react-select";
 
+const getCurrentDate = () => {
+  const today = new Date();
+  let day = today.getDate();
+  console.log(day)
+  let month = today.getMonth() + 1;
+  const year = today.getFullYear();
+  let newday;
+  let newmonth;
+
+  if (day < 10) {
+    newday = '0' + day.toString();
+  }
+  else{
+    newday = day.toString();
+  }
+  if (month < 10) {
+    newmonth = '0' + month.toString();
+  }
+
+  return `${year}-${newmonth}-${newday}`;
+}
+
 //component for displaying the form for employee transfer initiation
 const InitiateTransferForm = ({
   employeeData,
@@ -24,30 +46,7 @@ const InitiateTransferForm = ({
   handleCheckboxChange,
 }: InitiateTransferFormPropsType) => {
 
-  function getCurrentDate() {
-    const today = new Date();
-    let day = today.getDate();
-    console.log(day)
-    let month = today.getMonth() + 1;
-    const year = today.getFullYear();
-    let newday;
-    let newmonth;
-  
-    if (day < 10) {
-      newday = '0' + day.toString();
-    }
-    else{
-      newday = day.toString();
-    }
-    if (month < 10) {
-      newmonth = '0' + month.toString();
-    }
-
-    return `${year}-${newmonth}-${newday}`;
-  }
-
-  let currentDate = getCurrentDate()
-  console.log(currentDate)
+let currentDate = getCurrentDate()
 
   return (
     <>
@@ -164,9 +163,6 @@ const InitiateTransferForm = ({
                     fontSize: 10,
                   }),
                 }}
-                // components={{
-                //   DropdownIndicator: () => <span>&#9660;</span>, // Unicode for down arrow
-                // }}
               />
             </div>
           </div>
@@ -254,7 +250,7 @@ const InitiateTransferForm = ({
               />
             </div>
             <div className={styles.single_transfer_detail}>
-              <label className={styles.form_label}>Skills:</label>
+              <label className={styles.form_label}>Skills:*</label>
               <textarea
                 name="employee_skills"
                 onChange={(e) => {
@@ -267,7 +263,7 @@ const InitiateTransferForm = ({
           <div className={styles.form_row}>
             <div className={styles.single_transfer_detail}>
               <label className={styles.form_label}>
-                Upskilling Suggestions:
+                Upskilling Suggestions:*
               </label>
               <textarea
                 name="upskilling_suggestions"
@@ -278,7 +274,7 @@ const InitiateTransferForm = ({
               />
             </div>
             <div className={styles.single_transfer_detail}>
-              <label className={styles.form_label}>Areas of Strengths:</label>
+              <label className={styles.form_label}>Areas of Strengths:*</label>
               <textarea
                 name="strengths"
                 onChange={(e) => {
@@ -290,7 +286,7 @@ const InitiateTransferForm = ({
           </div>
           <div className={styles.form_row}>
             <div className={styles.single_transfer_detail}>
-              <label className={styles.form_label}>Reason for Release:</label>
+              <label className={styles.form_label}>Reason for Release:*</label>
               <textarea
                 name="releaseReason"
                 onChange={(e) => {
@@ -308,15 +304,6 @@ const InitiateTransferForm = ({
           </div>
         </div>
         <div className={styles.submit_area}>
-          <div>
-            <Checkbox
-              checked={isChecked}
-              onChange={handleCheckboxChange}
-              inputProps={{ "aria-label": "controlled" }}
-              size="small"
-            />
-            <label htmlFor="checkbox">Is Project Access Revoked</label>
-          </div>
           <Button
             variant="outlined"
             color="error"
