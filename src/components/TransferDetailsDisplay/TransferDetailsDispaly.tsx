@@ -21,9 +21,10 @@ export default function TransferDetailsDisplay({formData}:TransferDataDisplayPro
               <TransferDetailsDisplayBody name="6.  Reason for Release:"/>
               <TransferDetailsDisplayBody name="7.  Skills:"/>
               <TransferDetailsDisplayBody name="8.  Upskilling Suggestions:"/>
-              <TransferDetailsDisplayBody name="19. Strength:"/>
+              <TransferDetailsDisplayBody name="9. Strength:"/>
               <TransferDetailsDisplayBody name="10. Transfer Date:"/>
-              <TransferDetailsDisplayBody name="11. Initiated by:"/>
+              {/* <TransferDetailsDisplayBody name="11. Transfer Raised on:"/> */}
+              <TransferDetailsDisplayBody name="12. Initiated by:"/>
           </div>
           </div>
 
