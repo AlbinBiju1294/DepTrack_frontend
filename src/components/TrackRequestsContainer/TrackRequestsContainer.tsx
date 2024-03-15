@@ -119,6 +119,7 @@ const TrackRequestsContainer = () => {
       dataIndex: ["employee", "employee_number"],
       key: "employee_number",
       sorter: (a, b) => a.employee.employee_number.localeCompare(b.employee.employee_number),
+      width:'160px'
     },
     {
       title: "Employee Name",
@@ -127,19 +128,13 @@ const TrackRequestsContainer = () => {
       sorter: (a, b) => a.employee.name.localeCompare(b.employee.name),
     },
     {
-      title: "Initiated from",
-      dataIndex: ["currentdu", "du_name"],
-      key: "initiated_from",
-      sorter: (a, b) => a.currentdu.du_name.localeCompare(b.currentdu.du_name),
-    },
-    {
-      title: "Initiated to",
+      title: "Initiated To",
       dataIndex: ["targetdu", "du_name"],
       key: "initiated_to",
       sorter: (a, b) => a.targetdu.du_name.localeCompare(b.targetdu.du_name),
     },
     {
-      title: "Initiated by",
+      title: "Initiated By",
       dataIndex: ["initiated_by", "name"],
       key: "initiated_by",
       sorter: (a, b) => a.initiated_by.name.localeCompare(b.initiated_by.name),
@@ -176,7 +171,7 @@ const TrackRequestsContainer = () => {
     <>
       {contextHolder}
       <div className={styles.inner_container}>
-        <Table columns={columns} dataSource={currentItems} pagination={false} />
+        <Table columns={columns} dataSource={currentItems} pagination={false} scroll={{y:500}} />
         <Pagination
           size="small"
           showSizeChanger

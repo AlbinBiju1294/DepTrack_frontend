@@ -8,7 +8,7 @@ import IconButton from "@mui/joy/IconButton";
 import BadgeRoundedIcon from "@mui/icons-material/BadgeRounded";
 import useLoginHandler from "./LoginHandler";
 import { Stack, formLabelClasses } from "@mui/joy";
-// import MicrosoftIcon from "../../../components/MicrosoftIcon/MicrosoftIcon";
+import MicrosoftIcon from "../../components/MicrosoftIcon/MicrosoftIcon";
 
 export default function LoginPage() {
   const { handleLogin, loading } = useLoginHandler(() =>
@@ -99,7 +99,7 @@ export default function LoginPage() {
                 variant="soft"
                 color="neutral"
                 fullWidth
-                // startDecorator={<MicrosoftIcon />}
+                startDecorator={<MicrosoftIcon />}
                 onClick={() => handleLogin("popup")}
                 disabled={loading}
               >

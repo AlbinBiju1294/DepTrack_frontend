@@ -19,11 +19,11 @@ const FilterComponent = () => {
   const [pagination, setPagination] = useState<paginationtype>({
     current: 1,
     total: 0,
-    pageSize: 6,
+    pageSize: 10,
   });
 
   const emptyForm = { limit: pagination.pageSize, offset: 0 };
-  const pageSizeOptions = ["5", "6", "8", "10", "20", "50"];
+  const pageSizeOptions = ["10", "20", "30", "40", "50"];
 
   const statusRef = useRef<ReactDropdown>(null);
   const fromRef = useRef<ReactDropdown>(null);
@@ -336,6 +336,8 @@ const FilterComponent = () => {
           rowKey={(record) => record.id.toString()}
           dataSource={dataSource}
           pagination={false}
+          scroll={{y:300}}
+          
         />
         <Pagination
           size="small"
