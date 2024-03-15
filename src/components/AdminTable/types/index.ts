@@ -15,6 +15,13 @@ export type adminDataSourceType = {
 export type AdminTableSetDataType = (dataSource: adminDataSourceType[]) => void;
 
 export type AdminTablePropsType = {
-  adminDataSource: adminDataSourceType[] | undefined;
+  adminDataSource: adminDataSourceType[];
   columns: TableColumnsType<adminDataSourceType>;
+  current: number;
+  open:boolean;
+  pageSize: number;
+  total: number | undefined;
+  onShowSizeChange: (current: number, size: number) => void;
+  onChange: (page: number) => void;
+  pageSizeOptions: string[];
 };

@@ -116,7 +116,7 @@ function App() {
           }
         />
         <Route
-          path="/managedu"
+          path="/admin"
           element={
             user?(
             <>

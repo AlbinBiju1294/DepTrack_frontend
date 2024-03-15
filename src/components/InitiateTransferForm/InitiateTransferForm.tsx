@@ -7,7 +7,7 @@ import { Button, Checkbox } from "@mui/material";
 import { Employee, InitiateTransferFormPropsType } from "./types";
 import Select from "react-select";
 
-const getCurrentDate = () => {
+export const getCurrentDate = () => {
   const today = new Date();
   let day = today.getDate();
   console.log(day)
@@ -25,7 +25,6 @@ const getCurrentDate = () => {
   if (month < 10) {
     newmonth = '0' + month.toString();
   }
-
   return `${year}-${newmonth}-${newday}`;
 }
 
@@ -46,7 +45,7 @@ const InitiateTransferForm = ({
   handleCheckboxChange,
 }: InitiateTransferFormPropsType) => {
 
-let currentDate = getCurrentDate()
+  let currentDate = getCurrentDate();
 
   return (
     <>
