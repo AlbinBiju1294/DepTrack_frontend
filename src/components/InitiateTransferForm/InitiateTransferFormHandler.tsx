@@ -27,22 +27,23 @@ const InitiateTransferFormHandler = () => {
   const { user } = useContext(UserContext);
 
   const [formData, setFormData] = useState<FormDataType>({});
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
   const [messageApi, contextHolder] = message.useMessage();
 
   const navigate = useNavigate();
 
   //for setting options for du dropdown
-  const options = duData.map((du) => {
-    return {value:du, label:du.du_name};
-  });
+  const options = duData
+  .filter(du => du.id !== user?.du_id)
+  .map(du => ({ value: du, label: du.du_name }));
+
 
   const bandData = bands.map((band) => {
     return {value:band, label:band};
   });
 
   useEffect(() => {
-    fetchEmployeeData(searchKeyword, setEmployeeData);
+    fetchEmployeeData(searchKeyword, setEmployeeData, user?.employee_id);
   }, [searchKeyword]);
 
   useEffect(() => {
@@ -128,16 +129,6 @@ const InitiateTransferFormHandler = () => {
       employee_band: selectedOption, // Assuming selectedOption.value is the band value
     });
   };
-
-  // const handleDuDropdownChange = (selectedOption: Option) => {
-  //   const newDuData = duData.filter((du) => {
-  //     return du.du_name === selectedOption.value;
-  //   });
-  //   setFormData({
-  //     ...formData,
-  //     targetdu_id: newDuData[0].id,
-  //   });
-  // };
 
   const handleDuDropdownChange = (selectedOption: Du | undefined ) => {
     setFormData({

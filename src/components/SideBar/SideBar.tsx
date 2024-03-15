@@ -55,7 +55,7 @@ const SideBar = () => {
     } else if (divId === 6) {
       localStorage.clear();
       setUser(null);
-      navigate("/login");
+      navigate("/");
     } else if (divId === 7) {
       navigate("/admin");
     }
