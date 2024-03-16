@@ -5,6 +5,24 @@
   height: 21px;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: #4154f1;
+  opacity: 50%;
+  width: 100px;
+  height: 30px;
+  margin-top: 0.06rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.uploadfile_whole {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 0.5rem;
 }
 
 .pagination {
