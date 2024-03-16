@@ -35,7 +35,7 @@ const TrackRequestsContainer = () => {
     TransferDetailsType[]
   >([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize,setPageSize] = useState(8); // Number of items per page
+  const [pageSize,setPageSize] = useState(10); // Number of items per page
   const totalItems = initiatedTransfers.length;
   const { user } = useContext(UserContext);
   const [open, setOpen] = useState(false);
@@ -45,7 +45,7 @@ const TrackRequestsContainer = () => {
 
   const [messageApi, contextHolder] = message.useMessage();
 
-  const pageSizeOptions = [ '1', '5', '8', '10', '20', '50'];
+  const pageSizeOptions = [ '10', '20', '30', '40', '50'];
 
   const navigate = useNavigate();
 
@@ -153,20 +153,35 @@ const TrackRequestsContainer = () => {
         return <Tag color={color}>{status}</Tag>;
       },
     },
-    {
-      render: (_, record) => (
-        <button className={styles.button}
-         onClick={() => {
-          setOpen(true);
-          setSelectedTransfer(record);
-          console.log(record.id);
-          console.log(record);
-        }}>
-          Cancel
-        </button>
-      ),
-    },
+    // {
+    //   render: (_, record) => (
+    //     <button className={styles.button}
+    //      onClick={() => {
+    //       setOpen(true);
+    //       setSelectedTransfer(record);
+    //       console.log(record.id);
+    //       console.log(record);
+    //     }}>
+    //       Cancel
+    //     </button>
+    //   ),
+    // },
   ];
+  if (user?.role === 1) {
+    columns.push({
+        render: (_, record) => (
+            <button className={styles.button}
+                onClick={() => {
+                    setOpen(true);
+                    setSelectedTransfer(record);
+                    console.log(record.id);
+                    console.log(record);
+                }}>
+                Cancel
+            </button>
+        ),
+    });
+}
   return (
     <>
       {contextHolder}

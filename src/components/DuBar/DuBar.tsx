@@ -75,7 +75,14 @@ const DuBar = () => {
 
   return (
     <div>
-      <p className={styles.bar_graph_heading}>Total Transfers Completed</p>
+      <div className={styles.bar_graph_heading_container}>
+      <p className={styles.bar_graph_heading}>Total Transfers Completed </p>
+      <div className={styles.bar_graph_label}>
+        <div className={styles.square_div}></div>
+        <p>Last 30 days</p>
+      </div>
+      </div>
+      
       <div className={styles.bar_chart}>
       {isLoaded?<BarChart 
         xAxis={[

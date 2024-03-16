@@ -13,7 +13,7 @@ const Navbar = () => {
   const logOutFunction = () => {
       localStorage.clear();
       setUser(null);
-      navigate("/login");
+      navigate("/");
   }
   const items: MenuProps['items'] = [
     {
@@ -32,7 +32,7 @@ const Navbar = () => {
         <PersonCircle/>
         
         <Dropdown menu={{ items }} placement="bottom" trigger={['click']}>
-          <h5 className={styles.navbar_name}>{user ? capitalizeFirstLetter(user.username) : null}</h5>
+          <h5 className={styles.navbar_name}>{user ? capitalizeFirstLetter(user.employee_name) : null}</h5>
         </Dropdown>
     </div>:<></>}
     </nav>

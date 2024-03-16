@@ -6,27 +6,7 @@ import "react-dropdown/style.css";
 import { Button, Checkbox } from "@mui/material";
 import { Employee, InitiateTransferFormPropsType } from "./types";
 import Select from "react-select";
-
-export const getCurrentDate = () => {
-  const today = new Date();
-  let day = today.getDate();
-  console.log(day)
-  let month = today.getMonth() + 1;
-  const year = today.getFullYear();
-  let newday;
-  let newmonth;
-
-  if (day < 10) {
-    newday = '0' + day.toString();
-  }
-  else{
-    newday = day.toString();
-  }
-  if (month < 10) {
-    newmonth = '0' + month.toString();
-  }
-  return `${year}-${newmonth}-${newday}`;
-}
+import { getCurrentDate } from "../../common/getCurrentDate";
 
 //component for displaying the form for employee transfer initiation
 const InitiateTransferForm = ({
@@ -252,6 +232,7 @@ const InitiateTransferForm = ({
               <label className={styles.form_label}>Skills:*</label>
               <textarea
                 name="employee_skills"
+                required
                 onChange={(e) => {
                   handleInputChange(e);
                 }}
@@ -265,6 +246,7 @@ const InitiateTransferForm = ({
                 Upskilling Suggestions:*
               </label>
               <textarea
+                required
                 name="upskilling_suggestions"
                 onChange={(e) => {
                   handleInputChange(e);
@@ -275,6 +257,7 @@ const InitiateTransferForm = ({
             <div className={styles.single_transfer_detail}>
               <label className={styles.form_label}>Areas of Strengths:*</label>
               <textarea
+                required
                 name="strengths"
                 onChange={(e) => {
                   handleInputChange(e);
@@ -287,6 +270,7 @@ const InitiateTransferForm = ({
             <div className={styles.single_transfer_detail}>
               <label className={styles.form_label}>Reason for Release:*</label>
               <textarea
+                required
                 name="releaseReason"
                 onChange={(e) => {
                   handleInputChange(e);

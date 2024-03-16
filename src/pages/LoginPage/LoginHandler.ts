@@ -1,4 +1,4 @@
-import React, { useState,useContext } from "react"; // Import useState
+import React, { useState,useContext } from "react";
 import { useMsal } from "@azure/msal-react";
 import { useNavigate } from "react-router-dom";
 import { loginRequest } from "../../Authentication/authConfig";
@@ -8,14 +8,13 @@ import axios, {AxiosError} from "axios";
 
 const useLoginHandler = (onLoginSuccess: () => void) => {
   const { instance } = useMsal();
-  const [loading, setLoading] = useState(false); // Loading state
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
-  const [graphData,setGraphData] = useState(null)
 
   const { setUser } = useContext(UserContext);
 
   const handleLogin = async (loginType: string) => {
-    setLoading(true); // Enable loading
+    setLoading(true);
     if (loginType === "popup") {
       try {
         const response = await instance.loginPopup(loginRequest);
@@ -43,19 +42,19 @@ const useLoginHandler = (onLoginSuccess: () => void) => {
               config
             );
       
-            console.log(userResponse);
+            console.log('hello',userResponse);
             localStorage.setItem("user", JSON.stringify(userResponse.data.data));
             setUser(userResponse.data.data);
       
             navigate("/dashboard");
           } catch (error) {
             if (axios.isAxiosError(error)) {
+              console.log(error)
               const axiosError = error as AxiosError;
               if (axiosError.response) {
-                // Axios error with response
-                const responseData = axiosError.response.data as { detail: string };
-                if (responseData && responseData.detail) {
-                //   messageApi.error(responseData.detail);
+                const responseData = axiosError.response.data as { error: string };
+                if (responseData && responseData) {
+                alert(responseData.error)
                 }
               } else {
                 // Other Axios errors

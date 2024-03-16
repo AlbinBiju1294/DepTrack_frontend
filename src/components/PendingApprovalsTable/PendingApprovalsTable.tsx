@@ -15,10 +15,10 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
     
   const navigate = useNavigate()
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize,setPageSize] = useState(8);
+  const [pageSize,setPageSize] = useState(10);
   const totalItems = dataSource.length;
   
-  const pageSizeOptions = ['1','5', '8', '10', '20', '50'];
+  const pageSizeOptions = ['10','20', '30', '40', '50'];
 
 
   const handlePageChange = (page: number) => {
@@ -44,7 +44,8 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
         {
             title: 'Employee Number',
             dataIndex: ['employee', 'employee_number'],
-                  sorter: (a, b) => a.employee.employee_number.localeCompare(b.employee.employee_number),
+            sorter: (a, b) => a.employee.employee_number.localeCompare(b.employee.employee_number),
+            width:'150px'
 
         },
 
@@ -100,7 +101,7 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
     
   return (
     <div style={{display:"flex",flexDirection:"column",justifyContent:"space-between",height:"420px"}}>
-      <Table className={styles.table} columns={columns}  dataSource={currentItems} pagination={false} />
+      <Table className={styles.table} columns={columns}  dataSource={currentItems} pagination={false} scroll={{y:450}} />
       <Pagination
           size="small"
           showSizeChanger

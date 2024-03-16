@@ -7,6 +7,7 @@ export type User = {
   role: number;
   email?: string;
   du_id: number;
+  employee_name:string
 };
 
 export type UserContextType = {
