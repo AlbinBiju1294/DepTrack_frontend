@@ -6,7 +6,7 @@ import {TransferDetailsDisplayBodyProps} from './types/index'
 const TransferDetailsDisplayBody = (props:TransferDetailsDisplayBodyProps) => {
   return (
   
-        <div className={`${styles.Form_data}`}>
+      <div className={`${styles.Form_data}`}>
         {props.name} {props.value}
       </div>
       

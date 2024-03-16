@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import styles from "./TrackRequestsContainer.module.css";
-import { Button, Modal, Pagination, Space, Table, Tag, message } from "antd";
+import { Tag, message } from "antd";
 import type { TableProps } from "antd";
 import axiosInstance from "../../config/AxiosConfig";
 import UserContext from "../Contexts/UserContextProvider";
-import { CloseOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
 import './TrackRequests.css'
-import { Employee,TransferDetailsType,DuName } from "./types";
+import { TransferDetailsType } from "./types";
 import TrackRequestsContainer from "./TrackRequestsContainer";
 
 const TrackRequestsContainerHandler = () => {
@@ -27,15 +25,10 @@ const TrackRequestsContainerHandler = () => {
 
   const pageSizeOptions = ['10', '20', '30', '40', '50'];
 
-  const navigate = useNavigate();
-
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  const showModal = () => {
-    setOpen(true);
-  };
   const handleOk = () => {
     setOpen(false);
   };
@@ -46,7 +39,7 @@ const TrackRequestsContainerHandler = () => {
 
   const cancelRequest = async () => {
     try {
-      const res = await axiosInstance.post(`/api/v1/transfer/cancel/`, {
+      await axiosInstance.post(`/api/v1/transfer/cancel/`, {
         transfer_id: selectedTransfer?.id,
       });
       const newInitiatedTransfers = initiatedTransfers.filter(
@@ -64,8 +57,8 @@ const TrackRequestsContainerHandler = () => {
   };
 
   const handlePageSizeChange = (current: number, size: number) => {
-    setCurrentPage(current); // Update current page if needed
-    setPageSize(size); // Update page size
+    setCurrentPage(current);
+    setPageSize(size);
   };
 
   const startIndex = (currentPage - 1) * pageSize;
@@ -87,6 +80,8 @@ const TrackRequestsContainerHandler = () => {
     };
     fetchInitiatedRequests();
   }, []);
+
+  
   const columns: TableProps<TransferDetailsType>["columns"] = [
     {
       title: "Transfer Id",
@@ -123,6 +118,7 @@ const TrackRequestsContainerHandler = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      width:'140px',
       render: (status) => {
         let color = "green"; // Default color
         if (status === "Transfer Initiated") {
@@ -133,19 +129,6 @@ const TrackRequestsContainerHandler = () => {
         return <Tag color={color}>{status}</Tag>;
       },
     },
-    // {
-    //   render: (_, record) => (
-    //     <button className={styles.button}
-    //      onClick={() => {
-    //       setOpen(true);
-    //       setSelectedTransfer(record);
-    //       console.log(record.id);
-    //       console.log(record);
-    //     }}>
-    //       Cancel
-    //     </button>
-    //   ),
-    // },
   ];
   if (user?.role === 1) {
     columns.push({
@@ -163,9 +146,7 @@ const TrackRequestsContainerHandler = () => {
     });
 }
   return (
-    <div>
         <TrackRequestsContainer contextHolder={contextHolder} columns={columns} currentItems={currentItems} currentPage={currentPage} pageSize={pageSize} totalItems={totalItems} handlePageSizeChange={handlePageSizeChange} handlePageChange={handlePageChange} pageSizeOptions={pageSizeOptions} open={open} handleOk={handleOk} handleCancel={handleCancel} selectedTransfer={selectedTransfer} cancelRequest={cancelRequest}/>
-    </div>
   )
 }
 

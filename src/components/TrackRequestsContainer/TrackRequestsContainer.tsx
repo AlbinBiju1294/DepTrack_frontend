@@ -1,11 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
 import styles from "./TrackRequestsContainer.module.css";
-import { Button, Modal, Pagination, Space, Table, Tag, message } from "antd";
-import type { TableProps } from "antd";
-import axiosInstance from "../../config/AxiosConfig";
-import UserContext from "../Contexts/UserContextProvider";
-import { CloseOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { Modal, Pagination, Table } from "antd";
 import './TrackRequests.css'
 import { TrackRequestsContainerPropsType } from "./types";
 
@@ -29,7 +23,7 @@ const TrackRequestsContainer = ({
     <>
       {contextHolder}
       <div className={styles.inner_container}>
-        <Table columns={columns} dataSource={currentItems} pagination={false} scroll={{y:500}} />
+        <Table columns={columns} dataSource={currentItems} pagination={false} scroll={{y:380}} />
         <Pagination
           size="small"
           showSizeChanger
