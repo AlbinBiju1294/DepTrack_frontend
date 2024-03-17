@@ -9,6 +9,7 @@ const TransferButtonComponent = ({
   showModal, 
   open,
   handleOk,
+  confirmLoading,
   handleCloseApproval,
   handleDateChange,
   pmOptions,
@@ -45,6 +46,7 @@ const TransferButtonComponent = ({
         centered
         onOk={handleOk}
         onCancel={handleCloseApproval}
+        confirmLoading={confirmLoading}
         footer={[
           <Button  className={styles.approveSuccessButton} key="submit" type="primary" size='small' onClick={handleOk}>
             Submit
@@ -65,8 +67,8 @@ const TransferButtonComponent = ({
                 className={styles.transferDateInput}
               />
           </div>
-          {(user?.role == 1 && user?.du_id != currentDuNumber)
-            ? <div className={styles.transferDateDiv}>
+          {(user?.role == 1 && user?.du_id !== currentDuNumber)
+            ? <div className={styles.transferDateDiv} >
                 <label className={styles.transferDateLabel}>Select Project Manager :</label>
                 <Dropdown
                   options={pmOptions}

@@ -30,6 +30,7 @@ const TransferDetailsEmployeeData = ({setCurrentDuNumber}:{setCurrentDuNumber: R
           const res = await axiosInstance.get(`http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/?transfer_id=${id}`);
           console.log('Response from API to find employee du:', res.data);         
           setUserData(prev => res.data.data);
+          console.log("emp du from emp data",res.data.data.currentdu.id);
           setCurrentDuNumber(res.data.data.currentdu.id);
           
         } catch (error) {
