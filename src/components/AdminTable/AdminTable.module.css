@@ -5,6 +5,24 @@
   height: 21px;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: #4154f1;
+  opacity: 50%;
+  width: 100px;
+  height: 30px;
+  margin-top: 0.06rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.uploadfile_whole {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 0.5rem;
 }
 
 .pagination {
@@ -49,4 +67,37 @@
   border: 1px solid green;
   color: green;
   border-radius: 3px;
+}
+
+.Approve {
+  background-color: #5cb85c !important;
+  width: 55px;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px !important;
+  color: white;
+}
+
+.formGroup {
+  margin-bottom: 2px;
+}
+
+.label {
+  margin-bottom: 5px;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.dropdown {
+  width: 100%;
+}
+
+.dropdownControl {
+  width: 100%;
 }
