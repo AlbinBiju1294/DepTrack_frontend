@@ -22,7 +22,7 @@ export type TransferButtonComponentPropsType = {
   showModal: () => void;
   open: boolean;
   handleOk: (e: React.MouseEvent<HTMLElement>) => Promise<void>;
-  confirmLoading: boolean;
+  loading: boolean;
   handleCloseApproval: () => void;
   handleDateChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   pmOptions: string[];

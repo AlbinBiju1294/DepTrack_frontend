@@ -24,7 +24,8 @@ const {user} = useContext(UserContext);
 //variables for reject modal
 const [openReject, setOpenReject] = useState(false);
 const [reason, setReason] = useState<string>('');
-const [confirmLoading, setConfirmLoading] = useState(false);
+const [loading, setLoading] = useState(false);
+
 
 
 const showModal = () => {
@@ -33,20 +34,17 @@ const showModal = () => {
 };
 const handleCloseApproval= () => {
   setOpen(false);
+  setLoading(false);
 };
 
 const handleOk = async (e: React.MouseEvent<HTMLElement>) => {
   e.preventDefault();
+  setLoading(true); 
   try {
     const response = await postApprovalData(datePmPostData, user?.role === 1 && user?.du_id !== currentDuNumber
       ? DuApproval.targetDu
       : DuApproval.currentDu
     );
-    setConfirmLoading(true);
-    setTimeout(() => {
-      setOpen(false);
-      setConfirmLoading(false);
-    }, 2000);
     if (response?.status) {
       await messageApi.success(response.message, 2);
       navigate('/pendingapprovals')
@@ -129,7 +127,7 @@ const success = () => {
       showModal={showModal}
       open={open}
       handleOk={handleOk}
-      confirmLoading={confirmLoading}
+      loading={loading}
       handleCloseApproval={handleCloseApproval}
       handleDateChange={handleDateChange}
       pmOptions={pmOptions}
