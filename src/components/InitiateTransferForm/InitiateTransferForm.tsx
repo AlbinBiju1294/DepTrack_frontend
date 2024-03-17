@@ -6,7 +6,7 @@ import "react-dropdown/style.css";
 import { Button, Checkbox } from "@mui/material";
 import { Employee, InitiateTransferFormPropsType } from "./types";
 import Select from "react-select";
-import { getCurrentDate } from "../../common/getCurrentDate";
+import { getCurrentDate } from "../../utils/getCurrentDate";
 
 //component for displaying the form for employee transfer initiation
 const InitiateTransferForm = ({

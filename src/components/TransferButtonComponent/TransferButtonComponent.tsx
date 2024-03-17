@@ -2,7 +2,7 @@ import { Button, Modal, Input } from 'antd';
 import Dropdown from "react-dropdown";
 import styles from './TransferButtonComponent.module.css';
 import { TransferButtonComponentPropsType } from './types';
-import { getCurrentDate } from '../../common/getCurrentDate';
+import { getCurrentDate } from '../../utils/getCurrentDate';
 
 const TransferButtonComponent = ({
   contextHolder, 

@@ -9,6 +9,7 @@ import BadgeRoundedIcon from "@mui/icons-material/BadgeRounded";
 import useLoginHandler from "./LoginHandler";
 import { Stack, formLabelClasses } from "@mui/joy";
 import MicrosoftIcon from "../../components/MicrosoftIcon/MicrosoftIcon";
+import Loader from "./Loader";
 
 export default function LoginPage() {
   const { handleLogin, loading } = useLoginHandler(() =>
@@ -95,6 +96,7 @@ export default function LoginPage() {
               <Stack gap={1}>
                 <Typography level="h3">Sign in</Typography>
               </Stack>
+              {loading && <Loader />} {/* Loader displayed here */}
               <Button
                 variant="soft"
                 color="neutral"
