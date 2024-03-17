@@ -77,7 +77,7 @@ const AddEmployeeContainer: React.FC = () => {
           <p className="ant-upload-drag-icon">
             <InboxOutlined />
           </p>
-          <p className="ant-upload-text">Click here to upload a csv file</p>
+          <p className="ant-upload-text">Click here to upload a excel file</p>
           <p className="ant-upload-hint">Support for a single file only.</p>
         </Dragger>
       </div>
