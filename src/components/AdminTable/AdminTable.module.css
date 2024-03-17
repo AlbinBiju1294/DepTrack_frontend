@@ -68,3 +68,36 @@
   color: green;
   border-radius: 3px;
 }
+
+.Approve {
+  background-color: #5cb85c !important;
+  width: 55px;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px !important;
+  color: white;
+}
+
+.formGroup {
+  margin-bottom: 2px;
+}
+
+.label {
+  margin-bottom: 5px;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.dropdown {
+  width: 100%;
+}
+
+.dropdownControl {
+  width: 100%;
+}
