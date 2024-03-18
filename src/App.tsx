@@ -4,7 +4,6 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  useNavigate,
   Navigate,
 } from "react-router-dom";
 import Login from "./pages/Login/Login";
@@ -29,8 +28,6 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="" element={<LoginPage />} />
-        {/* <Route path="/dashboard" element={user?<> <Navbar></Navbar>
-      <SideBar></SideBar><Dashboard /></>:navigate('/login')} /> */}
         <Route
           path="/dashboard"
           element={

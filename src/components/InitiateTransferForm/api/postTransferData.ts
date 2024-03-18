@@ -1,8 +1,6 @@
 import axiosInstance from "../../../config/AxiosConfig";
-import { message } from "antd";
 import { FormDataType } from "../types";
 import { AxiosError } from "axios";
-// const [messageApi, contextHolder] = message.useMessage();
 
 export const postTransferData = async (formData:FormDataType) => {
     try {
