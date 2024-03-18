@@ -390,9 +390,13 @@ const FilterComponent = () => {
                 Clear
               </Button>
             </div>
-            <span className={styles.approveText}>Download History</span>
-            <div className={styles.downloadicon} onClick={fetchData}>
-              <FileDownloadIcon></FileDownloadIcon>
+
+            <div
+              className={styles.downloadicon}
+              title="Download History"
+              onClick={fetchData}
+            >
+              <FileDownloadIcon className={styles.iconpart}></FileDownloadIcon>
             </div>
           </div>
         </div>
