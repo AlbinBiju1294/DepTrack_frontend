@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { message } from "antd";
 import { Option } from "react-dropdown";
 import { pmDataType, datePmPostDataType } from './types';
-import { postApprovalData } from './api/postApprovalData';
+import { DuApproval, postApprovalData } from './api/postApprovalData';
 import TransferButtonComponent from './TransferButtonComponent';
 import { fetchPmData } from './api/fetchPmData';
 import { patchRejectData } from './api/patchRejectData';
@@ -11,6 +11,7 @@ import UserContext from '../Contexts/UserContextProvider';
 
 
 const TransferButtonComponentHandler = ({transferDate, currentDuNumber}: {transferDate: string, currentDuNumber: number}) => {
+console.log("transfer button component handler render", currentDuNumber, transferDate);
 
 const navigate = useNavigate();
 const [open, setOpen] = useState(false);
@@ -23,6 +24,8 @@ const {user} = useContext(UserContext);
 //variables for reject modal
 const [openReject, setOpenReject] = useState(false);
 const [reason, setReason] = useState<string>('');
+const [loading, setLoading] = useState(false);
+
 
 
 const showModal = () => {
@@ -31,12 +34,17 @@ const showModal = () => {
 };
 const handleCloseApproval= () => {
   setOpen(false);
+  setLoading(false);
 };
 
 const handleOk = async (e: React.MouseEvent<HTMLElement>) => {
   e.preventDefault();
+  setLoading(true); 
   try {
-    const response = await postApprovalData(datePmPostData);
+    const response = await postApprovalData(datePmPostData, user?.role === 1 && user?.du_id !== currentDuNumber
+      ? DuApproval.targetDu
+      : DuApproval.currentDu
+    );
     if (response?.status) {
       await messageApi.success(response.message, 2);
       navigate('/pendingapprovals')
@@ -59,6 +67,7 @@ const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     transfer_date: e.target.value}
   )
 }
+
 const handleSelectPm = (selectedOption: Option) => {
   const selectedPm = pmData.find( pm => pm.employee_details.name === selectedOption.value)
   setDatePmPostData({
@@ -118,6 +127,7 @@ const success = () => {
       showModal={showModal}
       open={open}
       handleOk={handleOk}
+      loading={loading}
       handleCloseApproval={handleCloseApproval}
       handleDateChange={handleDateChange}
       pmOptions={pmOptions}

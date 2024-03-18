@@ -8,6 +8,11 @@
     height: 20px;
 }
 
+.ant-table-body{
+    scrollbar-width: none;
+}
+
+
 .ant-table-cell{
     padding-top: 13px !important;
     padding-bottom: 13px !important;

@@ -7,7 +7,6 @@ import styles from './Dashboard.module.css'
 const Dashboard = () => {
 
   const storedUser = localStorage.getItem('user')
-  console.log(storedUser)
   return (
     <>
         
