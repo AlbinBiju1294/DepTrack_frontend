@@ -18,6 +18,7 @@
 
 .buttondiv {
   display: flex;
+  margin-top: 0.1rem;
   margin-left: 1.1rem;
 }
 
@@ -29,7 +30,7 @@
 }
 
 .labels {
-  font-size: 12px;
+  font-size: 11px;
   margin-left: 2rem;
   padding-right: 6px;
   cursor: default;
@@ -37,15 +38,15 @@
 }
 
 .label_transto {
-  font-size: 12px;
-  padding-right: 23px;
+  font-size: 11px;
+  padding-right: 22px;
   margin-left: -1.1rem;
   cursor: default;
   margin-top: 2px;
 }
 
 .label_datefrom {
-  font-size: 12px;
+  font-size: 11px;
   padding-right: 8px;
   margin-left: 0;
   cursor: default;
@@ -53,7 +54,7 @@
 }
 
 .label_name {
-  font-size: 12px;
+  font-size: 11px;
   padding-right: 17px;
   margin-left: 0;
   cursor: default;
@@ -61,24 +62,24 @@
 }
 
 .label_to {
-  font-size: 12px;
+  font-size: 11px;
   margin-left: -0.1rem;
-  padding-right: 25px;
+  padding-right: 23px;
   margin-right: 0rem;
   cursor: default;
   margin-top: 2px;
 }
 
 .label_number {
-  font-size: 12px;
-  padding-right: 6px;
-  margin-left: 0rem;
+  font-size: 11px;
+  padding-right: 8px;
+  margin-left: -0.1rem;
   cursor: default;
   margin-top: 2px;
 }
 
 .label_status {
-  font-size: 12px;
+  font-size: 11px;
   padding-right: 10px;
   margin-left: -0.3rem;
   cursor: default;
@@ -86,13 +87,13 @@
 }
 
 .input_drop_control {
-  height: 28px;
+  height: 28px !important;
   width: 120px;
   border: 1px solid #7d7d7d !important;
   border-radius: 3px !important;
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 11px !important;
   margin-right: 15px;
 }
 
@@ -109,6 +110,7 @@
   align-items: center;
   padding-left: 10px;
   margin-right: 38px;
+  font-size: 11px;
   color: #7d7d7d;
 }
 
@@ -121,6 +123,7 @@
   align-items: center;
   padding-left: 10px;
   margin-right: 20.5px;
+  font-size: 11px;
   color: #7d7d7d;
 }
 
@@ -137,6 +140,7 @@
   align-items: center;
   padding-left: 10px;
   margin-right: 20px;
+  font-size: 11px;
   color: #7d7d7d;
 }
 
@@ -184,21 +188,4 @@
   cursor: pointer;
   margin-left: 2rem;
   color: #1976d2;
-}
-
-.approveText {
-  display: none;
-  position: absolute;
-  top: -20px; /* Adjust this value to position the text above the icon */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #333;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 4px;
-  white-space: nowrap;
-}
-
-.iconpart:hover .approveText {
-  display: block;
 }

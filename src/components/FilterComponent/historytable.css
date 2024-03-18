@@ -9,7 +9,7 @@
 }
 
 .ant-table-body {
-    scrollbar-width: thin;
+  scrollbar-width: thin;
 }
 
 .ant-table-cell {
@@ -17,6 +17,10 @@
   padding-bottom: 13px !important;
 }
 
-[title]::tooltip {
-  font-size: 10px;
+.Dropdown-menu {
+  width: 7.5rem;
+}
+
+.Dropdown-option {
+  font-size: 11px;
 }
