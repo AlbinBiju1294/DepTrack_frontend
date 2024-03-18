@@ -48,7 +48,7 @@ const TransferButtonComponent = ({
         onCancel={handleCloseApproval}
         footer={[
           <Button  className={styles.approveSuccessButton} key="submit" type="primary" size='small' onClick={handleOk} loading={loading}>
-            {loading ? <Spin /> : 'Submit'}
+            Submit
           </Button>
         ]}
       >
