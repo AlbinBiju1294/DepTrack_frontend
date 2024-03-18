@@ -1,4 +1,4 @@
-import { Button, Modal, Input } from 'antd';
+import { Button, Modal, Input, Spin } from 'antd';
 import Dropdown from "react-dropdown";
 import styles from './TransferButtonComponent.module.css';
 import { TransferButtonComponentPropsType } from './types';
@@ -9,6 +9,7 @@ const TransferButtonComponent = ({
   showModal, 
   open,
   handleOk,
+  loading,
   handleCloseApproval,
   handleDateChange,
   pmOptions,
@@ -46,8 +47,8 @@ const TransferButtonComponent = ({
         onOk={handleOk}
         onCancel={handleCloseApproval}
         footer={[
-          <Button  className={styles.approveSuccessButton} key="submit" type="primary" size='small' onClick={handleOk}>
-            Submit
+          <Button  className={styles.approveSuccessButton} key="submit" type="primary" size='small' onClick={handleOk} loading={loading}>
+            {loading ? <Spin /> : 'Submit'}
           </Button>
         ]}
       >
@@ -65,8 +66,8 @@ const TransferButtonComponent = ({
                 className={styles.transferDateInput}
               />
           </div>
-          {(user?.role == 1 && user?.du_id != currentDuNumber)
-            ? <div className={styles.transferDateDiv}>
+          {(user?.role == 1 && user?.du_id !== currentDuNumber)
+            ? <div className={styles.transferDateDiv} >
                 <label className={styles.transferDateLabel}>Select Project Manager :</label>
                 <Dropdown
                   options={pmOptions}
