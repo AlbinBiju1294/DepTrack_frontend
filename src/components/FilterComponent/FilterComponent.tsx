@@ -4,16 +4,18 @@ import styles from "./FilterComponent.module.css";
 import { Button } from "@mui/material";
 import Dropdown, { Option } from "react-dropdown";
 import "react-dropdown/style.css";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import { Du, dataSourceType, paginationtype } from "./types/index";
 import ReactDropdown from "react-dropdown";
 import { Table, Pagination } from "antd";
 import type { TableColumnsType } from "antd";
 import { Tag } from "antd";
 import * as XLSX from "xlsx";
+import { TransferDetailsType } from "../TrackRequestsContainer/types";
 
 
 import moment from "moment";
+import UserContext, { UserContextProvider } from "../Contexts/UserContextProvider";
 
 const FilterComponent = () => {
   const status = ["Completed", "Cancelled", "Rejected"];
@@ -36,6 +38,7 @@ const FilterComponent = () => {
   const transferDateToRef = useRef<HTMLInputElement>(null);
   const employeeNameRef = useRef<HTMLInputElement>(null);
   const employeeNumberRef = useRef<HTMLInputElement>(null);
+  const {user} = useContext(UserContext)
 
   const options = duData.map((du) => {
     return du.du_name;

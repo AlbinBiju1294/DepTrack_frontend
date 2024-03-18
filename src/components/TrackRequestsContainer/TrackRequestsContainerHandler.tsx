@@ -72,7 +72,16 @@ const TrackRequestsContainerHandler = () => {
           `/api/v1/transfer/track-initiated-requests/?du_id=${du_id}`
         );
         console.log("Response from API - initiated Requests:", res.data.data);
-        setInitiatedTransfers(res.data.data);
+        if(user?.role == 2)
+        {
+          const newInitiatedTransfers = res.data.data.filter((initiatedTransfer:TransferDetailsType) => {
+            return initiatedTransfer.initiated_by.id == user.employee_id
+          })
+          setInitiatedTransfers(newInitiatedTransfers);
+        }
+        else{
+          setInitiatedTransfers(res.data.data);
+        }
         console.log(initiatedTransfers);
       } catch (error) {
         console.error("Error fetching data:", error);
