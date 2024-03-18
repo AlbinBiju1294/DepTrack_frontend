@@ -28,7 +28,7 @@ const AdminTableHandler = () => {
   const [pageSize, setPageSize] = useState(10); // Number of items per page
   const [open, setOpen] = useState(false);
   const [changeOpen, setChangeOpen] = useState(false);
-  const [selectedDu,setSelectedDu] = useState<number>()
+  const [selectedDu, setSelectedDu] = useState<number>();
   const [duHeadsCandidates, setDuHeads] = useState<
     duHeadsAndHrbpCandidatesType[]
   >([]);
@@ -61,13 +61,13 @@ const AdminTableHandler = () => {
     fetchHrbpCandidates(setHrpbs);
   };
 
-  const changeDuHead = (duId:number) => {
+  const changeDuHead = (duId: number) => {
     setChangeOpen(true);
     setChangeFormData({
       ...changeFormData,
-      du_id:duId,
+      du_id: duId,
     });
-    setSelectedDu(duId)
+    setSelectedDu(duId);
     fetchDuheadsCandidates(setDuHeads);
   };
 
@@ -82,7 +82,7 @@ const AdminTableHandler = () => {
   };
 
   const handleChangeDuHeadSelection = (selectedOption: Option) => {
-    console.log(changeFormData)
+    console.log(changeFormData);
     const selectedDuhead = duHeadsCandidates.find(
       (du) => du.name === selectedOption.value
     );
@@ -158,30 +158,31 @@ const AdminTableHandler = () => {
   };
 
   const onChangeDuHeadSubmit = async () => {
-    console.log(changeFormData)
-    try{
-      const res = await axiosInstance.post('api/v1/employee/update-duhead/',changeFormData);
-      setChangeFormData({})
-      console.log(res)
-      setChangeOpen(false)
+    console.log(changeFormData);
+    try {
+      const res = await axiosInstance.post(
+        "api/v1/employee/update-duhead/",
+        changeFormData
+      );
+      setChangeFormData({});
+      console.log(res);
+      setChangeOpen(false);
       fetchDeliveryUnitData(setAdminData);
-      messageApi.success(res.data.message)
+      messageApi.success(res.data.message);
       if (changeDuHeadInputRef.current) {
         changeDuHeadInputRef.current.setState({
           selected: "Select Delivery Unit Head :",
           isOpen: false,
         });
       }
-    }  
-    catch(e: any) {
+    } catch (e: any) {
       console.log(e);
       if (e.response && e.response.data && e.response.data.error) {
         messageApi.error(e.response.data.error);
       } else {
-        messageApi.error('Error updating DU head');
+        messageApi.error("Error updating DU head");
       }
     }
-      
   };
 
   const handlePageChange = (page: number) => {
@@ -196,15 +197,21 @@ const AdminTableHandler = () => {
       title: "Du Name",
       dataIndex: ["du", "du_name"],
       key: "id",
+      sorter: (a, b) => a.du.du_name.localeCompare(b.du.du_name),
     },
     {
       title: "Du Head",
       dataIndex: ["du_head", "name"],
+      sorter: (a, b) => a.du_head.name.localeCompare(b.du_head.name),
     },
     {
       title: "",
       render: (_, record) => (
-        <button className={styles.button} type="button" onClick={() => changeDuHead(record.du.id)}>
+        <button
+          className={styles.button}
+          type="button"
+          onClick={() => changeDuHead(record.du.id)}
+        >
           <p style={{ color: "#FFFF" }}>{"Change"}</p>
         </button>
       ),

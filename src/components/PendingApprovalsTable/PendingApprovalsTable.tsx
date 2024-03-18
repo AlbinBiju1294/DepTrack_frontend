@@ -60,7 +60,6 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
             title: 'Initiated From',
             dataIndex: ['currentdu', 'du_name'],
             sorter: (a, b) => a.currentdu.du_name.localeCompare(b.currentdu.du_name),
-
         },
 
         {

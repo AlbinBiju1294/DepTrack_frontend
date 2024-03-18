@@ -176,24 +176,31 @@ const FilterComponent = () => {
   const columns: TableColumnsType<dataSourceType> = [
     {
       title: "Transfer Id",
-      dataIndex: "id",
+      dataIndex: ["id"],
       key: "id",
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: "Employee Number",
       dataIndex: ["employee", "employee_number"],
+      sorter: (a, b) =>
+        a.employee.employee_number.localeCompare(b.employee.employee_number),
+      width: "152px",
     },
     {
       title: "Employee Name",
       dataIndex: ["employee", "name"],
+      sorter: (a, b) => a.employee.name.localeCompare(b.employee.name),
     },
     {
       title: "Transferred From",
       dataIndex: ["currentdu", "du_name"],
+      sorter: (a, b) => a.currentdu.du_name.localeCompare(b.currentdu.du_name),
     },
     {
       title: "Transferred To",
       dataIndex: ["targetdu", "du_name"],
+      sorter: (a, b) => a.targetdu.du_name.localeCompare(b.targetdu.du_name),
     },
     {
       title: "Status",
@@ -205,11 +212,13 @@ const FilterComponent = () => {
         else if (status === "Cancelled") color = "#808080";
         return <Tag color={color}>{status}</Tag>;
       },
+      sorter: (a, b) => a.status.localeCompare(b.status),
     },
     {
       title: "Transfer Date",
       dataIndex: "transfer_date",
       render: (date) => moment(date).format("DD-MM-YYYY"),
+      sorter: (a, b) => a.transfer_date.localeCompare(b.transfer_date),
     },
   ];
 
