@@ -26,7 +26,7 @@ const AddEmployeeContainer: React.FC = () => {
       } else if (status === "error") {
         message.error(`${info.file.name} file upload failed.`);
       }
-      setFileList(info.fileList); // Update fileList state
+      setFileList(info.fileList); 
     },
     onDrop(e) {
       console.log("Dropped files", e.dataTransfer.files);
@@ -86,7 +86,7 @@ const AddEmployeeContainer: React.FC = () => {
           marginTop: 5,
           alignSelf: "end",
           backgroundColor: "#4154f1",
-          opacity: "50%",
+          opacity: "70%",
           color: "white",
         }}
         onClick={handleSubmit}
