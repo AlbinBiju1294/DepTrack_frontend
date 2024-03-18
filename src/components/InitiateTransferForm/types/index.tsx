@@ -1,5 +1,3 @@
-import { Option } from "react-dropdown";
-
 export interface Employee {
   id: number;
   employee_number: string;

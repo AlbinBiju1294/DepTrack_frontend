@@ -129,20 +129,20 @@
 
 
 .approveSuccessButton{
-  margin-right: 13px;
+  margin-right: 23px;
 }
 
 .modalContentContainer {
   display: flex;
   flex-direction: column;
-  /* height: 8rem; */
   justify-content: space-around;
 }
 
 .transferDateDiv {
   display: flex;
   justify-content: space-around;
-  padding: 10px;
+  align-items: center;
+  padding: 15px;
 }
 .transferDateDiv .transferDateLabel {
   color: var(--secondary-color);
@@ -160,4 +160,13 @@
   color: gray;
   padding-top: 0px;
   padding-left: 8px
+}
+
+.transferDateLabel
+{
+  min-width: 5rem !important;
+}
+
+.input_drop_control{
+  width: 250px;
 }

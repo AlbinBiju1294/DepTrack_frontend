@@ -3,7 +3,6 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import "./Initiate.css";
 import "react-dropdown/style.css";
-// import { Button, Checkbox } from "@mui/material";
 import { Button } from "antd";
 import { Employee, InitiateTransferFormPropsType } from "./types";
 import Select from "react-select";
@@ -14,7 +13,6 @@ const InitiateTransferForm = ({
   employeeData,
   selectedEmployee,
   bands,
-  isChecked,
   contextHolder,
   options,
   changeKeyword,
@@ -23,7 +21,6 @@ const InitiateTransferForm = ({
   handleAutocompleteChange,
   handleBandDropdownChange,
   handleDuDropdownChange,
-  handleCheckboxChange,
   loading
 }: InitiateTransferFormPropsType) => {
 

@@ -11,6 +11,7 @@ const DuBar = () => {
   const [ydata, setYdata] = useState<Array<number>>([]);
   const [isLoaded,setIsLoaded] = useState(false)
 
+  //for fetching bargraph data on rendering
   useEffect(() => {
     fetchBarGraphData(setDuData)
   }, []);

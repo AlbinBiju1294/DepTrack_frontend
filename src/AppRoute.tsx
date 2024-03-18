@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import "./App.css";
 import {
   BrowserRouter,
   Routes,
@@ -20,7 +19,7 @@ import Admin from "./pages/Admin/Admin";
 import UserContext from "./components/Contexts/UserContextProvider";
 import LoginPage from "./pages/LoginPage/LoginPage";
 
-function App() {
+function AppRoute() {
   const { user } = useContext(UserContext);
 
   return (
@@ -131,4 +130,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppRoute;

@@ -11,6 +11,7 @@ import { message } from "antd";
 import { postTransferData } from "./api/postTransferData";
 import InitiateTransferForm from "./InitiateTransferForm";
 
+//handler for the initiate transfer
 const InitiateTransferFormHandler = () => {
     const [employeeData, setEmployeeData] = useState<Employee[]>([]);
   const [searchKeyword, setSearchKeyword] = useState<string>("");
@@ -97,6 +98,7 @@ const InitiateTransferFormHandler = () => {
   }, []);
 
   
+  //for handling inputbox change
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -109,6 +111,7 @@ const InitiateTransferFormHandler = () => {
     }
   };
 
+  //for handling employee dropdown change
   const handleAutocompleteChange = (selectedValue: Employee | null) => {
     if (selectedValue === null) {
       setSelectedEmployee(null);
@@ -126,6 +129,7 @@ const InitiateTransferFormHandler = () => {
     }
   };
 
+  //for handling band dropdown change
   const handleBandDropdownChange = (selectedOption: string | undefined) => {
     console.log(selectedOption)
     setFormData({
@@ -134,6 +138,7 @@ const InitiateTransferFormHandler = () => {
     });
   };
 
+  //for handling du dropdown change
   const handleDuDropdownChange = (selectedOption: Du | undefined ) => {
     setFormData({
       ...formData,
@@ -141,6 +146,7 @@ const InitiateTransferFormHandler = () => {
     });
   };
 
+  //for handling checkbox change
   const handleCheckboxChange = () => {
     setIsChecked((prev) => {
       return !prev;

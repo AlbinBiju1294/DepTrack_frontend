@@ -37,6 +37,7 @@ const TrackRequestsContainerHandler = () => {
     setOpen(false);
   };
 
+  //for handling cancel transfer requests by du_heads
   const cancelRequest = async () => {
     try {
       await axiosInstance.post(`/api/v1/transfer/cancel/`, {
@@ -90,7 +91,7 @@ const TrackRequestsContainerHandler = () => {
     fetchInitiatedRequests();
   }, []);
 
-  
+  //for setting table columns
   const columns: TableProps<TransferDetailsType>["columns"] = [
     {
       title: "Transfer Id",

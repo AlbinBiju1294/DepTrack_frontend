@@ -129,7 +129,7 @@ const AdminTable = ({
         ]}
       >
         <div className={styles.transferDateDiv} >
-                <label className={styles.transferDateLabel}>Select Project Manager :</label>
+                <label className={styles.transferDateLabel}>Select Delivery Unit Head :</label>
                 <Dropdown
                   options={duHeadOptions}
                   ref={changeDuHeadInputRef}
@@ -141,19 +141,6 @@ const AdminTable = ({
                   placeholder="Select an option"
                 />
               </div>
-        {/* <div className={styles.formGroup}>
-          <label className={styles.label}>Select Delivery Unit Head :</label>
-          <Dropdown
-            options={duHeadOptions}
-            ref={changeDuHeadInputRef}
-            className={styles.dropdown}
-            controlClassName={styles.dropdownControl}
-            placeholder="Select an option"
-            onChange={(selectedOption) =>
-              handleChangeDuHeadSelection(selectedOption)
-            }
-          />
-        </div> */}
       </Modal>
     </div>
   );
