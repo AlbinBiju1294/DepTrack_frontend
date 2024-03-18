@@ -31,7 +31,7 @@ const AdminTable = ({
   handleCloseChangeDuHead,
   handleChangeDuHeadSelection,
   changeDuHeadInputRef,
-  onChangeDuHeadSubmit
+  onChangeDuHeadSubmit,
 }: AdminTablePropsType) => {
   return (
     <div className={styles.inner_container}>
@@ -118,9 +118,9 @@ const AdminTable = ({
         onCancel={handleCloseChangeDuHead}
         footer={[
           <Button
-            variant="outlined"
-            color="success"
-            type="submit"
+            className={styles.approveSuccessButton}
+            key="submit"
+            type="primary"
             size="small"
             onClick={onChangeDuHeadSubmit}
           >
@@ -136,7 +136,9 @@ const AdminTable = ({
             className={styles.dropdown}
             controlClassName={styles.dropdownControl}
             placeholder="Select an option"
-            onChange={(selectedOption) => handleChangeDuHeadSelection(selectedOption)}
+            onChange={(selectedOption) =>
+              handleChangeDuHeadSelection(selectedOption)
+            }
           />
         </div>
       </Modal>
