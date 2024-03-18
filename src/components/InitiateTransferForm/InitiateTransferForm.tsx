@@ -29,7 +29,7 @@ const InitiateTransferForm = ({
 
   return (
     <>
-      {contextHolder}
+      {contextHolder} 
       <form onSubmit={handleSubmit}>
         <div className={styles.form_wrapper}>
           <div className={styles.form_row}>
@@ -289,7 +289,7 @@ const InitiateTransferForm = ({
         <div className={styles.submit_area}>
           <Button
             variant="outlined"
-            color="error"
+            color="primary"
             type="submit"
             disabled={!isChecked}
             size="small"

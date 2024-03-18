@@ -1,14 +1,11 @@
 import React, { useContext } from 'react'
 import UserContext from '../Contexts/UserContextProvider'
 import styles from './DashboardWelcome.module.css'
-
-export const capitalizeFirstLetter = (str:string) => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-}
+import { capitalizeFirstLetter } from '../../utils/utils'
 
 const DashboardWelcome = () => {
 
-    const {user} = useContext(UserContext)
+  const {user} = useContext(UserContext)
     
   return (
     <>

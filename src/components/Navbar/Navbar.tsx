@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import {PersonCircle} from 'react-bootstrap-icons'
 import styles from './Navbar.module.css' 
 import UserContext from '../Contexts/UserContextProvider'
-import { capitalizeFirstLetter } from '../DashboardWelcome/DashboardWelcome'
+import { capitalizeFirstLetter } from '../../utils/utils'
 import { Dropdown } from 'antd'
 import type { MenuProps } from 'antd';
 import { useNavigate } from 'react-router-dom'

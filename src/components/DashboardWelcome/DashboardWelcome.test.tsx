@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react';
 import { render } from '@testing-library/react';
 import UserContext from '../Contexts/UserContextProvider';
-import DashboardWelcome, { capitalizeFirstLetter } from './DashboardWelcome';
+import DashboardWelcome from './DashboardWelcome';
+import { capitalizeFirstLetter } from '../../utils/utils'
 
 const mockUser = {
   employee_name: 'John Doe',

@@ -4,6 +4,7 @@ import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import type { TableColumnsType } from "antd";
 import {
+  ChangeFormDataType,
   FormDataType,
   adminDataSourceType,
   duHeadsAndHrbpCandidatesType,
@@ -18,12 +19,16 @@ import {
 import { postNewDu } from "./api/postNewDu";
 import AdminTable from "./AdminTable";
 import ReactDropdown from "react-dropdown";
+import axiosInstance from "../../config/AxiosConfig";
+import { AxiosError } from "axios";
 
 const AdminTableHandler = () => {
   const [adminDataSource, setAdminData] = useState<adminDataSourceType[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(10); // Number of items per page
   const [open, setOpen] = useState(false);
+  const [changeOpen, setChangeOpen] = useState(false);
+  const [selectedDu,setSelectedDu] = useState<number>()
   const [duHeadsCandidates, setDuHeads] = useState<
     duHeadsAndHrbpCandidatesType[]
   >([]);
@@ -33,6 +38,7 @@ const AdminTableHandler = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
   const [FormData, setFormData] = useState<FormDataType>({});
+  const [changeFormData, setChangeFormData] = useState<ChangeFormDataType>({});
   const totalItems = adminDataSource.length;
   const pageSizeOptions = ["10", "20", "30", "40", "50"];
   const startIndex = (currentPage - 1) * pageSize;
@@ -42,6 +48,7 @@ const AdminTableHandler = () => {
   const hrbpOptions = HrbpCandidates.map((candidate) => candidate.name);
   const duNameInputboxRef = useRef<HTMLInputElement>(null);
   const duHeadInputRef = useRef<ReactDropdown>(null);
+  const changeDuHeadInputRef = useRef<ReactDropdown>(null);
   const duHrbpInputRef = useRef<ReactDropdown>(null);
 
   useEffect(() => {
@@ -54,12 +61,33 @@ const AdminTableHandler = () => {
     fetchHrbpCandidates(setHrpbs);
   };
 
+  const changeDuHead = (duId:number) => {
+    setChangeOpen(true);
+    setChangeFormData({
+      ...changeFormData,
+      du_id:duId,
+    });
+    setSelectedDu(duId)
+    fetchDuheadsCandidates(setDuHeads);
+  };
+
   const handleSelectDuHead = (selectedOption: Option) => {
     const selectedDuhead = duHeadsCandidates.find(
       (du) => du.name === selectedOption.value
     );
     setFormData({
       ...FormData,
+      du_head_id: selectedDuhead?.employee_id,
+    });
+  };
+
+  const handleChangeDuHeadSelection = (selectedOption: Option) => {
+    console.log(changeFormData)
+    const selectedDuhead = duHeadsCandidates.find(
+      (du) => du.name === selectedOption.value
+    );
+    setChangeFormData({
+      ...changeFormData,
       du_head_id: selectedDuhead?.employee_id,
     });
   };
@@ -96,6 +124,17 @@ const AdminTableHandler = () => {
     if (duNameInputboxRef.current) duNameInputboxRef.current.value = "";
   };
 
+  const handleCloseChangeDuHead = () => {
+    setChangeOpen(false);
+    setChangeFormData({});
+    if (changeDuHeadInputRef.current) {
+      changeDuHeadInputRef.current.setState({
+        selected: "Select Delivery Unit Head :",
+        isOpen: false,
+      });
+    }
+  };
+
   const onSubmit = async () => {
     try {
       const formDataKeys = Object.keys(FormData);
@@ -118,6 +157,33 @@ const AdminTableHandler = () => {
     }
   };
 
+  const onChangeDuHeadSubmit = async () => {
+    console.log(changeFormData)
+    try{
+      const res = await axiosInstance.post('api/v1/employee/update-duhead/',changeFormData);
+      setChangeFormData({})
+      console.log(res)
+      setChangeOpen(false)
+      fetchDeliveryUnitData(setAdminData);
+      messageApi.success(res.data.message)
+      if (changeDuHeadInputRef.current) {
+        changeDuHeadInputRef.current.setState({
+          selected: "Select Delivery Unit Head :",
+          isOpen: false,
+        });
+      }
+    }  
+    catch(e: any) {
+      console.log(e);
+      if (e.response && e.response.data && e.response.data.error) {
+        messageApi.error(e.response.data.error);
+      } else {
+        messageApi.error('Error updating DU head');
+      }
+    }
+      
+  };
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
@@ -138,7 +204,7 @@ const AdminTableHandler = () => {
     {
       title: "",
       render: (_, record) => (
-        <button className={styles.button} type="button">
+        <button className={styles.button} type="button" onClick={() => changeDuHead(record.du.id)}>
           <p style={{ color: "#FFFF" }}>{"Change"}</p>
         </button>
       ),
@@ -154,6 +220,7 @@ const AdminTableHandler = () => {
         current={currentPage}
         duNameInputboxRef={duNameInputboxRef}
         duHeadInputRef={duHeadInputRef}
+        changeDuHeadInputRef={changeDuHeadInputRef}
         duHrbpInputRef={duHrbpInputRef}
         open={open}
         addDu={addDu}
@@ -169,6 +236,10 @@ const AdminTableHandler = () => {
         onShowSizeChange={handlePageSizeChange}
         onChange={handlePageChange}
         pageSizeOptions={pageSizeOptions}
+        changeOpen={changeOpen}
+        handleCloseChangeDuHead={handleCloseChangeDuHead}
+        handleChangeDuHeadSelection={handleChangeDuHeadSelection}
+        onChangeDuHeadSubmit={onChangeDuHeadSubmit}
       ></AdminTable>
     </>
   );

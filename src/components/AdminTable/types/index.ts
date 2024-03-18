@@ -21,6 +21,11 @@ export type FormDataType = {
   hrbp_id?: number;
 };
 
+export type ChangeFormDataType = {
+  du_head_id?: number;
+  du_id?:number;
+};
+
 export type duHeadsAndHrbpCandidatesType = {
   employee_id: number;
   name: string;
@@ -49,6 +54,7 @@ export type AdminTablePropsType = {
   hrbpOptions: string[];
   duNameInputboxRef: RefObject<HTMLInputElement>;
   duHeadInputRef: LegacyRef<ReactDropdown>;
+  changeDuHeadInputRef:LegacyRef<ReactDropdown>;
   duHrbpInputRef: LegacyRef<ReactDropdown>;
   addDu: () => void;
   handleSelectDuHead: (selectedOption: Option) => void;
@@ -56,8 +62,12 @@ export type AdminTablePropsType = {
   handleSelectHrbp: (selectedOption: Option) => void;
   handleCloseAddDu: () => void;
   onSubmit: () => Promise<void>;
+  onChangeDuHeadSubmit: () => Promise<void>;
   total: number | undefined;
   onShowSizeChange: (current: number, size: number) => void;
   onChange: (page: number) => void;
   pageSizeOptions: string[];
+  changeOpen:boolean;
+  handleCloseChangeDuHead: () => void;
+  handleChangeDuHeadSelection:(selectedOption: Option) => void
 };
