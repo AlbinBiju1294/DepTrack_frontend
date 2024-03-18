@@ -2,12 +2,12 @@
     background-color: white;
     margin-top: 10px;
     height: 490px;
-    padding: 20px
-    ;
+    padding: 20px;
   }
 
   .form_heading
 {
     color: var(--secondary-color);
     font-weight: 500;
+    font-size: 14px;
 }

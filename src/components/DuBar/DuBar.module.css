@@ -7,6 +7,29 @@
     margin-top: 20px;
 }
 
+.bar_graph_label
+{
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 400;
+    padding-left: 160px;
+    margin-bottom: -30px;
+    margin-top: 30px;
+}
+
+.bar_graph_heading_container{
+    display: flex;
+}
+
 .bar_chart{
     margin-left: 30px;
+    width: 500px;
+}
+
+.square_div{
+    height: 8px;
+    width: 8px;
+    background-color: var(--primary-color);
+    margin-right: 5px;
 }

@@ -16,19 +16,35 @@
   .pagination
   {
     align-self: end;
-    margin-right: 5vw;
+    margin-top: 10px;
     color: var(--secondary-color);
+  }
+
+  .button:hover {
+    display: flex;
+    color: white;
+    font-size: 11px;
+    background-color: #D2042D;
+    border: 1px solid #D2042D;
+    padding: 3px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-left: 25px;
   }
 
   .button {
     display: flex;
-    width: 18px; /* Increase width to accommodate the icon */
-    height: 18px; /* Increase height to accommodate the icon */
-    background-color: #F08080;
-    border: none;
-    border-radius: 50%; /* Adjusted to create a circular button */
+    color: #D2042D;
+    font-size: 11px;
+    background-color: rgb(250, 233, 233);
+    border: 1px solid #D2042D;
+    padding: 3px;
     align-items: center;
     justify-content: center;
+    border-radius: 3px;
+    margin-left: 25px;
   }
 
   .cancel_popup_buttons{

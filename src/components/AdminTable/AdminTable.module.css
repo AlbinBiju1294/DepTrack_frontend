@@ -1,0 +1,121 @@
+.button {
+  background-color: #4154f1;
+  opacity: 70%;
+  width: 100px;
+  height: 21px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: #4154f1;
+  opacity: 70%;
+  width: 100px;
+  height: 30px;
+  margin-top: 0.06rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.uploadfile_whole {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 0.5rem;
+}
+
+.pagination {
+  margin-top: 0.1rem;
+  align-self: end;
+  color: var(--secondary-color);
+}
+
+.inner_container {
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.inner_container::-webkit-scrollbar {
+  display: none;
+}
+
+.cancel_popup_buttons {
+  margin-left: 290px;
+  margin-top: 20px;
+  width: 160px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cancel_button {
+  background-color: white;
+  width: 70px;
+  height: 25px;
+  border: 1px solid red;
+  color: red;
+  border-radius: 3px;
+}
+
+.close_button {
+  background-color: white;
+  width: 70px;
+  height: 25px;
+  border: 1px solid green;
+  color: green;
+  border-radius: 3px;
+}
+
+.Approve {
+  background-color: #5cb85c !important;
+  width: 55px;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px !important;
+  color: white;
+}
+
+.formGroup {
+  margin-bottom: 4px;
+  display: flex;
+  justify-content: center;
+}
+.formGroup1 {
+  margin-left: 4.5rem;
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: center;
+}
+
+.label {
+  font-size: 12px;
+  margin-top: 0.3rem;
+}
+
+.input {
+  width: 12rem;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.dropdown {
+  width: 12rem;
+  border: 1px;
+  border-radius: 4px;
+}
+
+.dropdownControl {
+  width: 100%;
+}
+
+.customTitle {
+  color: var(--secondary-color);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 1rem;
+}

@@ -1,0 +1,33 @@
+.ant-table-row {
+  font-size: 11px;
+  height: 10px;
+}
+
+.ant-table-thead {
+  font-size: 11px;
+  height: 20px;
+}
+
+.ant-table-cell {
+  padding-top: 13px !important;
+  padding-bottom: 13px !important;
+}
+
+.Dropdown-control {
+  height: 2rem;
+  font-size: 12px;
+  padding-top: 0.3rem;
+}
+
+.Dropdown-placeholder {
+  padding: 0;
+}
+
+.AdminTable_input__G4eiS {
+  font-size: 12px;
+  margin-left: 0.1rem;
+}
+
+.ant-modal-title {
+  color: var();
+}

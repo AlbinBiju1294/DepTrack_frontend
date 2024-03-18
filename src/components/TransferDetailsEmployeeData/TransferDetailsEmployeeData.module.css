@@ -8,7 +8,7 @@
 .Right_Container{
     display: flex;
     flex:1px;
-    margin-top:30px;
+    margin-top:12px;
     margin-left: 40px;
 }
 
@@ -16,6 +16,7 @@
     display:flex;
     margin-left: -70px;
     flex:5px;
+    margin-top: -20px;
     
     
 }
@@ -24,14 +25,14 @@
     margin-top: -4.7px;
     margin-right: 20px;
     font-size: 4.9rem!important;
-    color:#012970
+    color: var(--secondary-color)!important
 
 }
 .Employee_details_container{
     flex: 90;
     width: 10px;
-    font-family: "Poppins";
-    color:#012970;
+    font-family: var(--font-family)!important;
+    color: var(--secondary-color)!important;
     font-size: 11px;
 }
 
@@ -50,11 +51,13 @@
     padding-top: 6px;
     padding-right: 8px; 
     border-radius: 10px!important;
-    background-color: #E6EFF5!important;   
+    background-color: #E6EFF5!important;  
+    color: var(--secondary-color);
 }
 
 .ArrowIcon{
-    color: #012970!important;
+    color: var(--secondary-color)!important;
+        margin-top: -4px!important;
 }
 .Du{
     color:#595353

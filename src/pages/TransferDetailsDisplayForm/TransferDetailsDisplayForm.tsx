@@ -8,7 +8,7 @@ const TransferDetailsDisplayForm= () => {
   return (
     <>
       <div className={styles.main}>
-        <InnerBodyHeader heading="PendingApprovals" />
+        <InnerBodyHeader heading="Pending Approvals" />
         <TransferDetailsdisplayContainer />
         
       </div>

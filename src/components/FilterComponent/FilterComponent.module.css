@@ -2,34 +2,147 @@
   position: relative;
   top: 10px;
   display: flex;
+  margin-bottom: 18px;
 }
+
+.filter_container {
+  background-color: #fafafa;
+  padding: 3px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.eachdiv {
+  display: flex;
+}
+
+.buttondiv {
+  display: flex;
+  margin-left: 1.1rem;
+}
+
 .second_row {
   margin-top: 15px;
+  display: flex;
+  margin-left: 3.1rem;
+  margin-bottom: 5px;
+}
+
+.labels {
+  font-size: 12px;
+  margin-left: 2rem;
+  padding-right: 6px;
+  cursor: default;
+  margin-top: 2px;
+}
+
+.label_transto {
+  font-size: 12px;
+  padding-right: 23px;
+  margin-left: -1.1rem;
+  cursor: default;
+  margin-top: 2px;
+}
+
+.label_datefrom {
+  font-size: 12px;
+  padding-right: 8px;
+  margin-left: 0;
+  cursor: default;
+  margin-top: 2px;
+}
+
+.label_name {
+  font-size: 12px;
+  padding-right: 17px;
+  margin-left: 0;
+  cursor: default;
+  margin-top: 2px;
+}
+
+.label_to {
+  font-size: 12px;
+  margin-left: -0.1rem;
+  padding-right: 25px;
+  margin-right: 0rem;
+  cursor: default;
+  margin-top: 2px;
+}
+
+.label_number {
+  font-size: 12px;
+  padding-right: 6px;
+  margin-left: 0rem;
+  cursor: default;
+  margin-top: 2px;
+}
+
+.label_status {
+  font-size: 12px;
+  padding-right: 10px;
+  margin-left: -0.3rem;
+  cursor: default;
+  margin-top: 2px;
 }
 
 .input_drop_control {
   height: 28px;
-  width: 110px;
+  width: 120px;
   border: 1px solid #7d7d7d !important;
   border-radius: 3px !important;
   display: flex;
   align-items: center;
   font-size: 12px;
+  margin-right: 15px;
 }
 
 .dropdown {
-  padding-right: 5px;
+  padding-right: 3px;
 }
 
 .input_box {
   height: 28px;
-  width: 150px;
+  width: 130px;
+  border: 1px solid #7d7d7d;
+  border-radius: 3px;
+  font-size: 12px;
+  align-items: center;
+  padding-left: 10px;
+  margin-right: 38px;
+  color: #7d7d7d;
+}
+
+.input_box_name {
+  font-size: 12px;
+  height: 28px;
+  width: 130px;
   border: 1px solid #7d7d7d;
   border-radius: 3px;
   align-items: center;
   padding-left: 10px;
-  margin-right: 5px;
+  margin-right: 20.5px;
   color: #7d7d7d;
+}
+
+.input_box_name:focus {
+  border: 1px solid blue;
+  outline: 1px solid blue;
+}
+
+.date_box {
+  height: 28px;
+  width: 130px;
+  border: 1px solid #7d7d7d;
+  border-radius: 3px;
+  align-items: center;
+  padding-left: 10px;
+  margin-right: 20px;
+  color: #7d7d7d;
+}
+
+.date_box:focus {
+  border: 1px solid blue;
+  outline: 1px solid blue;
 }
 
 .input_box:focus {
@@ -38,5 +151,54 @@
 }
 
 .button {
+  padding-right: 10px;
+  margin-right: 5px !important;
+  margin-left: 2px;
+  width: 30px;
+  height: 27px;
+}
+
+.button1 {
   padding-right: 5px;
+  margin-right: 5px !important;
+  margin-left: 7px;
+  width: 30px;
+  height: 27px;
+}
+
+.pagination {
+  align-self: end;
+  color: var(--secondary-color);
+}
+
+.history_container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  min-height: 360px;
+}
+
+.downloadicon {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 2rem;
+  color: #1976d2;
+}
+
+.approveText {
+  display: none;
+  position: absolute;
+  top: -20px; /* Adjust this value to position the text above the icon */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.iconpart:hover .approveText {
+  display: block;
 }

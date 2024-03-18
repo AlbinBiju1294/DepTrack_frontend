@@ -1,7 +1,6 @@
 import axiosInstance from "../../../config/AxiosConfig";
-import { message } from "antd";
 import { FormDataType } from "../types";
-// const [messageApi, contextHolder] = message.useMessage();
+import { AxiosError } from "axios";
 
 export const postTransferData = async (formData:FormDataType) => {
     try {
@@ -12,11 +11,14 @@ export const postTransferData = async (formData:FormDataType) => {
       console.log("Response from API - submission:", res);
       if(res.status === 201)
       {
-          return {'status':true,'message':'transfer initiated successfully'};
+          return {'status':true,'message':'Transfer Initiated Successfully'};
       }
     } catch (error) {
-      console.log(error)
-        return {'status':false,'message':'transfer initiation failed'};
+      console.log(error);
+      const err = error as AxiosError;
+      const errorMessage = (err.response?.data as { error: string })?.error;
+      return {'status': false, 'message': errorMessage};
     }
+    
     console.log(formData);
   };

@@ -6,37 +6,54 @@ import HistoryIcon from "@mui/icons-material/History";
 import LogoutIcon from "@mui/icons-material/Logout";
 import TimelineIcon from "@mui/icons-material/Timeline";
 import styles from "./SideBar.module.css";
-import { useState, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import UserContext from "../Contexts/UserContextProvider";
+import sideBarContext from "../Contexts/SideBarContextProvider";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const SideBar = () => {
-  const [activeDiv, setActiveDiv] = useState<number>(1);
-  const { user,setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
+  const { activeDiv, setActiveDiv } = useContext(sideBarContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Update activePage based on the current pathname
+    setActivePage(location.pathname);
+  }, [location]);
+
+  const setActivePage = (location: string) => {
+    if (location === "/dashboard") {
+      setActiveDiv(1);
+    } else if (location === "/initiatetransfer") {
+      setActiveDiv(2);
+    } else if (location === "/trackrequests") {
+      setActiveDiv(3);
+    } else if (location === "/pendingapprovals") {
+      setActiveDiv(4);
+    } else if (location === "/transferhistory") {
+      setActiveDiv(5);
+    } else if (location === "/admin") {
+      setActiveDiv(7);
+    }
+  };
 
   const handleDivClick = (divId: number) => {
     setActiveDiv(divId);
     if (divId === 1) {
       navigate("/dashboard");
-    } 
-    else if (divId === 2) {
+    } else if (divId === 2) {
       navigate("/initiatetransfer");
-    }
-      else if (divId === 3) {
-        navigate("/trackrequests");
-    }
-    else if (divId === 4) {
+    } else if (divId === 3) {
+      navigate("/trackrequests");
+    } else if (divId === 4) {
       navigate("/pendingapprovals");
-  }
-    else if (divId === 5) {
+    } else if (divId === 5) {
       navigate("/transferhistory");
-    }
-    else if (divId === 6) {
-      localStorage.clear()
-      setUser(null)
-      navigate("/login");
+    }  else if (divId === 7) {
+      navigate("/admin");
     }
   };
 
@@ -83,12 +100,12 @@ const SideBar = () => {
               : `${styles.sidebar_item}`
           }`}
         >
-          Manage DU
+          Admin
         </h6>
       </div>
       <div
         className={`${
-          user?.role !== 1 && user?.role !== 2
+          user?.role !== 1 && user?.role !== 2 && user?.role !== 5
             ? `${styles.no_display}`
             : activeDiv === 2
             ? `${styles.sidebar_items_active}`
@@ -106,14 +123,12 @@ const SideBar = () => {
               : `${styles.sidebar_item}`
           }`}
         >
-          Initiate transfer
+          Initiate Transfer
         </h6>
       </div>
       <div
         className={`${
-          user?.role === 5
-            ? `${styles.no_display}`
-            : activeDiv === 3
+          activeDiv === 3
             ? `${styles.sidebar_items_active}`
             : `${styles.sidebar_items}`
         }`}
@@ -129,12 +144,12 @@ const SideBar = () => {
               : `${styles.sidebar_item}`
           }`}
         >
-          Track requests
+          Track Requests
         </h6>
       </div>
       <div
         className={`${
-          user?.role !== 1
+          user?.role !== 1 && user?.role !== 5
             ? `${styles.no_display}`
             : activeDiv === 4
             ? `${styles.sidebar_items_active}`
@@ -152,14 +167,12 @@ const SideBar = () => {
               : `${styles.sidebar_item}`
           }`}
         >
-          Pending approvals
+          Pending Approvals
         </h6>
       </div>
       <div
         className={`${
-          user?.role === 5
-            ? `${styles.no_display}`
-            : activeDiv === 5
+          activeDiv === 5
             ? `${styles.sidebar_items_active}`
             : `${styles.sidebar_items}`
         }`}
@@ -176,27 +189,6 @@ const SideBar = () => {
           }`}
         >
           Transfer history
-        </h6>
-      </div>
-      <div
-        className={`${
-          activeDiv === 6
-            ? `${styles.sidebar_items_active}`
-            : `${styles.sidebar_items}`
-        }`}
-        onClick={() => {
-          handleDivClick(6);
-        }}
-      >
-        <LogoutIcon className={styles.icon} />
-        <h6
-          className={`${
-            activeDiv === 6
-              ? `${styles.sidebar_item_active}`
-              : `${styles.sidebar_item}`
-          }`}
-        >
-          Logout
         </h6>
       </div>
     </div>

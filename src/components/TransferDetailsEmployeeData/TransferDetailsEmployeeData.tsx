@@ -1,7 +1,6 @@
 import React from 'react'
 import Avatar from '@mui/material/Avatar';
 import Card from '@mui/material/Card';
-// import styles from './EmployeeDetails.module.css'
 import { useState,useEffect } from 'react';
 import axios from 'axios'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -11,25 +10,28 @@ import styles from './TransferDetailsEmployeeData.module.css'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useParams } from 'react-router-dom';
 import axiosInstance from '../../config/AxiosConfig';
+import { kMaxLength } from 'buffer';
 
 
 
 
 
-const TransferDetailsEmployeeData = () => {
+const TransferDetailsEmployeeData = ({setCurrentDuNumber}:{setCurrentDuNumber: React.Dispatch<React.SetStateAction<number>>}) => {
+  "Displays the Employee details such as employee name,designation,email id ,current and traget du in the pending approvals page"
 
-        const [userData,setUserData] = useState< EmployeeDataProps>();
-        const {id}=useParams()
+
+  const [userData,setUserData] = useState< EmployeeDataProps|undefined>();
+  const {id}=useParams()
 
   
   useEffect(() => {
       const fetchData = async () => {
         try {
-          // const transfer_id=3;
           const res = await axiosInstance.get(`http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/?transfer_id=${id}`);
-          console.log('Response from API:', res.data);
-          setUserData(res.data.data);
-          
+          console.log('Response from API to find employee du:', res.data);         
+          setUserData(prev => res.data.data);
+          console.log("emp du from emp data",res.data.data.currentdu.id);
+          setCurrentDuNumber(res.data.data.currentdu.id);
           
         } catch (error) {
           console.error('Error fetching data:', error);
@@ -38,8 +40,6 @@ const TransferDetailsEmployeeData = () => {
       fetchData();
     }, []);
 
-    console.log("userData: ",userData);
-    
 
   return (
     <>
@@ -53,16 +53,14 @@ const TransferDetailsEmployeeData = () => {
             <h4  className= {`${styles.Employee_name}`}>{userData?userData.employee.name:""}</h4>
                 <h4>{userData?userData.employee.designation:""}</h4>
                 <p>{userData?userData.employee.mail_id:""}</p>
-        
         </div>
     </div>
 
 
-
     <div className= {`${styles.Right_Container}`}>
-            <Card className= {`${styles.Card}`}>
+            <div className= {`${styles.Card}`}>
              <p>{userData?userData.currentdu?.du_name:""}</p>
-            </Card>
+            </div>
 
         <div className= {`${styles.Arrow_Container}`}>
             <IconButton className={`${styles.ArrowIcon}`}>
@@ -71,9 +69,9 @@ const TransferDetailsEmployeeData = () => {
         </div>
 
         <div className= {`${styles.CDU_container}`}>
-            <Card className= {`${styles.Card}`}>
+            <div className= {`${styles.Card}`}>
                 <p>{userData?userData.targetdu.du_name:""}</p>
-            </Card>
+            </div>
         </div>
     </div>
     </div>

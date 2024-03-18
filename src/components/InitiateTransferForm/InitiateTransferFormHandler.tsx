@@ -1,13 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import styles from "./InitiateTransferForm.module.css";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
 import "./Initiate.css";
-import Dropdown, { Option } from "react-dropdown";
 import "react-dropdown/style.css";
 import UserContext from "../Contexts/UserContextProvider";
-import { Button, Checkbox } from "@mui/material";
-import { Employee, Du, FormDataType, optionType, bandDataType } from "./types";
+import { Employee, Du, FormDataType} from "./types";
 import { fetchEmployeeData } from "./api/fetchEmployeeData";
 import { fetchDuData } from "./api/fetchDuData";
 import { fetchBandData } from "./api/fetchBandData";
@@ -27,28 +22,32 @@ const InitiateTransferFormHandler = () => {
   const { user } = useContext(UserContext);
 
   const [formData, setFormData] = useState<FormDataType>({});
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
   const [messageApi, contextHolder] = message.useMessage();
 
   const navigate = useNavigate();
 
   //for setting options for du dropdown
-  const options = duData.map((du) => {
-    return {value:du, label:du.du_name};
-  });
+  const options = duData
+  .filter(du => du.id !== user?.du_id)
+  .map(du => ({ value: du, label: du.du_name }));
 
+  //for setting the band dropdown
   const bandData = bands.map((band) => {
     return {value:band, label:band};
   });
 
+  //on searchKeyword change employees which match that keyword is fetched
   useEffect(() => {
-    fetchEmployeeData(searchKeyword, setEmployeeData);
+    fetchEmployeeData(searchKeyword, setEmployeeData, user?.employee_id);
   }, [searchKeyword]);
 
+  //for fetching du data
   useEffect(() => {
     fetchDuData(setDuData);
   }, []);
 
+  //for fetching band data
   useEffect(() => {
     fetchBandData(setBands);
   }, []);
@@ -76,6 +75,7 @@ const InitiateTransferFormHandler = () => {
     }
   };
 
+  //for automatically setting du_id and status
   useEffect(() => {
     let newStatus: number;
     if (user?.role === 1) {
@@ -129,16 +129,6 @@ const InitiateTransferFormHandler = () => {
     });
   };
 
-  // const handleDuDropdownChange = (selectedOption: Option) => {
-  //   const newDuData = duData.filter((du) => {
-  //     return du.du_name === selectedOption.value;
-  //   });
-  //   setFormData({
-  //     ...formData,
-  //     targetdu_id: newDuData[0].id,
-  //   });
-  // };
-
   const handleDuDropdownChange = (selectedOption: Du | undefined ) => {
     setFormData({
       ...formData,
@@ -151,6 +141,7 @@ const InitiateTransferFormHandler = () => {
       return !prev;
     });
   };
+  
   return (
     <div>
         <InitiateTransferForm employeeData={employeeData} selectedEmployee={selectedEmployee} bands={bandData} isChecked={isChecked} contextHolder={contextHolder} options={options} changeKeyword={changeKeyword} handleSubmit={handleSubmit} handleInputChange={handleInputChange} handleAutocompleteChange={handleAutocompleteChange} handleBandDropdownChange={handleBandDropdownChange} handleDuDropdownChange={handleDuDropdownChange} handleCheckboxChange={handleCheckboxChange}/>

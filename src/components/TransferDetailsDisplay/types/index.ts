@@ -37,6 +37,7 @@ export interface FormDataDisplayProps {
       status: number;
       rejection_reason: string;
       transfer_date: string; 
+      transfer_raised_on:string;
       employee_id: number;
       currentdu_id: number;
       targetdu_id: number;
@@ -44,3 +45,10 @@ export interface FormDataDisplayProps {
       
   };
   
+  export type TransferDataDisplayPropsType={
+    formData: FormDataDisplayProps|undefined
+    
+  }
+
+  export type TransferDetailsDisplayHandlerPropsType = {
+    setTransferDate: React.Dispatch<React.SetStateAction<string>>,  }

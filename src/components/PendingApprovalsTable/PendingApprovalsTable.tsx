@@ -1,18 +1,40 @@
 import React, { useEffect, useState } from 'react';
-// import './index.css';
-import { Table ,Button} from 'antd';
-import type { TableColumnsType, TableProps } from 'antd';
+import { Table ,Button, Flex} from 'antd';
+import type { TableColumnsType, TableProps} from 'antd';
+import { Pagination } from 'antd';
 import axios from 'axios';
 import {dataSourceType } from './types';
 import styles from './PendingApprovalsTable.module.css'
 import { useNavigate } from 'react-router-dom';
+import { Display } from 'react-bootstrap-icons';
+// import moment from moment;
 
 
-  
+  //Table to display both internal and external pending approvals of a du
 const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) => {
     
-    const navigate = useNavigate()
-    const columns: TableColumnsType<dataSourceType> = [
+  const navigate = useNavigate()
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize,setPageSize] = useState(10);
+  const totalItems = dataSource.length;
+  
+  const pageSizeOptions = ['10','20', '30', '40', '50'];
+
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const handlePageSizeChange = (current: number, size: number) => {
+    setCurrentPage(current); // Update current page if needed
+    setPageSize(size); // Update page size
+  };
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = Math.min(startIndex + pageSize, totalItems);
+  const currentItems = dataSource.slice(startIndex, endIndex);
+
+  const columns: TableColumnsType<dataSourceType> = [
         {
             title: 'Transfer Id',
             dataIndex: 'id',
@@ -22,7 +44,8 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
         {
             title: 'Employee Number',
             dataIndex: ['employee', 'employee_number'],
-                  sorter: (a, b) => a.employee.employee_number.localeCompare(b.employee.employee_number),
+            sorter: (a, b) => a.employee.employee_number.localeCompare(b.employee.employee_number),
+            width:'150px'
 
         },
 
@@ -52,10 +75,18 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
             sorter: (a, b) => a.targetdu.du_name.localeCompare(b.targetdu.du_name),
 
         },
+      //   {
+      //     title: 'Transfer Raised Date',
+      //     dataIndex: ['targetdu', 'du_name'],
+      //     // render:(date)=>moment(date).format("DD-MM-YYYY")
+      //     // sorter: (a, b) => a.targetdu.du_name.localeCompare(b.targetdu.du_name),
+
+      // },
         {
             title: 'View',
             render: ( _,record) => (
-            <button type='button' className={styles.button} onClick={() => handleButtonClick(record)}> <p style={{color:"#FFFF"}}>{'>'}</p>  </button>
+            <button type='button' className={styles.button} onClick={() => handleButtonClick(record)}> <p style={{color:"#FFFF"}}>{'>'}</p>          <span className={styles.approveText}>View Details</span>
+            </button>
             ),
           },
         ];
@@ -69,8 +100,19 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
         
     
   return (
-    <div>
-      <Table className={styles.table} columns={columns} dataSource={dataSource} />
+    <div style={{display:"flex",flexDirection:"column",justifyContent:"space-between",height:"420px"}}>
+      <Table className={styles.table} columns={columns}  dataSource={currentItems} pagination={false} scroll={{y:450}} />
+      <Pagination
+          size="small"
+          showSizeChanger
+          current={currentPage}
+          pageSize={pageSize}
+          total={totalItems}
+          onShowSizeChange={handlePageSizeChange}
+          onChange={handlePageChange}
+          pageSizeOptions={pageSizeOptions}
+          className={styles.pagination}
+        />
     </div>
   )
 }
