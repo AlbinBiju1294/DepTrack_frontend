@@ -22,7 +22,7 @@ const InitiateTransferFormHandler = () => {
   const { user } = useContext(UserContext);
 
   const [formData, setFormData] = useState<FormDataType>({});
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
 
   const navigate = useNavigate();

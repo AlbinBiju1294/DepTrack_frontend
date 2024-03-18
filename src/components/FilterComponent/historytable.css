@@ -8,8 +8,8 @@
     height: 20px;
 }
 
-.ant-table-body{
-    scrollbar-width: none;
+.ant-table-body {
+    scrollbar-width: thin;
 }
 
 

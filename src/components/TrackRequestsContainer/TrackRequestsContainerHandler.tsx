@@ -103,7 +103,7 @@ const TrackRequestsContainerHandler = () => {
       dataIndex: ["employee", "employee_number"],
       key: "employee_number",
       sorter: (a, b) => a.employee.employee_number.localeCompare(b.employee.employee_number),
-      width:'160px'
+      width:'152px'
     },
     {
       title: "Employee Name",
@@ -126,8 +126,8 @@ const TrackRequestsContainerHandler = () => {
     {
       title: "Status",
       dataIndex: "status",
+      width: user?.role === 1 ? '140px' : undefined,
       key: "status",
-      width:'140px',
       render: (status) => {
         let color = "green"; // Default color
         if (status === "Transfer Initiated") {
