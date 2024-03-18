@@ -11,11 +11,12 @@ import { Table, Pagination } from "antd";
 import type { TableColumnsType } from "antd";
 import { Tag } from "antd";
 import * as XLSX from "xlsx";
-import { TransferDetailsType } from "../TrackRequestsContainer/types";
-
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
 
 import moment from "moment";
-import UserContext, { UserContextProvider } from "../Contexts/UserContextProvider";
+import UserContext, {
+  UserContextProvider,
+} from "../Contexts/UserContextProvider";
 
 const FilterComponent = () => {
   const status = ["Completed", "Cancelled", "Rejected"];
@@ -38,7 +39,7 @@ const FilterComponent = () => {
   const transferDateToRef = useRef<HTMLInputElement>(null);
   const employeeNameRef = useRef<HTMLInputElement>(null);
   const employeeNumberRef = useRef<HTMLInputElement>(null);
-  const {user} = useContext(UserContext)
+  const { user } = useContext(UserContext);
 
   const options = duData.map((du) => {
     return du.du_name;
@@ -171,7 +172,6 @@ const FilterComponent = () => {
       console.error("Error:", error);
     }
   };
-  
 
   const columns: TableColumnsType<dataSourceType> = [
     {
@@ -211,77 +211,73 @@ const FilterComponent = () => {
       dataIndex: "transfer_date",
       render: (date) => moment(date).format("DD-MM-YYYY"),
     },
-  ]
-
-
+  ];
 
   //Excel Export: to Export the transfer history to excel
-    const fetchData = async () => {
-      try {        
-        const qparam =
-         {
-              ...formData,
-              
-            }
-          
-        const res = await axiosInstance.get(
-          "/api/v1/transfer/filter-transfers/",
-          {
-            params: qparam,
-          }
-        );
-        console.log('Response from API:', res.data);
- 
-  
-    const rows = res.data.data.results.map((transfer: dataSourceType) => ({
+  const fetchData = async () => {
+    try {
+      const qparam = {
+        ...formData,
+      };
 
-      id: transfer.id,
-      name: transfer.employee?.name,
-      employee_number: transfer.employee?.employee_number,
-      currentdu:transfer.currentdu?.du_name,
-      targetdu:transfer.targetdu?.du_name,
-      status:transfer.status,
-      transfer_date:transfer.transfer_date
-    }));
+      const res = await axiosInstance.get(
+        "/api/v1/transfer/filter-transfers/",
+        {
+          params: qparam,
+        }
+      );
+      console.log("Response from API:", res.data);
 
+      const rows = res.data.data.results.map((transfer: dataSourceType) => ({
+        id: transfer.id,
+        name: transfer.employee?.name,
+        employee_number: transfer.employee?.employee_number,
+        currentdu: transfer.currentdu?.du_name,
+        targetdu: transfer.targetdu?.du_name,
+        status: transfer.status,
+        transfer_date: transfer.transfer_date,
+      }));
 
-    const workbook = XLSX.utils.book_new();
-    const worksheet = XLSX.utils.json_to_sheet(rows);
+      const workbook = XLSX.utils.book_new();
+      const worksheet = XLSX.utils.json_to_sheet(rows);
 
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Transfers");
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Transfers");
 
-    XLSX.utils.sheet_add_aoa(worksheet, [
-      ["Transfer ID", "Employee Name", "Employee Number","Transferred From","Transferred To","Status","Transfer Date"],
-    ]);
+      XLSX.utils.sheet_add_aoa(worksheet, [
+        [
+          "Transfer ID",
+          "Employee Name",
+          "Employee Number",
+          "Transferred From",
+          "Transferred To",
+          "Status",
+          "Transfer Date",
+        ],
+      ]);
 
-    
-    const columnWidths = [
-      { wch: 15 },
-      { wch: 20 }, 
-      { wch: 15 }, 
-      { wch: 20 }, 
-      { wch: 20 }, 
-      { wch: 15 }, 
-      { wch: 15 }, 
-    ];
-    worksheet['!cols'] = columnWidths;
+      const columnWidths = [
+        { wch: 15 },
+        { wch: 20 },
+        { wch: 15 },
+        { wch: 20 },
+        { wch: 20 },
+        { wch: 15 },
+        { wch: 15 },
+      ];
+      worksheet["!cols"] = columnWidths;
 
+      XLSX.writeFile(workbook, "TransferHistory.xlsx", { compression: false });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-   
-    XLSX.writeFile(workbook, "TransferHistory.xlsx", { compression: false});
-        
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-  
-  
   return (
     <>
       <div className={styles.filter_container}>
         <div className={styles.first_row}>
           <div className={styles.eachdiv}>
-            <p className={styles.labels}>Transferred From:</p>
+            <p className={styles.labels}>Transferred From :</p>
             <Dropdown
               options={options}
               value="From"
@@ -293,9 +289,8 @@ const FilterComponent = () => {
               controlClassName={styles.input_drop_control}
             />
           </div>
-
           <div className={styles.eachdiv}>
-            <p className={styles.label_datefrom}>From:</p>
+            <p className={styles.label_datefrom}>From :</p>
             <input
               type="date"
               name="transfer_date"
@@ -305,17 +300,18 @@ const FilterComponent = () => {
             />
           </div>
           <div className={styles.eachdiv}>
-            <p className={styles.label_to}>To:</p>
+            <p className={styles.label_name}> Name :</p>
             <input
-              type="date"
-              name="transfer_date"
-              ref={transferDateToRef}
-              onChange={(e) => handleChange("end_date", e.target.value)}
-              className={styles.date_box}
+              type="text"
+              name="employee_name"
+              ref={employeeNameRef}
+              placeholder="Employee Name"
+              onChange={(e) => handleChange("employee_name", e.target.value)}
+              className={styles.input_box_name}
             />
           </div>
           <div className={styles.eachdiv}>
-            <p className={styles.label_status}>Status:</p>
+            <p className={styles.label_status}>Status :</p>
             <Dropdown
               options={status}
               value="status"
@@ -331,7 +327,7 @@ const FilterComponent = () => {
 
         <div className={styles.second_row}>
           <div className={styles.eachdiv}>
-            <p className={styles.label_transto}>Transferred To:</p>
+            <p className={styles.label_transto}>Transferred To :</p>
             <Dropdown
               options={options}
               value="To"
@@ -343,20 +339,19 @@ const FilterComponent = () => {
               controlClassName={styles.input_drop_control}
             />
           </div>
-
           <div className={styles.eachdiv}>
-            <p className={styles.label_name}> Name:</p>
+            <p className={styles.label_to}>To :</p>
             <input
-              type="text"
-              name="employee_name"
-              ref={employeeNameRef}
-              placeholder="Employee Name"
-              onChange={(e) => handleChange("employee_name", e.target.value)}
-              className={styles.input_box_name}
+              type="date"
+              name="transfer_date"
+              ref={transferDateToRef}
+              onChange={(e) => handleChange("end_date", e.target.value)}
+              className={styles.date_box}
             />
           </div>
+
           <div className={styles.eachdiv}>
-            <p className={styles.label_number}>Number:</p>
+            <p className={styles.label_number}>Number :</p>
             <input
               type="text"
               name="employee_number"
@@ -390,23 +385,15 @@ const FilterComponent = () => {
                 }}
                 type="submit"
                 size="small"
-                className={styles.button}
+                className={styles.button1}
               >
                 Clear
               </Button>
             </div>
-                                    
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={fetchData}
-                type="submit"
-                size="small"
-
-                className={styles.button}
-              >
-                EXPORT 
-              </Button>
+            <span className={styles.approveText}>Download History</span>
+            <div className={styles.downloadicon} onClick={fetchData}>
+              <FileDownloadIcon></FileDownloadIcon>
+            </div>
           </div>
         </div>
       </div>
@@ -417,8 +404,7 @@ const FilterComponent = () => {
           rowKey={(record) => record.id.toString()}
           dataSource={dataSource}
           pagination={false}
-          scroll={{y:300}}
-          
+          scroll={{ y: 300 }}
         />
         <Pagination
           size="small"
