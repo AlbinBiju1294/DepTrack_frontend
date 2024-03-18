@@ -25,12 +25,13 @@
     color: white;
     font-size: 11px;
     background-color: #D2042D;
-    border: none;
+    border: 1px solid #D2042D;
     padding: 3px;
     align-items: center;
     justify-content: center;
     border-radius: 3px;
     cursor: pointer;
+    margin-left: 25px;
   }
 
   .button {
@@ -43,6 +44,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 3px;
+    margin-left: 25px;
   }
 
   .cancel_popup_buttons{

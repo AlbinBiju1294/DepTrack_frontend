@@ -27,6 +27,11 @@ const AdminTable = ({
   onSubmit,
   open,
   pageSizeOptions,
+  changeOpen,
+  handleCloseChangeDuHead,
+  handleChangeDuHeadSelection,
+  changeDuHeadInputRef,
+  onChangeDuHeadSubmit
 }: AdminTablePropsType) => {
   return (
     <div className={styles.inner_container}>
@@ -103,6 +108,35 @@ const AdminTable = ({
             controlClassName={styles.dropdownControl}
             placeholder="Select an option"
             onChange={(selectedOption) => handleSelectHrbp(selectedOption)}
+          />
+        </div>
+      </Modal>
+      <Modal
+        open={changeOpen}
+        centered
+        title="Change Delivery Unit Head"
+        onCancel={handleCloseChangeDuHead}
+        footer={[
+          <Button
+            variant="outlined"
+            color="success"
+            type="submit"
+            size="small"
+            onClick={onChangeDuHeadSubmit}
+          >
+            Submit
+          </Button>,
+        ]}
+      >
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Select Delivery Unit Head :</label>
+          <Dropdown
+            options={duHeadOptions}
+            ref={changeDuHeadInputRef}
+            className={styles.dropdown}
+            controlClassName={styles.dropdownControl}
+            placeholder="Select an option"
+            onChange={(selectedOption) => handleChangeDuHeadSelection(selectedOption)}
           />
         </div>
       </Modal>

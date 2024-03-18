@@ -3,6 +3,7 @@ import TransferDetailsDisplayBody from '../TransferDetailsDisplayBody/TransferDe
 import {FormDataDisplayProps} from './types/index';
 import styles from './TransferDetailsDisplay.module.css';
 import {TransferDataDisplayPropsType} from './types/index'
+import moment from 'moment';
 
 
 export default function TransferDetailsDisplay({formData}:TransferDataDisplayPropsType) {
@@ -23,7 +24,7 @@ export default function TransferDetailsDisplay({formData}:TransferDataDisplayPro
               <TransferDetailsDisplayBody name="8.  Upskilling Suggestions:"/>
               <TransferDetailsDisplayBody name="9. Strength:"/>
               <TransferDetailsDisplayBody name="10. Transfer Date:"/>
-              {/* <TransferDetailsDisplayBody name="11. Transfer Raised on:"/> */}
+              <TransferDetailsDisplayBody name="11. Transfer Raised on:"/>
               <TransferDetailsDisplayBody name="12. Initiated by:"/>
           </div>
           </div>
@@ -39,7 +40,8 @@ export default function TransferDetailsDisplay({formData}:TransferDataDisplayPro
               <TransferDetailsDisplayBody value={formData?.details?.employee_skills ?? "-"} />
               <TransferDetailsDisplayBody value={formData?.details?.upskilling_suggestions ?? "-"} />
               <TransferDetailsDisplayBody value={formData?.details?.strengths ?? "-"} />
-              <TransferDetailsDisplayBody value={formData?formData.transfer_date: ""}/>
+              <TransferDetailsDisplayBody value={formData?moment(formData.transfer_date).format('DD-MM-YYYY'): ""}/>
+              <TransferDetailsDisplayBody value={formData?moment(formData.transfer_raised_on).format('DD-MM-YYYY'): ""}/>
               <TransferDetailsDisplayBody value={formData?formData.initiated_by.name:""}/>    
             </div>
           </div>

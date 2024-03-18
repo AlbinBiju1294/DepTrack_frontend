@@ -4,16 +4,18 @@ import styles from "./FilterComponent.module.css";
 import { Button } from "@mui/material";
 import Dropdown, { Option } from "react-dropdown";
 import "react-dropdown/style.css";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import { Du, dataSourceType, paginationtype } from "./types/index";
 import ReactDropdown from "react-dropdown";
 import { Table, Pagination } from "antd";
 import type { TableColumnsType } from "antd";
 import { Tag } from "antd";
 import * as XLSX from "xlsx";
+import { TransferDetailsType } from "../TrackRequestsContainer/types";
 
 
 import moment from "moment";
+import UserContext, { UserContextProvider } from "../Contexts/UserContextProvider";
 
 const FilterComponent = () => {
   const status = ["Completed", "Cancelled", "Rejected"];
@@ -23,11 +25,11 @@ const FilterComponent = () => {
   const [pagination, setPagination] = useState<paginationtype>({
     current: 1,
     total: 0,
-    pageSize: 6,
+    pageSize: 10,
   });
 
   const emptyForm = { limit: pagination.pageSize, offset: 0 };
-  const pageSizeOptions = ["5", "6", "8", "10", "20", "50"];
+  const pageSizeOptions = ["10", "20", "30", "40", "50"];
 
   const statusRef = useRef<ReactDropdown>(null);
   const fromRef = useRef<ReactDropdown>(null);
@@ -36,6 +38,7 @@ const FilterComponent = () => {
   const transferDateToRef = useRef<HTMLInputElement>(null);
   const employeeNameRef = useRef<HTMLInputElement>(null);
   const employeeNumberRef = useRef<HTMLInputElement>(null);
+  const {user} = useContext(UserContext)
 
   const options = duData.map((du) => {
     return du.du_name;
@@ -414,6 +417,8 @@ const FilterComponent = () => {
           rowKey={(record) => record.id.toString()}
           dataSource={dataSource}
           pagination={false}
+          scroll={{y:300}}
+          
         />
         <Pagination
           size="small"
