@@ -18,7 +18,7 @@
 
 .buttondiv {
   display: flex;
-  margin-left: 1.2rem;
+  margin-left: 1.1rem;
 }
 
 .second_row {
@@ -29,7 +29,7 @@
 }
 
 .labels {
-  font-size: 12.5px;
+  font-size: 12px;
   margin-left: 2rem;
   padding-right: 6px;
   cursor: default;
@@ -37,15 +37,15 @@
 }
 
 .label_transto {
-  font-size: 12.5px;
-  padding-right: 24px;
+  font-size: 12px;
+  padding-right: 23px;
   margin-left: -1.1rem;
   cursor: default;
   margin-top: 2px;
 }
 
 .label_datefrom {
-  font-size: 12.5px;
+  font-size: 12px;
   padding-right: 8px;
   margin-left: 0;
   cursor: default;
@@ -53,7 +53,7 @@
 }
 
 .label_name {
-  font-size: 12.5px;
+  font-size: 12px;
   padding-right: 17px;
   margin-left: 0;
   cursor: default;
@@ -61,7 +61,7 @@
 }
 
 .label_to {
-  font-size: 12.5px;
+  font-size: 12px;
   margin-left: -0.1rem;
   padding-right: 25px;
   margin-right: 0rem;
@@ -70,7 +70,7 @@
 }
 
 .label_number {
-  font-size: 12.5px;
+  font-size: 12px;
   padding-right: 6px;
   margin-left: 0rem;
   cursor: default;
@@ -78,7 +78,7 @@
 }
 
 .label_status {
-  font-size: 12.5px;
+  font-size: 12px;
   padding-right: 10px;
   margin-left: -0.3rem;
   cursor: default;
@@ -105,6 +105,7 @@
   width: 130px;
   border: 1px solid #7d7d7d;
   border-radius: 3px;
+  font-size: 12px;
   align-items: center;
   padding-left: 10px;
   margin-right: 38px;
@@ -112,6 +113,7 @@
 }
 
 .input_box_name {
+  font-size: 12px;
   height: 28px;
   width: 130px;
   border: 1px solid #7d7d7d;
@@ -177,18 +179,26 @@
 }
 
 .downloadicon {
+  position: relative;
+  display: inline-block;
   cursor: pointer;
-  margin-left: 1.5rem;
+  margin-left: 2rem;
   color: #1976d2;
 }
 
 .approveText {
   display: none;
-  font-size: 10px;
-  color: grey;
-  transition: opacity 0.3s ease; /* Adding transition for smooth effect */
+  position: absolute;
+  top: -20px; /* Adjust this value to position the text above the icon */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
 }
 
-.downloadicon:hover ~ .approveText {
+.iconpart:hover .approveText {
   display: block;
 }
