@@ -3,7 +3,7 @@ import { AdminTablePropsType } from "./types";
 import styles from "./AdminTable.module.css";
 import "./AntTable.css";
 import Dropdown from "react-dropdown";
-import { Button } from "@mui/material";
+import { Button } from "antd";
 
 const AdminTable = ({
   contextHolder,
@@ -56,13 +56,13 @@ const AdminTable = ({
       <Modal
         open={open}
         centered
-        title="Add Du"
+        title={<span className={styles.customTitle}>Add Du</span>}
         onCancel={handleCloseAddDu}
         footer={[
           <Button
-            variant="outlined"
-            color="success"
-            type="submit"
+            className={styles.approveSuccessButton}
+            key="submit"
+            type="primary"
             size="small"
             onClick={onSubmit}
           >
@@ -94,7 +94,7 @@ const AdminTable = ({
             onChange={(selectedOption) => handleSelectDuHead(selectedOption)}
           />
         </div>
-        <div className={styles.formGroup}>
+        <div className={styles.formGroup1}>
           <label className={styles.label}>Select HRBP :</label>
           <Dropdown
             ref={duHrbpInputRef}

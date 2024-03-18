@@ -83,13 +83,13 @@ const AdminTableHandler = () => {
     setFormData({});
     if (duHeadInputRef.current) {
       duHeadInputRef.current.setState({
-        selected: "Select Delivery Unit Head :",
+        selected: "Select An Option",
         isOpen: false,
       });
     }
     if (duHrbpInputRef.current) {
       duHrbpInputRef.current.setState({
-        selected: "Select HRBP ",
+        selected: "Select An Option",
         isOpen: false,
       });
     }
