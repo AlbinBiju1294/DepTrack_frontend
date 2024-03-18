@@ -46,6 +46,7 @@ const AdminTable = ({
         columns={columns}
         dataSource={adminDataSource}
         pagination={false}
+        scroll={{ y: 340 }}
       />
       <Pagination
         size="small"
@@ -115,7 +116,9 @@ const AdminTable = ({
         open={changeOpen}
         centered
         onCancel={handleCloseChangeDuHead}
-        title={<span className={styles.customTitle}>Change Delivery Unit Head</span>}
+        title={
+          <span className={styles.customTitle}>Change Delivery Unit Head</span>
+        }
         footer={[
           <Button
             className={styles.approveSuccessButton}
@@ -128,19 +131,21 @@ const AdminTable = ({
           </Button>,
         ]}
       >
-        <div className={styles.transferDateDiv} >
-                <label className={styles.transferDateLabel}>Select Project Manager :</label>
-                <Dropdown
-                  options={duHeadOptions}
-                  ref={changeDuHeadInputRef}
-                  className={styles.pmSelectDropdown}
-                  controlClassName={styles.input_drop_control}
-                  onChange={(selectedOption) =>
-                    handleChangeDuHeadSelection(selectedOption)
-                  }
-                  placeholder="Select an option"
-                />
-              </div>
+        <div className={styles.transferDateDiv}>
+          <label className={styles.transferDateLabel}>
+            Select Project Manager :
+          </label>
+          <Dropdown
+            options={duHeadOptions}
+            ref={changeDuHeadInputRef}
+            className={styles.pmSelectDropdown}
+            controlClassName={styles.input_drop_control}
+            onChange={(selectedOption) =>
+              handleChangeDuHeadSelection(selectedOption)
+            }
+            placeholder="Select an option"
+          />
+        </div>
         {/* <div className={styles.formGroup}>
           <label className={styles.label}>Select Delivery Unit Head :</label>
           <Dropdown
