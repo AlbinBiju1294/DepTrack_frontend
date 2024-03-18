@@ -3,7 +3,8 @@ import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import "./Initiate.css";
 import "react-dropdown/style.css";
-import { Button, Checkbox } from "@mui/material";
+// import { Button, Checkbox } from "@mui/material";
+import { Button } from "antd";
 import { Employee, InitiateTransferFormPropsType } from "./types";
 import Select from "react-select";
 import { getCurrentDate } from "../../utils/getCurrentDate";
@@ -23,6 +24,7 @@ const InitiateTransferForm = ({
   handleBandDropdownChange,
   handleDuDropdownChange,
   handleCheckboxChange,
+  loading
 }: InitiateTransferFormPropsType) => {
 
   let currentDate = getCurrentDate();
@@ -287,22 +289,7 @@ const InitiateTransferForm = ({
           </div>
         </div>
         <div className={styles.submit_area}>
-        <div>
-            <Checkbox
-              checked={isChecked}
-              onChange={handleCheckboxChange}
-              inputProps={{ "aria-label": "controlled" }}
-              size="small"
-            />
-            <label htmlFor="checkbox">Is Project Access Revoked</label>
-          </div>
-          <Button
-            variant="outlined"
-            color="primary"
-            type="submit"
-            disabled={false}  
-            size="small"
-          >
+          <Button key="submit" type="primary" htmlType="submit" loading={loading}>
             Submit
           </Button>
         </div>

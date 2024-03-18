@@ -114,8 +114,8 @@ const AdminTable = ({
       <Modal
         open={changeOpen}
         centered
-        title="Change Delivery Unit Head"
         onCancel={handleCloseChangeDuHead}
+        title={<span className={styles.customTitle}>Change Delivery Unit Head</span>}
         footer={[
           <Button
             className={styles.approveSuccessButton}
@@ -128,7 +128,20 @@ const AdminTable = ({
           </Button>,
         ]}
       >
-        <div className={styles.formGroup}>
+        <div className={styles.transferDateDiv} >
+                <label className={styles.transferDateLabel}>Select Project Manager :</label>
+                <Dropdown
+                  options={duHeadOptions}
+                  ref={changeDuHeadInputRef}
+                  className={styles.pmSelectDropdown}
+                  controlClassName={styles.input_drop_control}
+                  onChange={(selectedOption) =>
+                    handleChangeDuHeadSelection(selectedOption)
+                  }
+                  placeholder="Select an option"
+                />
+              </div>
+        {/* <div className={styles.formGroup}>
           <label className={styles.label}>Select Delivery Unit Head :</label>
           <Dropdown
             options={duHeadOptions}
@@ -140,7 +153,7 @@ const AdminTable = ({
               handleChangeDuHeadSelection(selectedOption)
             }
           />
-        </div>
+        </div> */}
       </Modal>
     </div>
   );
