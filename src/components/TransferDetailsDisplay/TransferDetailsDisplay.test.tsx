@@ -1,7 +1,6 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
-import TransferDetailsDisplay from './TransferDetailsDispaly';
-import { TransferDataDisplayPropsType } from './types';
+import TransferDetailsDisplay from '../../components/TransferDetailsDisplay/TransferDetailsDispaly';
+import {TransferDataDisplayPropsType} from '../../components/TransferDetailsDisplay/types/index'
  
 describe('TransferDetailsDisplay component', () => {
   const mockFormData :TransferDataDisplayPropsType= {
@@ -52,7 +51,7 @@ describe('TransferDetailsDisplay component', () => {
   it('renders transfer details correctly', () => {
     render(<TransferDetailsDisplay {...mockFormData} />);
    
-    expect(screen.getByText('1. Employee id :')).toBeInTheDocument();
+    expect(screen.getByText('1. Employee id:')).toBeInTheDocument();
     expect(screen.getByText('2. Current Department:')).toBeInTheDocument();
     expect(screen.getByText('3. Band:')).toBeInTheDocument();
     expect(screen.getByText('4. Total Experience:')).toBeInTheDocument();

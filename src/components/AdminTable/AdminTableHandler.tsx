@@ -82,7 +82,6 @@ const AdminTableHandler = () => {
   };
 
   const handleChangeDuHeadSelection = (selectedOption: Option) => {
-    console.log(changeFormData);
     const selectedDuhead = duHeadsCandidates.find(
       (du) => du.name === selectedOption.value
     );
@@ -139,7 +138,6 @@ const AdminTableHandler = () => {
     try {
       const formDataKeys = Object.keys(FormData);
       if (formDataKeys.length !== 3) {
-        console.log("Please fill in all fields.");
         await messageApi.error("All Fields Are Required", 2);
         return;
       }
@@ -152,20 +150,17 @@ const AdminTableHandler = () => {
         await messageApi.error(response.message, 2);
       }
     } catch (error) {
-      console.error("Error:", error);
       alert("An error occurred while processing the transfer.");
     }
   };
 
   const onChangeDuHeadSubmit = async () => {
-    console.log(changeFormData);
     try {
       const res = await axiosInstance.post(
         "api/v1/employee/update-duhead/",
         changeFormData
       );
       setChangeFormData({});
-      console.log(res);
       setChangeOpen(false);
       fetchDeliveryUnitData(setAdminData);
       messageApi.success(res.data.message);

@@ -5,6 +5,7 @@ import TransferDetailsEmployeeData from '../TransferDetailsEmployeeData/Transfer
 import TransferButtonComponent from '../TransferButtonComponent/TransferButtonComponent';
 import TransferButtonComponentHandler from '../TransferButtonComponent/TransferButtonComponentHandler';
 import TransferDetailsDisplayHandler from '../TransferDetailsDisplay/TransferDetailsDisplayHandler';
+import TransferDetailsEmployeeDataHandler from '../TransferDetailsEmployeeData/TransferDetailsEmployeeDataHandler';
 
 const TransferDetailsDisplayContainer = () => {
 
@@ -14,7 +15,7 @@ const TransferDetailsDisplayContainer = () => {
 
   return (
     <div className={styles.inner_container}>
-        <TransferDetailsEmployeeData setCurrentDuNumber={setCurrentDuNumber}/>
+        <TransferDetailsEmployeeDataHandler setCurrentDuNumber={setCurrentDuNumber}/>
         <TransferDetailsDisplayHandler setTransferDate={setTransferDate} />
         <TransferButtonComponentHandler transferDate={transferDate} currentDuNumber={currentDuNumber}/>
     </div>
