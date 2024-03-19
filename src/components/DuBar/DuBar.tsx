@@ -11,6 +11,7 @@ const DuBar = () => {
   const [ydata, setYdata] = useState<Array<number>>([]);
   const [isLoaded,setIsLoaded] = useState(false)
 
+  //for fetching bargraph data on rendering
   useEffect(() => {
     fetchBarGraphData(setDuData)
   }, []);
@@ -24,6 +25,11 @@ const DuBar = () => {
         if(data.du_name == "TalentPool")
         {
           newxData.push("TP");
+          newyData.push(data.no_of_transfers as number);
+        }
+        else if(data.du_name == "PitStop")
+        {
+          newxData.push("PS");
           newyData.push(data.no_of_transfers as number);
         }
         else
