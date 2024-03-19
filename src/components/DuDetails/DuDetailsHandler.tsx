@@ -1,5 +1,5 @@
 import { DuDetailsProps } from './types';
-import { fetchDuDetails } from './api/fetchDuDetails';
+import { fetchDuDetailsData } from './api/fetchDuDetailsData';
 import { useEffect, useState } from 'react';
 import DuDetails from './DuDetails';
 
@@ -8,7 +8,7 @@ const DuDetailsHandler = () => {
   const [duData,setDuData] = useState<DuDetailsProps>();
 
   useEffect(() => {
-    fetchDuDetails(setDuData);
+    fetchDuDetailsData(setDuData);
     }, []);
    
   return (

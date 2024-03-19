@@ -1,4 +1,4 @@
-import { PieChart } from '@mui/x-charts/PieChart';
+import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
 import {  dataType } from './types';
 import styles from'./DashboardPieChart.module.css'
 
@@ -9,16 +9,31 @@ const DashboardPieChart = ({data}: {data:dataType}) => {
     <PieChart
       series={[
         {
-            outerRadius: 80,
+          arcLabel: (item) => {
+            if(item.label === 'TalentPool')
+              item.label = 'TP';
+            else if(item.label === 'PitStop')
+              item.label = 'PS';
+            return `${item.label} (${item.value})`;
+          },
+          // arcLabelMinAngle: 45,
+            outerRadius: 90,
             innerRadius: 40,
             cornerRadius: 2,
             data: data,
             highlightScope: { faded: 'global', highlighted: 'item' },
             faded: { innerRadius: 40, additionalRadius: -5},
-            cx: 250,
+            cx: 230,
             cy: 120
         }
       ]}
+      sx={{
+        [`& .${pieArcLabelClasses.root}`]: {
+          fill: 'white',
+          fontWeight: 'light',
+          fontSize: 9
+        },
+      }}
       height={300}
       width={350}
       slotProps={{

@@ -10,7 +10,6 @@ return (
     <div className={`${styles.card}`}>
      
       <DuDetailsCard name="Delivery Unit Name :" value={duData?duData.du_name: ""}/>
-      {/* <DuDetailsCard name="Number Of PMs :" value={duData?duData.no_of_pms:""}/> */}
       <DuDetailsCard name="Number Of Employees :" value={duData?duData.no_of_employees:""}/>
  
     </div>
