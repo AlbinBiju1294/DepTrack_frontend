@@ -15,9 +15,11 @@
 .eachdiv {
   display: flex;
 }
+
 .buttondiv {
   display: flex;
-  margin-left: 0.9rem;
+  margin-top: 0.1rem;
+  margin-left: 1rem;
 }
 
 .second_row {
@@ -28,7 +30,7 @@
 }
 
 .labels {
-  font-size: 12.5px;
+  font-size: 11px;
   margin-left: 2rem;
   padding-right: 6px;
   cursor: default;
@@ -36,15 +38,15 @@
 }
 
 .label_transto {
-  font-size: 12.5px;
-  padding-right: 24px;
+  font-size: 11px;
+  padding-right: 22px;
   margin-left: -1.1rem;
   cursor: default;
   margin-top: 2px;
 }
 
 .label_datefrom {
-  font-size: 12.5px;
+  font-size: 11px;
   padding-right: 8px;
   margin-left: 0;
   cursor: default;
@@ -52,46 +54,46 @@
 }
 
 .label_name {
-  font-size: 12.5px;
-  padding-right: 1px;
+  font-size: 11px;
+  padding-right: 17px;
   margin-left: 0;
   cursor: default;
   margin-top: 2px;
 }
 
 .label_to {
-  font-size: 12.5px;
-  margin-left: 0.8rem;
-  padding-right: 10px;
-  margin-right: 2rem;
+  font-size: 11px;
+  margin-left: -0.1rem;
+  padding-right: 23px;
+  margin-right: 0rem;
   cursor: default;
   margin-top: 2px;
 }
 
 .label_number {
-  font-size: 12.5px;
+  font-size: 11px;
   padding-right: 6px;
-  margin-left: -0.2rem;
+  margin-left: 0rem;
   cursor: default;
   margin-top: 2px;
 }
 
 .label_status {
-  font-size: 12.5px;
+  font-size: 11px;
   padding-right: 10px;
-  margin-left: 0.8rem;
+  margin-left: -0.3rem;
   cursor: default;
   margin-top: 2px;
 }
 
 .input_drop_control {
-  height: 28px;
-  width: 120px;
+  height: 28px !important;
+  width: 120px !important;
   border: 1px solid #7d7d7d !important;
   border-radius: 3px !important;
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 11px !important;
   margin-right: 15px;
 }
 
@@ -99,18 +101,28 @@
   padding-right: 3px;
 }
 
+.drop_menu {
+  width: 87%;
+}
+.drop_menu1 {
+  width: 89%;
+}
+
 .input_box {
   height: 28px;
   width: 130px;
   border: 1px solid #7d7d7d;
   border-radius: 3px;
+  font-size: 12px;
   align-items: center;
   padding-left: 10px;
   margin-right: 38px;
+  font-size: 11px;
   color: #7d7d7d;
 }
 
 .input_box_name {
+  font-size: 12px;
   height: 28px;
   width: 130px;
   border: 1px solid #7d7d7d;
@@ -118,6 +130,7 @@
   align-items: center;
   padding-left: 10px;
   margin-right: 20.5px;
+  font-size: 11px;
   color: #7d7d7d;
 }
 
@@ -133,8 +146,14 @@
   border-radius: 3px;
   align-items: center;
   padding-left: 10px;
-  margin-right: 5px;
+  margin-right: 20px;
+  font-size: 11px;
   color: #7d7d7d;
+}
+
+.date_box:focus {
+  border: 1px solid blue;
+  outline: 1px solid blue;
 }
 
 .input_box:focus {
@@ -143,12 +162,19 @@
 }
 
 .button {
-  padding-right: 5px;
-  margin-right: 5px!important;
+  padding-right: 10px;
+  margin-right: 5px !important;
   margin-left: 2px;
-  width:30px;
-  height:27px;
+  width: 30px;
+  height: 27px;
+}
 
+.button1 {
+  padding-right: 5px;
+  margin-right: 5px !important;
+  margin-left: 7px;
+  width: 30px;
+  height: 27px;
 }
 
 .pagination {
@@ -161,4 +187,12 @@
   justify-content: space-between;
   flex-direction: column;
   min-height: 360px;
+}
+
+.downloadicon {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 2rem;
+  color: #1976d2;
 }

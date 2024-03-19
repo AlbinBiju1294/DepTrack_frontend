@@ -1,19 +1,22 @@
 .ant-table-row {
-    font-size: 11px;
-    height: 10px;
-  }
-
-.ant-table-thead{
-    font-size: 11px;
-    height: 20px;
+  font-size: 11px;
+  height: 10px;
 }
 
-.ant-table-body{
-    scrollbar-width: none;
+.ant-table-thead {
+  font-size: 11px;
+  height: 20px;
 }
 
+.ant-table-body {
+  scrollbar-width: thin;
+}
 
-.ant-table-cell{
-    padding-top: 13px !important;
-    padding-bottom: 13px !important;
+.ant-table-cell {
+  padding-top: 13px !important;
+  padding-bottom: 13px !important;
+}
+
+.Dropdown-option {
+  font-size: 11px;
 }

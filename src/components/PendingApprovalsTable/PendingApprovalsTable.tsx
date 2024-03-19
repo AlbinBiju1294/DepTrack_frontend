@@ -60,7 +60,6 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
             title: 'Initiated From',
             dataIndex: ['currentdu', 'du_name'],
             sorter: (a, b) => a.currentdu.du_name.localeCompare(b.currentdu.du_name),
-
         },
 
         {
@@ -101,7 +100,7 @@ const PendingApprovalsTable = ({dataSource}: {dataSource: dataSourceType[]} ) =>
     
   return (
     <div style={{display:"flex",flexDirection:"column",justifyContent:"space-between",height:"420px"}}>
-      <Table className={styles.table} columns={columns}  dataSource={currentItems} pagination={false} scroll={{y:450}} />
+      <Table className={styles.table} columns={columns}  dataSource={currentItems} pagination={false} scroll={{y:340}} />
       <Pagination
           size="small"
           showSizeChanger

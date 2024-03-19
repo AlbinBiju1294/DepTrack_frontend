@@ -23,7 +23,7 @@ const TrackRequestsContainer = ({
     <>
       {contextHolder}
       <div className={styles.inner_container}>
-        <Table columns={columns} dataSource={currentItems} pagination={false} scroll={{y:380}} />
+        <Table columns={columns} dataSource={currentItems} pagination={false} scroll={{y:390}} />
         <Pagination
           size="small"
           showSizeChanger

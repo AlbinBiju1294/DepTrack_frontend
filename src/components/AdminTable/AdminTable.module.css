@@ -80,7 +80,7 @@
 }
 
 .formGroup {
-  margin-bottom: 4px;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: center;
 }
@@ -92,8 +92,22 @@
 }
 
 .label {
-  font-size: 12px;
   margin-top: 0.3rem;
+  color: var(--secondary-color);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 0.8rem;
+  margin-right: 1rem;
+}
+
+.label1 {
+  margin-top: 0.3rem;
+  color: var(--secondary-color);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 0.8rem;
+  margin-left: 0.8rem;
+  margin-right: 1rem;
 }
 
 .input {
@@ -110,7 +124,7 @@
 }
 
 .dropdownControl {
-  width: 100%;
+  width: 100% !important;
 }
 
 .customTitle {
@@ -118,4 +132,46 @@
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 1rem;
+}
+
+.customTitle {
+  color: var(--secondary-color);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.approveSuccessButton {
+  margin-right: 13px;
+}
+
+.modalContentContainer {
+  display: flex;
+  flex-direction: column;
+  /* height: 8rem; */
+  justify-content: space-around;
+}
+
+.transferDateDiv {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+.transferDateDiv .transferDateLabel {
+  color: var(--secondary-color);
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 0.8rem;
+  min-width: 13rem;
+}
+
+.transferDateDiv .transferDateInput,
+.input_drop_control {
+  width: 14rem;
+  height: 1.6rem;
+  border: 1px solid gray;
+  border-radius: 0.3rem;
+  color: gray;
+  padding-top: 0px;
+  padding-left: 8px;
 }

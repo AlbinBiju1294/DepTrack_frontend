@@ -49,6 +49,7 @@ export interface InitiateTransferFormPropsType {
   handleBandDropdownChange:(selectedOption: string | undefined) => void;
   handleDuDropdownChange:(selectedOption: Du | undefined) => void;
   handleCheckboxChange:() => void;
+  loading:boolean;
 }
 
 export interface optionType{

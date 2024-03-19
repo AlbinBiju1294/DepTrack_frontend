@@ -20,6 +20,7 @@ const mockProps = {
   handleBandDropdownChange: jest.fn(),
   handleDuDropdownChange: jest.fn(),
   handleCheckboxChange: jest.fn(),
+  loading:false
 };
 
 describe('InitiateTransferForm', () => {

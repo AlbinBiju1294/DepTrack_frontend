@@ -22,8 +22,9 @@ const InitiateTransferFormHandler = () => {
   const { user } = useContext(UserContext);
 
   const [formData, setFormData] = useState<FormDataType>({});
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const [loading,setLoading] = useState<boolean>(false)
 
   const navigate = useNavigate();
 
@@ -61,15 +62,19 @@ const InitiateTransferFormHandler = () => {
   // function to post the transfer details
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true)
     try {
       const res = await postTransferData(formData);
       if (res?.status) {
+        setLoading(false)
         await messageApi.success(res.message, 1);
         navigate("/trackrequests");
       } else if (res?.status == false) {
+        setLoading(false)
         await messageApi.error(res.message, 1);
       }
     } catch (error) {
+      setLoading(false)
       console.error("Error:", error);
       alert("An error occurred while processing the transfer.");
     }
@@ -144,7 +149,7 @@ const InitiateTransferFormHandler = () => {
   
   return (
     <div>
-        <InitiateTransferForm employeeData={employeeData} selectedEmployee={selectedEmployee} bands={bandData} isChecked={isChecked} contextHolder={contextHolder} options={options} changeKeyword={changeKeyword} handleSubmit={handleSubmit} handleInputChange={handleInputChange} handleAutocompleteChange={handleAutocompleteChange} handleBandDropdownChange={handleBandDropdownChange} handleDuDropdownChange={handleDuDropdownChange} handleCheckboxChange={handleCheckboxChange}/>
+        <InitiateTransferForm loading={loading} employeeData={employeeData} selectedEmployee={selectedEmployee} bands={bandData} isChecked={isChecked} contextHolder={contextHolder} options={options} changeKeyword={changeKeyword} handleSubmit={handleSubmit} handleInputChange={handleInputChange} handleAutocompleteChange={handleAutocompleteChange} handleBandDropdownChange={handleBandDropdownChange} handleDuDropdownChange={handleDuDropdownChange} handleCheckboxChange={handleCheckboxChange}/>
     </div>
   )
 }
