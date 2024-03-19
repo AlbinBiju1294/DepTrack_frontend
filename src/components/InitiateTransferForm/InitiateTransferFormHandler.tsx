@@ -76,7 +76,6 @@ const InitiateTransferFormHandler = () => {
       }
     } catch (error) {
       setLoading(false)
-      console.error("Error:", error);
       alert("An error occurred while processing the transfer.");
     }
   };
@@ -89,7 +88,6 @@ const InitiateTransferFormHandler = () => {
     } else {
       newStatus = 1;
     }
-    console.log(newStatus);
     setFormData((prevState) => ({
       ...prevState,
       currentdu_id: user?.du_id,
@@ -131,7 +129,6 @@ const InitiateTransferFormHandler = () => {
 
   //for handling band dropdown change
   const handleBandDropdownChange = (selectedOption: string | undefined) => {
-    console.log(selectedOption)
     setFormData({
       ...formData,
       employee_band: selectedOption, // Assuming selectedOption.value is the band value

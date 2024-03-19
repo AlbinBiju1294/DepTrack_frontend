@@ -50,8 +50,6 @@ const TrackRequestsContainerHandler = () => {
       setInitiatedTransfers(newInitiatedTransfers);
       messageApi.info("Request cancelled", 2);
       handleCancel();
-
-      console.log("Request successfully cancelled");
     } catch (error) {
       console.error("Error cancelling request", error);
     }
@@ -72,7 +70,6 @@ const TrackRequestsContainerHandler = () => {
         const res = await axiosInstance.get(
           `/api/v1/transfer/track-initiated-requests/?du_id=${du_id}`
         );
-        console.log("Response from API - initiated Requests:", res.data.data);
         if(user?.role == 2)
         {
           const newInitiatedTransfers = res.data.data.filter((initiatedTransfer:TransferDetailsType) => {
@@ -83,7 +80,6 @@ const TrackRequestsContainerHandler = () => {
         else{
           setInitiatedTransfers(res.data.data);
         }
-        console.log(initiatedTransfers);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -147,8 +143,6 @@ const TrackRequestsContainerHandler = () => {
                 onClick={() => {
                     setOpen(true);
                     setSelectedTransfer(record);
-                    console.log(record.id);
-                    console.log(record);
                 }}>
                 Cancel
             </button>

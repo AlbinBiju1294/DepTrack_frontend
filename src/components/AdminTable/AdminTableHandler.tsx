@@ -171,7 +171,6 @@ const AdminTableHandler = () => {
         });
       }
     } catch (e: any) {
-      console.log(e);
       if (e.response && e.response.data && e.response.data.error) {
         messageApi.error(e.response.data.error);
       } else {

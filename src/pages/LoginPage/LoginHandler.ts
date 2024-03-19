@@ -19,8 +19,6 @@ const useLoginHandler = (onLoginSuccess: () => void) => {
       try {
         const response = await instance.loginPopup(loginRequest);
         const newGraph = await callMsGraph(response.accessToken)
-        console.log(newGraph)
-        console.log(newGraph.userPrincipalName)
         try {
             const login_response = await axios.post(
               "http://127.0.0.1:8000/api/v1/users/login/",
@@ -42,7 +40,6 @@ const useLoginHandler = (onLoginSuccess: () => void) => {
               config
             );
       
-            console.log('hello',userResponse);
             localStorage.setItem("user", JSON.stringify(userResponse.data.data));
             setUser(userResponse.data.data);
       
@@ -65,7 +62,6 @@ const useLoginHandler = (onLoginSuccess: () => void) => {
           }
         onLoginSuccess();
       } catch (e) {
-        console.log('error')
         console.error(e);
       } finally {
         setLoading(false); // Disable loading regardless of outcome
