@@ -57,11 +57,9 @@ const useLoginHandler = (onLoginSuccess: () => void) => {
                 alert(responseData.error)
                 }
               } else {
-                // Other Axios errors
                 console.error("Axios error:", axiosError.message);
               }
             } else {
-              // Other errors
               console.error("Error:", error);
             }
           }

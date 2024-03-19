@@ -63,9 +63,6 @@ export default function LoginPage() {
               justifyContent: "space-between",
             }}
           >
-            <Box sx={{ gap: 2, display: "flex", alignItems: "center" }}>
-              <Typography level="title-lg">MPT</Typography>
-            </Box>
           </Box>
           <Box
             component="main"

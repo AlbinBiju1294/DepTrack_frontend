@@ -1,6 +1,5 @@
 import React from 'react'
 import TransferCounts from '../TransferCounts/TransferCounts'
-import { Paper } from '@mui/material'
 import styles from './TransferCountsDisplay.module.css'
 
 const TransferCountsDisplay = () => {

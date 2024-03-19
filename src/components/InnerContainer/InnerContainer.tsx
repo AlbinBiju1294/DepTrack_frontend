@@ -15,7 +15,11 @@ const InnerContainer = () => {
         <DuBar></DuBar>
         <DashboardPieChart></DashboardPieChart>
       </div>
-        <p className={styles.du_stats}>DU Stats</p>
+        <p className={styles.du_stats}>DU Stats<span className={styles.range}><span className={styles.square_div}></span>Last 30 days</span></p>
+        {/* <div className={styles.bar_graph_label}>
+        <div className={styles.square_div}></div>
+        <p>Last 30 days</p>
+        </div> */}
         <div className={styles.du_transfer_details}>
         <TransferCountsDisplay></TransferCountsDisplay>
         <DuDetails></DuDetails>
