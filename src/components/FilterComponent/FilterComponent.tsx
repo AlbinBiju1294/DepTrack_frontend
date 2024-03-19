@@ -176,24 +176,31 @@ const FilterComponent = () => {
   const columns: TableColumnsType<dataSourceType> = [
     {
       title: "Transfer Id",
-      dataIndex: "id",
+      dataIndex: ["id"],
       key: "id",
+      sorter: (a, b) => a.id - b.id,
     },
     {
       title: "Employee Number",
       dataIndex: ["employee", "employee_number"],
+      sorter: (a, b) =>
+        a.employee.employee_number.localeCompare(b.employee.employee_number),
+      width: "152px",
     },
     {
       title: "Employee Name",
       dataIndex: ["employee", "name"],
+      sorter: (a, b) => a.employee.name.localeCompare(b.employee.name),
     },
     {
       title: "Transferred From",
       dataIndex: ["currentdu", "du_name"],
+      sorter: (a, b) => a.currentdu.du_name.localeCompare(b.currentdu.du_name),
     },
     {
       title: "Transferred To",
       dataIndex: ["targetdu", "du_name"],
+      sorter: (a, b) => a.targetdu.du_name.localeCompare(b.targetdu.du_name),
     },
     {
       title: "Status",
@@ -205,11 +212,13 @@ const FilterComponent = () => {
         else if (status === "Cancelled") color = "#808080";
         return <Tag color={color}>{status}</Tag>;
       },
+      sorter: (a, b) => a.status.localeCompare(b.status),
     },
     {
       title: "Transfer Date",
       dataIndex: "transfer_date",
       render: (date) => moment(date).format("DD-MM-YYYY"),
+      sorter: (a, b) => a.transfer_date.localeCompare(b.transfer_date),
     },
   ];
 
@@ -277,7 +286,7 @@ const FilterComponent = () => {
       <div className={styles.filter_container}>
         <div className={styles.first_row}>
           <div className={styles.eachdiv}>
-            <p className={styles.labels}>Transferred From :</p>
+            <p className={styles.labels}>Transferred From:</p>
             <Dropdown
               options={options}
               value="From"
@@ -286,11 +295,12 @@ const FilterComponent = () => {
                 handleDuDropdownChange(selectedOption, "currentdu_id")
               }
               className={styles.dropdown}
+              menuClassName={styles.drop_menu}
               controlClassName={styles.input_drop_control}
             />
           </div>
           <div className={styles.eachdiv}>
-            <p className={styles.label_datefrom}>From :</p>
+            <p className={styles.label_datefrom}>From:</p>
             <input
               type="date"
               name="transfer_date"
@@ -321,13 +331,14 @@ const FilterComponent = () => {
               }
               className={styles.dropdown_status}
               controlClassName={styles.input_drop_control}
+              menuClassName={styles.drop_menu1}
             />
           </div>
         </div>
 
         <div className={styles.second_row}>
           <div className={styles.eachdiv}>
-            <p className={styles.label_transto}>Transferred To :</p>
+            <p className={styles.label_transto}>Transferred To:</p>
             <Dropdown
               options={options}
               value="To"
@@ -337,6 +348,7 @@ const FilterComponent = () => {
               }
               className={styles.dropdown}
               controlClassName={styles.input_drop_control}
+              menuClassName={styles.drop_menu}
             />
           </div>
           <div className={styles.eachdiv}>
@@ -351,7 +363,7 @@ const FilterComponent = () => {
           </div>
 
           <div className={styles.eachdiv}>
-            <p className={styles.label_number}>Number :</p>
+            <p className={styles.label_number}>Number:</p>
             <input
               type="text"
               name="employee_number"

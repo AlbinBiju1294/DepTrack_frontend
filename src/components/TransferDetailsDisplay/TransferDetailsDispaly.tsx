@@ -14,7 +14,7 @@ export default function TransferDetailsDisplay({formData}:TransferDataDisplayPro
         <div className={styles.Form_Inner_container}>
           <div className={styles.Form_left_side}>
             <div className={`${styles.Form_data}`}>
-              <TransferDetailsDisplayBody name="1.  Employee id :" /> 
+              <TransferDetailsDisplayBody name="1.  Employee id:" /> 
               <TransferDetailsDisplayBody name="2.  Current Department:" />
               <TransferDetailsDisplayBody name="3.  Band:"/>
               <TransferDetailsDisplayBody name="4.  Total Experience:"/>
