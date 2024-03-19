@@ -1,5 +1,6 @@
 export type TransferCountsProps = {
-    status: string;
+    transferStatus: string;
+    transferCount : TransferCountData
 }
  
 export type TransferCountData = {

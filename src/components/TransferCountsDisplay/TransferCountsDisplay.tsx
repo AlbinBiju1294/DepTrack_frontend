@@ -2,6 +2,7 @@ import React from 'react'
 import TransferCounts from '../TransferCounts/TransferCounts'
 import { Paper } from '@mui/material'
 import styles from './TransferCountsDisplay.module.css'
+import TransferCountsHandler from '../TransferCounts/TransferCountsHandler'
 
 const TransferCountsDisplay = () => {
     const transferStatuses = ["Initiated", "Completed", "Cancelled", "Rejected"]
@@ -10,7 +11,7 @@ const TransferCountsDisplay = () => {
       <div className={styles.transferContainer}>
           {transferStatuses.map( transferStatus => (
              <div className={styles.transferContainerChild}>
-             <TransferCounts status={transferStatus}/>
+             <TransferCountsHandler transferStatus={transferStatus}/>
              </div>
           ))}
         </div>
