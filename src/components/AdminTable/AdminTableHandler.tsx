@@ -20,7 +20,7 @@ import { postNewDu } from "./api/postNewDu";
 import AdminTable from "./AdminTable";
 import ReactDropdown from "react-dropdown";
 import axiosInstance from "../../config/AxiosConfig";
-import { AxiosError } from "axios";
+
 
 const AdminTableHandler = () => {
   const [adminDataSource, setAdminData] = useState<adminDataSourceType[]>([]);

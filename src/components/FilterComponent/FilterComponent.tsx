@@ -295,6 +295,7 @@ const FilterComponent = () => {
                 handleDuDropdownChange(selectedOption, "currentdu_id")
               }
               className={styles.dropdown}
+              menuClassName={styles.drop_menu}
               controlClassName={styles.input_drop_control}
             />
           </div>
@@ -330,6 +331,7 @@ const FilterComponent = () => {
               }
               className={styles.dropdown_status}
               controlClassName={styles.input_drop_control}
+              menuClassName={styles.drop_menu1}
             />
           </div>
         </div>
@@ -346,6 +348,7 @@ const FilterComponent = () => {
               }
               className={styles.dropdown}
               controlClassName={styles.input_drop_control}
+              menuClassName={styles.drop_menu}
             />
           </div>
           <div className={styles.eachdiv}>

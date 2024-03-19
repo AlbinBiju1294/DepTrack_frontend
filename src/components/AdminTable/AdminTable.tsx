@@ -62,7 +62,7 @@ const AdminTable = ({
       <Modal
         open={open}
         centered
-        title={<span className={styles.customTitle}>Add Du</span>}
+        title={<span className={styles.customTitle}>Add DU</span>}
         onCancel={handleCloseAddDu}
         footer={[
           <Button
@@ -77,7 +77,7 @@ const AdminTable = ({
         ]}
       >
         <div className={styles.formGroup}>
-          <label className={styles.label}>Enter Delivery Unit Name:</label>
+          <label className={styles.label}>Enter Delivery Unit Name :</label>
           <input
             type="text"
             required
@@ -101,7 +101,7 @@ const AdminTable = ({
           />
         </div>
         <div className={styles.formGroup1}>
-          <label className={styles.label}>Select HRBP :</label>
+          <label className={styles.label1}>Select HRBP :</label>
           <Dropdown
             ref={duHrbpInputRef}
             options={hrbpOptions}
