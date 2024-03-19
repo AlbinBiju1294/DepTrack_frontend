@@ -1,4 +1,4 @@
-import axiosInstance from "../../config/AxiosConfig"
+import axiosInstance from "../../../config/AxiosConfig"
 import { pieChartDataType } from "../types";
 
 export const getPieChartData = async (setPieChartData: React.Dispatch<React.SetStateAction<pieChartDataType[]>>) => {

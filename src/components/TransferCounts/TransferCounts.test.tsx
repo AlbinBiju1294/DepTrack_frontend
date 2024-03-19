@@ -4,13 +4,12 @@ import TransferCounts from './TransferCounts';
 
 describe('TransferCounts component', () => {
   const transferCountMock = {
-    'Transfer Pending': 10,
+    'Transfer Initiated': 10,
     'Transfer Completed': 20,
-    // Add more mock data as needed
   };
 
-  it('renders the transfer status and count correctly for "Pending"', () => {
-    const transferStatus = 'Pending';
+  it('renders the transfer status and count correctly for "Initiated"', () => {
+    const transferStatus = 'Initiated';
     const { getByText } = render(
       <TransferCounts transferStatus={transferStatus} transferCount={transferCountMock} />
     );
