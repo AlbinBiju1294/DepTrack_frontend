@@ -1,6 +1,4 @@
-import * as React from 'react';
 import TransferDetailsDisplayBody from '../TransferDetailsDisplayBody/TransferDetailsDisplayBody';
-import {FormDataDisplayProps} from './types/index';
 import styles from './TransferDetailsDisplay.module.css';
 import {TransferDataDisplayPropsType} from './types/index'
 import moment from 'moment';

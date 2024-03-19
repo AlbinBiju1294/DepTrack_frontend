@@ -27,6 +27,11 @@ const DuBar = () => {
           newxData.push("TP");
           newyData.push(data.no_of_transfers as number);
         }
+        else if(data.du_name == "PitStop")
+        {
+          newxData.push("PS");
+          newyData.push(data.no_of_transfers as number);
+        }
         else
         {
           newxData.push(data.du_name as string);
