@@ -4,6 +4,9 @@ import styles from './TransferButtonComponent.module.css';
 import { TransferButtonComponentPropsType } from './types';
 import { getCurrentDate } from '../../utils/getCurrentDate';
 
+/*Provides the button and its functionalities to show the modal in transfer details display page that is the 
+modals for approval and rejection of transfer requests by current DU head and target DU head.*/
+
 const TransferButtonComponent = ({
   contextHolder, 
   showModal, 

@@ -1,6 +1,11 @@
 import { Option } from "react-dropdown";
 import { User } from "../../Contexts/UserContextProvider";
 
+export enum DuApproval {
+  targetDu = 'targetDu',
+  currentDu = 'currentDu'
+};
+
 export type pmDataType = {
     employee_details: {
       id: number;

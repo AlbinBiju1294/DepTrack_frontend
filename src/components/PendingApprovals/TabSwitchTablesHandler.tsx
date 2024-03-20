@@ -4,6 +4,8 @@ import UserContext from '../Contexts/UserContextProvider';
 import {dataSourceType} from '../../components/PendingApprovalsTable/types/index'
 import TabSwitchTables from './TabSwitchTables';
 
+// Defines all the needed data to render the TabSwitchTables component.
+
 const TabSwitchTablesHandler = () => {
     const [activeButton, setActiveButton] = useState<number>(1);
     const { user } = useContext(UserContext);

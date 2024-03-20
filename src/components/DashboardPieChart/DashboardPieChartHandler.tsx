@@ -3,6 +3,7 @@ import { getPieChartData } from './api/getPieChartData';
 import {  pieChartDataType } from './types';
 import DashboardPieChart from './DashboardPieChart';
 
+// Calls the dashboard pie chart and defines all the needed data to render the component
 const DashboardPieChartHandler = () => {
     const [pieChartData, setPieChartData] = useState<pieChartDataType[]>([]);
 

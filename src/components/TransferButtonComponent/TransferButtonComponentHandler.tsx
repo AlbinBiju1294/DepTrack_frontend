@@ -2,16 +2,16 @@ import React, {useState, useEffect, useContext} from 'react'
 import { useNavigate, useParams } from "react-router-dom";
 import { message } from "antd";
 import { Option } from "react-dropdown";
-import { pmDataType, datePmPostDataType } from './types';
-import { DuApproval, postApprovalData } from './api/postApprovalData';
+import { pmDataType, DuApproval, datePmPostDataType } from './types';
+import { postApprovalData } from './api/postApprovalData';
 import TransferButtonComponent from './TransferButtonComponent';
 import { fetchPmData } from './api/fetchPmData';
 import { patchRejectData } from './api/patchRejectData';
 import UserContext from '../Contexts/UserContextProvider';
 
+/*Defines the needed data and its functionalities to render the transfer button component.*/
 
 const TransferButtonComponentHandler = ({transferDate, currentDuNumber}: {transferDate: string, currentDuNumber: number}) => {
-console.log("transfer button component handler render", currentDuNumber, transferDate);
 
 const navigate = useNavigate();
 const [open, setOpen] = useState(false);
@@ -24,9 +24,8 @@ const {user} = useContext(UserContext);
 //variables for reject modal
 const [openReject, setOpenReject] = useState(false);
 const [reason, setReason] = useState<string>('');
+
 const [loading, setLoading] = useState(false);
-
-
 
 const showModal = () => {
   setOpen(true);

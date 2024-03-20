@@ -1,9 +1,7 @@
 import axiosInstance from "../../../config/AxiosConfig";
-import { datePmPostDataType } from "../types";
-export enum DuApproval {
-  targetDu = 'targetDu',
-  currentDu = 'currentDu'
-};
+import { DuApproval, datePmPostDataType } from "../types";
+
+
 export const postApprovalData = async(datePmPostData: datePmPostDataType, duApproval: DuApproval) => {
     try {
         if(duApproval === DuApproval.targetDu)

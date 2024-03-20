@@ -82,7 +82,6 @@ const AdminTableHandler = () => {
   };
 
   const handleChangeDuHeadSelection = (selectedOption: Option) => {
-    console.log(changeFormData);
     const selectedDuhead = duHeadsCandidates.find(
       (du) => du.name === selectedOption.value
     );
