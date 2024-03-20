@@ -178,6 +178,7 @@
 }
 
 .pagination {
+  margin-right: 2vh;
   align-self: end;
   color: var(--secondary-color);
 }

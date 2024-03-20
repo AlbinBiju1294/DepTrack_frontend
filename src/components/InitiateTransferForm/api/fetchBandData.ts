@@ -11,4 +11,4 @@ export const fetchBandData = async (setBands:SetBandDataFunction) => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  };
+};

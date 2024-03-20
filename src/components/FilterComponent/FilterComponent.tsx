@@ -298,7 +298,7 @@ const FilterComponent = () => {
             />
           </div>
           <div className={styles.eachdiv}>
-            <p className={styles.label_name}> Name :</p>
+            <p className={styles.label_name}> Name:</p>
             <input
               type="text"
               name="employee_name"
@@ -309,7 +309,7 @@ const FilterComponent = () => {
             />
           </div>
           <div className={styles.eachdiv}>
-            <p className={styles.label_status}>Status :</p>
+            <p className={styles.label_status}>Status:</p>
             <Dropdown
               options={status}
               value="status"
@@ -340,7 +340,7 @@ const FilterComponent = () => {
             />
           </div>
           <div className={styles.eachdiv}>
-            <p className={styles.label_to}>To :</p>
+            <p className={styles.label_to}>To:</p>
             <input
               type="date"
               name="transfer_date"
@@ -408,7 +408,7 @@ const FilterComponent = () => {
           rowKey={(record) => record.id.toString()}
           dataSource={dataSource}
           pagination={false}
-          scroll={{ y: 300 }}
+          scroll={{ y: 280 }}
         />
         <Pagination
           size="small"
