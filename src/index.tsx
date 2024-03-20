@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
+import AppRoute from "./AppRoute";
 import reportWebVitals from "./reportWebVitals";
 import { UserContextProvider } from "./components/Contexts/UserContextProvider";
 import { SideBarContextProvider } from "./components/Contexts/SideBarContextProvider";
@@ -21,7 +21,7 @@ root.render(
     <SideBarContextProvider>
       <UserContextProvider>
       <MsalProvider instance={msalInstance}>
-        <App />
+        <AppRoute />
         </MsalProvider>
       </UserContextProvider>
     </SideBarContextProvider>

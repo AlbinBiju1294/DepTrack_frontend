@@ -31,7 +31,6 @@ export default function Login() {
       username: data.get("username"),
       password: data.get("password"),
     };
-    console.log(user);
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/v1/users/token/",
@@ -59,7 +58,6 @@ export default function Login() {
         config
       );
 
-      console.log(userResponse);
       localStorage.setItem("user", JSON.stringify(userResponse.data.data));
       setUser(userResponse.data.data);
 
@@ -68,17 +66,14 @@ export default function Login() {
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;
         if (axiosError.response) {
-          // Axios error with response
           const responseData = axiosError.response.data as { detail: string };
           if (responseData && responseData.detail) {
             messageApi.error(responseData.detail);
           }
         } else {
-          // Other Axios errors
           console.error("Axios error:", axiosError.message);
         }
       } else {
-        // Other errors
         console.error("Error:", error);
       }
     }

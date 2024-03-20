@@ -85,7 +85,6 @@ const FilterComponent = () => {
   const handleClear = () => {
     setFormData((prev) => {});
     fetchFilteredData(1, 1);
-    console.log(formData, "after");
     if (fromRef.current) {
       fromRef.current.setState({ selected: "From", isOpen: false });
     }
@@ -108,7 +107,6 @@ const FilterComponent = () => {
         const res = await axiosInstance.get(
           "/api/v1/delivery-unit/list-delivery-units/"
         );
-        console.log("Response from API - du's got:", res.data.data);
         setDuData(res.data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -123,12 +121,9 @@ const FilterComponent = () => {
       current: newPagination,
       pageSize: size,
     }));
-
-    console.log(newPagination);
   };
 
   useEffect(() => {
-    console.log(pagination);
     fetchFilteredData(pagination.current, 0);
   }, [pagination.pageSize, pagination.current]);
 
@@ -144,8 +139,6 @@ const FilterComponent = () => {
               offset: offset,
             }
           : emptyForm;
-      console.log(formData);
-      console.log(emptyForm);
       const res = await axiosInstance.get(
         "/api/v1/transfer/filter-transfers/",
         {
@@ -153,14 +146,12 @@ const FilterComponent = () => {
         }
       );
       const responseData = res.data.data;
-      console.log("Transfer history: ", responseData.results);
       setPagination((prevPagination) => ({
         ...prevPagination,
         current: page,
         total: responseData.count,
       }));
       setDataSource(responseData.results);
-      console.log(formData);
     } catch (error) {
       setPagination((prevPagination) => ({
         ...prevPagination,
@@ -168,8 +159,6 @@ const FilterComponent = () => {
         total: 0,
       }));
       setDataSource([]);
-      console.log(formData);
-      console.error("Error:", error);
     }
   };
 
@@ -235,7 +224,6 @@ const FilterComponent = () => {
           params: qparam,
         }
       );
-      console.log("Response from API:", res.data);
 
       const rows = res.data.data.results.map((transfer: dataSourceType) => ({
         id: transfer.id,
@@ -286,7 +274,7 @@ const FilterComponent = () => {
       <div className={styles.filter_container}>
         <div className={styles.first_row}>
           <div className={styles.eachdiv}>
-            <p className={styles.labels}>Transferred From :</p>
+            <p className={styles.labels}>Transferred From:</p>
             <Dropdown
               options={options}
               value="From"
@@ -300,7 +288,7 @@ const FilterComponent = () => {
             />
           </div>
           <div className={styles.eachdiv}>
-            <p className={styles.label_datefrom}>From :</p>
+            <p className={styles.label_datefrom}>From:</p>
             <input
               type="date"
               name="transfer_date"
@@ -338,7 +326,7 @@ const FilterComponent = () => {
 
         <div className={styles.second_row}>
           <div className={styles.eachdiv}>
-            <p className={styles.label_transto}>Transferred To :</p>
+            <p className={styles.label_transto}>Transferred To:</p>
             <Dropdown
               options={options}
               value="To"
@@ -363,7 +351,7 @@ const FilterComponent = () => {
           </div>
 
           <div className={styles.eachdiv}>
-            <p className={styles.label_number}>Number :</p>
+            <p className={styles.label_number}>Number:</p>
             <input
               type="text"
               name="employee_number"
@@ -405,7 +393,7 @@ const FilterComponent = () => {
 
             <div
               className={styles.downloadicon}
-              title="Download History"
+              title="Download Report"
               onClick={fetchData}
             >
               <FileDownloadIcon className={styles.iconpart}></FileDownloadIcon>

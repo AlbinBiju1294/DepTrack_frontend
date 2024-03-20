@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import InitiateTransferForm from './InitiateTransferForm';
 
@@ -26,10 +25,7 @@ const mockProps = {
 describe('InitiateTransferForm', () => {
     it('renders correctly', () => {
         const { getByText, getByPlaceholderText, debug } = render(<InitiateTransferForm {...mockProps} />);
-        // Debugging output
         debug();
-        
-        // Check if form elements are rendered
         expect(getByText('Employee Name:*')).toBeInTheDocument();
         expect(getByPlaceholderText('search employee')).toBeInTheDocument();
       });
@@ -52,6 +48,4 @@ describe('InitiateTransferForm', () => {
     expect(submitButton).toHaveAttribute('type', 'submit');
     expect(submitButton).toHaveTextContent('Submit');
   });
-
-  // Add more tests for other interactions and edge cases
 });
