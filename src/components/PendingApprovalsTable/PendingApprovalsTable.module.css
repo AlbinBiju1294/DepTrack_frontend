@@ -34,7 +34,6 @@
 .pagination
   {
     align-self: end;
-    margin-right: 4vw;
     color: var(--secondary-color);
     margin-top: 12px;
     

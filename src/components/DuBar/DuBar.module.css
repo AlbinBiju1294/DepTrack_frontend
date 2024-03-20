@@ -2,9 +2,9 @@
 {
     font-size: 13px;
     font-weight: 500;
-    padding-left: 40px;
-    margin-bottom: -30px;
-    margin-top: 20px;
+    padding-left: 7vh;
+    margin-bottom: -6vh;
+    margin-top: 4vh;
 }
 
 .bar_graph_label
@@ -13,9 +13,9 @@
     align-items: center;
     font-size: 10px;
     font-weight: 400;
-    padding-left: 245px;
-    margin-bottom: -30px;
-    margin-top: 30px;
+    padding-left: 40vh;
+    margin-bottom: -6vh;
+    margin-top: 6vh;
 }
 
 .bar_graph_heading_container{
@@ -23,13 +23,13 @@
 }
 
 .bar_chart{
-    margin-left: 30px;
-    width: 500px;
+    margin-left: 6vh;
+    width: 80vh;
 }
 
 .square_div{
     height: 8px;
     width: 8px;
     background-color: var(--primary-color);
-    margin-right: 5px;
+    margin-right: 0.8vh;
 }
