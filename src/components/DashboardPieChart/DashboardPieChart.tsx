@@ -2,6 +2,8 @@ import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
 import {  dataType } from './types';
 import styles from'./DashboardPieChart.module.css'
 
+// Renders a piechart to be displayed in the dashboard of a user which shows the employee count in all DUs.
+
 const DashboardPieChart = ({data}: {data:dataType}) => {
   return (
     <div className={styles.pieChart}>
