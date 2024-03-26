@@ -18,7 +18,7 @@ const DashboardPieChart = ({data}: {data:dataType}) => {
               item.label = 'PS';
             return `${item.label} (${item.value})`;
           },
-          // arcLabelMinAngle: 45,
+            arcLabelMinAngle: 15,
             outerRadius: 90,
             innerRadius: 40,
             cornerRadius: 2,
