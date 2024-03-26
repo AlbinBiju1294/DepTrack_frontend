@@ -11,6 +11,7 @@ import { message } from "antd";
 import { postTransferData } from "./api/postTransferData";
 import InitiateTransferForm from "./InitiateTransferForm";
 
+//handler for the initiate transfer
 const InitiateTransferFormHandler = () => {
     const [employeeData, setEmployeeData] = useState<Employee[]>([]);
   const [searchKeyword, setSearchKeyword] = useState<string>("");
@@ -22,8 +23,9 @@ const InitiateTransferFormHandler = () => {
   const { user } = useContext(UserContext);
 
   const [formData, setFormData] = useState<FormDataType>({});
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const [loading,setLoading] = useState<boolean>(false)
 
   const navigate = useNavigate();
 
@@ -61,16 +63,19 @@ const InitiateTransferFormHandler = () => {
   // function to post the transfer details
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true)
     try {
       const res = await postTransferData(formData);
       if (res?.status) {
+        setLoading(false)
         await messageApi.success(res.message, 1);
         navigate("/trackrequests");
       } else if (res?.status == false) {
+        setLoading(false)
         await messageApi.error(res.message, 1);
       }
     } catch (error) {
-      console.error("Error:", error);
+      setLoading(false)
       alert("An error occurred while processing the transfer.");
     }
   };
@@ -83,7 +88,6 @@ const InitiateTransferFormHandler = () => {
     } else {
       newStatus = 1;
     }
-    console.log(newStatus);
     setFormData((prevState) => ({
       ...prevState,
       currentdu_id: user?.du_id,
@@ -92,6 +96,7 @@ const InitiateTransferFormHandler = () => {
   }, []);
 
   
+  //for handling inputbox change
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -104,6 +109,7 @@ const InitiateTransferFormHandler = () => {
     }
   };
 
+  //for handling employee dropdown change
   const handleAutocompleteChange = (selectedValue: Employee | null) => {
     if (selectedValue === null) {
       setSelectedEmployee(null);
@@ -121,14 +127,15 @@ const InitiateTransferFormHandler = () => {
     }
   };
 
+  //for handling band dropdown change
   const handleBandDropdownChange = (selectedOption: string | undefined) => {
-    console.log(selectedOption)
     setFormData({
       ...formData,
       employee_band: selectedOption, // Assuming selectedOption.value is the band value
     });
   };
 
+  //for handling du dropdown change
   const handleDuDropdownChange = (selectedOption: Du | undefined ) => {
     setFormData({
       ...formData,
@@ -136,6 +143,7 @@ const InitiateTransferFormHandler = () => {
     });
   };
 
+  //for handling checkbox change
   const handleCheckboxChange = () => {
     setIsChecked((prev) => {
       return !prev;
@@ -144,7 +152,7 @@ const InitiateTransferFormHandler = () => {
   
   return (
     <div>
-        <InitiateTransferForm employeeData={employeeData} selectedEmployee={selectedEmployee} bands={bandData} isChecked={isChecked} contextHolder={contextHolder} options={options} changeKeyword={changeKeyword} handleSubmit={handleSubmit} handleInputChange={handleInputChange} handleAutocompleteChange={handleAutocompleteChange} handleBandDropdownChange={handleBandDropdownChange} handleDuDropdownChange={handleDuDropdownChange} handleCheckboxChange={handleCheckboxChange}/>
+        <InitiateTransferForm loading={loading} employeeData={employeeData} selectedEmployee={selectedEmployee} bands={bandData} isChecked={isChecked} contextHolder={contextHolder} options={options} changeKeyword={changeKeyword} handleSubmit={handleSubmit} handleInputChange={handleInputChange} handleAutocompleteChange={handleAutocompleteChange} handleBandDropdownChange={handleBandDropdownChange} handleDuDropdownChange={handleDuDropdownChange} handleCheckboxChange={handleCheckboxChange}/>
     </div>
   )
 }

@@ -11,7 +11,6 @@ import UserContext from '../Contexts/UserContextProvider';
 
 
 const TransferButtonComponentHandler = ({transferDate, currentDuNumber}: {transferDate: string, currentDuNumber: number}) => {
-console.log("transfer button component handler render", currentDuNumber, transferDate);
 
 const navigate = useNavigate();
 const [open, setOpen] = useState(false);

@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './InnerBodyHeader.module.css'
 
 const InnerBodyHeader = ({heading}:{heading:string}) => {

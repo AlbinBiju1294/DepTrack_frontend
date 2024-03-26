@@ -46,4 +46,9 @@ initiated_by: {
    
 };
 
+
+export type TransferDetailsEmployeePropsType={
+  userData: EmployeeDataProps|undefined
+ 
+}
   

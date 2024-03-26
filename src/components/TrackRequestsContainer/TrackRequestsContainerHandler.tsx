@@ -37,6 +37,7 @@ const TrackRequestsContainerHandler = () => {
     setOpen(false);
   };
 
+  //for handling cancel transfer requests by du_heads
   const cancelRequest = async () => {
     try {
       await axiosInstance.post(`/api/v1/transfer/cancel/`, {
@@ -49,8 +50,6 @@ const TrackRequestsContainerHandler = () => {
       setInitiatedTransfers(newInitiatedTransfers);
       messageApi.info("Request cancelled", 2);
       handleCancel();
-
-      console.log("Request successfully cancelled");
     } catch (error) {
       console.error("Error cancelling request", error);
     }
@@ -71,7 +70,6 @@ const TrackRequestsContainerHandler = () => {
         const res = await axiosInstance.get(
           `/api/v1/transfer/track-initiated-requests/?du_id=${du_id}`
         );
-        console.log("Response from API - initiated Requests:", res.data.data);
         if(user?.role == 2)
         {
           const newInitiatedTransfers = res.data.data.filter((initiatedTransfer:TransferDetailsType) => {
@@ -82,7 +80,6 @@ const TrackRequestsContainerHandler = () => {
         else{
           setInitiatedTransfers(res.data.data);
         }
-        console.log(initiatedTransfers);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -90,7 +87,7 @@ const TrackRequestsContainerHandler = () => {
     fetchInitiatedRequests();
   }, []);
 
-  
+  //for setting table columns
   const columns: TableProps<TransferDetailsType>["columns"] = [
     {
       title: "Transfer Id",
@@ -103,7 +100,7 @@ const TrackRequestsContainerHandler = () => {
       dataIndex: ["employee", "employee_number"],
       key: "employee_number",
       sorter: (a, b) => a.employee.employee_number.localeCompare(b.employee.employee_number),
-      width:'160px'
+      width:'152px'
     },
     {
       title: "Employee Name",
@@ -126,17 +123,18 @@ const TrackRequestsContainerHandler = () => {
     {
       title: "Status",
       dataIndex: "status",
+      width: user?.role === 1 ? '140px' : undefined,
       key: "status",
-      width:'140px',
       render: (status) => {
         let color = "green"; // Default color
         if (status === "Transfer Initiated") {
-          color = "red";
+          color = "orange";
         } else if (status === "Pending Acceptance") {
           color = "green";
         }
         return <Tag color={color}>{status}</Tag>;
       },
+      sorter: (a, b) => a.status.localeCompare(b.status),
     },
   ];
   if (user?.role === 1) {
@@ -146,8 +144,6 @@ const TrackRequestsContainerHandler = () => {
                 onClick={() => {
                     setOpen(true);
                     setSelectedTransfer(record);
-                    console.log(record.id);
-                    console.log(record);
                 }}>
                 Cancel
             </button>

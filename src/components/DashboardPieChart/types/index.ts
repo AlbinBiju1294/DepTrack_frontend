@@ -3,3 +3,7 @@ export type pieChartDataType = {
     no_of_employees: number;
 }
 
+export type dataType = {
+    label: string;
+    value: number;
+}[]

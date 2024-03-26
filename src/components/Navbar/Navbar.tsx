@@ -8,8 +8,10 @@ import type { MenuProps } from 'antd';
 import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
+  //for taking user and set user from context
   const {user, setUser} = useContext(UserContext)
   const navigate = useNavigate();
+  //for handling logout
   const logOutFunction = () => {
       localStorage.clear();
       setUser(null);
