@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './InitiateTransferConatainer.module.css'
-import InitiateTransferForm from '../InitiateTransferForm/InitiateTransferForm'
 import InitiateTransferFormHandler from '../InitiateTransferForm/InitiateTransferFormHandler'
 
 const InitiateTransferContainer = () => {

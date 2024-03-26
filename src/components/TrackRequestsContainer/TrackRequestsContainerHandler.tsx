@@ -128,12 +128,13 @@ const TrackRequestsContainerHandler = () => {
       render: (status) => {
         let color = "green"; // Default color
         if (status === "Transfer Initiated") {
-          color = "red";
+          color = "orange";
         } else if (status === "Pending Acceptance") {
           color = "green";
         }
         return <Tag color={color}>{status}</Tag>;
       },
+      sorter: (a, b) => a.status.localeCompare(b.status),
     },
   ];
   if (user?.role === 1) {
