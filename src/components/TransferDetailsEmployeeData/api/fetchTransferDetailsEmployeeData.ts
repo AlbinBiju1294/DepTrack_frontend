@@ -3,7 +3,7 @@ import { EmployeeDataProps} from '../types/index'
  
 export const fetchTransferDetailsEmployeeData = async (id:string|undefined,setUserData: React.Dispatch<React.SetStateAction<EmployeeDataProps |undefined>>, setCurrentDuNumber: React.Dispatch<React.SetStateAction<number>>) => {
     try {
-      const res = await axiosInstance.get(`http://127.0.0.1:8000/api/v1/transfer/get-transfer-details/?transfer_id=${id}`);
+      const res = await axiosInstance.get(`/api/v1/transfer/get-transfer-details/?transfer_id=${id}`);
       console.log('Response from API:', res.data);
                
       setUserData(prev => res.data.data);
